@@ -19,16 +19,16 @@ const CONFIG = {
   // ── 2. 메인 (히어로) ──
   groom: {
     name: "안석순",
-    nameEn: "Groom",
-    father: "안ㅇㅇ",
-    mother: "김ㅇㅇ",
+    nameEn: "Seoksoon Ahn",
+    father: "안종원",
+    mother: "김순옥",
     fatherDeceased: false,
     motherDeceased: false
   },
 
   bride: {
     name: "이현아",
-    nameEn: "Bride",
+    nameEn: "Hyunah Lee",
     father: "이근철",
     mother: "장미옥",
     fatherDeceased: false,
@@ -66,8 +66,8 @@ const CONFIG = {
   accounts: {
     groom: [
       { role: "신랑", name: "안석순", bank: "국민은행", number: "000-000-000000" },
-      { role: "아버지", name: "안ㅇㅇ", bank: "신한은행", number: "000-000-000000" },
-      { role: "어머니", name: "김ㅇㅇ", bank: "우리은행", number: "000-000-000000" }
+      { role: "아버지", name: "안종원", bank: "신한은행", number: "000-000-000000" },
+      { role: "어머니", name: "김순옥", bank: "우리은행", number: "000-000-000000" }
     ],
     bride: [
       { role: "신부", name: "이현아", bank: "하나은행", number: "000-000-000000" },
