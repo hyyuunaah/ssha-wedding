@@ -590,7 +590,7 @@
     });
   }
   */
-  
+
   function initLocation() {
     const w = CONFIG.wedding;
     const ml = CONFIG.mapLinks;
@@ -599,7 +599,6 @@
     $('#locationAddress').textContent = w.address;
     $('#locationTel').textContent = w.tel ? `Tel. ${w.tel}` : '';
     
-    // 카카오맵 버튼 및 네이버 지도 버튼 링크 설정
     $('#kakaoMapBtn').href = ml.kakao || '#';
     $('#naverMapBtn').href = ml.naver || '#';
 
@@ -607,46 +606,49 @@
       copyToClipboard(w.address, '주소가 복사되었습니다');
     });
 
-    // ─── 카카오 동적 지도 동적 생성 ───
-    const mapContainer = document.getElementById('daumMap'); // 지도를 표시할 div
-    if (!mapContainer || typeof kakao === 'undefined') return; // 스크립트 미로드 시 예외 처리
+    // ─── 카카오 지도 안전하게 로드 후 생성 ───
+    const mapContainer = document.getElementById('daumMap'); 
+    if (!mapContainer || typeof kakao === 'undefined') return; 
 
-    const mapOption = {
-        center: new kakao.maps.LatLng(33, 126), // 지도의 중심좌표 (기본값, 주소 검색 후 변경됨)
-        level: 3 // 지도의 확대 레벨
-    };
+    // API가 완전히 준비되었을 때 지도를 그리도록 kakao.maps.load 사용
+    kakao.maps.load(function () {
+      const mapOption = {
+          center: new kakao.maps.LatLng(37.8853, 127.7544), // 스카이컨벤션 대략적 기본 좌표
+          level: 3 
+      };
 
-    // 지도 생성
-    const map = new kakao.maps.Map(mapContainer, mapOption);
-    // 주소-좌표 변환 객체 생성
-    const geocoder = new kakao.maps.services.Geocoder();
+      const map = new kakao.maps.Map(mapContainer, mapOption);
+      const geocoder = new kakao.maps.services.Geocoder();
 
-    // CONFIG.wedding.address에 적힌 주소로 좌표를 검색합니다.
-    geocoder.addressSearch(w.address, function(result, status) {
-        if (status === kakao.maps.services.Status.OK) {
-            const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+      // 주소로 정확한 좌표 검색
+      geocoder.addressSearch(w.address, function(result, status) {
+          if (status === kakao.maps.services.Status.OK) {
+              const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-            // 결과값으로 받은 위치를 정중앙에 마커로 표시합니다.
-            const marker = new kakao.maps.Marker({
-                map: map,
-                position: coords
-            });
+              // 마커 생성
+              const marker = new kakao.maps.Marker({
+                  map: map,
+                  position: coords
+              });
 
-            // 마커 위에 장소명을 표시하는 말풍선(InfoWindow)을 얹어줍니다.
-            const infowindow = new kakao.maps.InfoWindow({
-                content: `<div style="width:150px; text-align:center; padding:6px 0; font-family:'Nanum Myeongjo', serif; font-size:13px; color:#333;">${w.venue}</div>`
-            });
-            infowindow.open(map, marker);
+              // 예식장 이름 말풍선 표시
+              const infowindow = new kakao.maps.InfoWindow({
+                  content: `<div style="width:150px; text-align:center; padding:6px 0; font-family:'Nanum Myeongjo', serif; font-size:13px; color:#333;">${w.venue}</div>`
+              });
+              infowindow.open(map, marker);
 
-            // 지도의 중심을 결과로 받은 위치로 이동시킵니다.
-            map.setCenter(coords);
-            
-            // 모바일 화면 리사이즈나 애니메이션 완료 후 지도가 깨지는 현상을 방지하기 위해 릴레이아웃 호출
-            setTimeout(() => {
-                map.relayout();
-                map.setCenter(coords);
-            }, 500);
-        }
+              // 지도 중심 이동
+              map.setCenter(coords);
+              
+              // 화면 리사이즈 및 레이아웃 깨짐 보정
+              setTimeout(() => {
+                  map.relayout();
+                  map.setCenter(coords);
+              }, 600);
+          } else {
+              console.error("카카오맵 주소 검색 실패: ", status);
+          }
+      });
     });
   }
   
