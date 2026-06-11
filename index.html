@@ -1,16 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
 
   <!-- Meta / OG tags - config.js 값으로 script에서 동적 설정 -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="안석순 ♡ 이현아">
-  <meta property="og:description" content="2027년 11월 6일 12시 춘천 스카이컨벤션">
+  <meta property="og:title" content="안석순 & 이현아 결혼합니다">
+  <meta property="og:description" content="2027년 11월 6일 12시">
   <meta property="og:image" content="https://hyyuunaah.github.io/ssha-wedding/images/og/1.jpg">
   <meta name="description" content="">
 
@@ -22,45 +20,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
-  <!-- <script src="config.js"></script> -->
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-  
+  <script src="config.js"></script>
 </head>
 <body>
-
-  <a id="kakao-link-btn" href="javascript:;">
-<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
-</a>
-<script type='text/javascript'>
-
-  //<![CDATA[
-    Kakao.init('6469b34cd87b4922021e697dc1ac53cf');
-
-
-    Kakao.Link.createDefaultButton({
-      container: '#kakao-link-btn',
-      objectType: 'feed',
-      content: {
-        title: '대제목',
-        description: '소제목',
-        imageUrl: '이미지주소',
-        link: {
-          mobileWebUrl: 'https://hyyuunaah.github.io/ssha-wedding/',
-          webUrl: 'https://hyyuunaah.github.io/ssha-wedding/'
-        }
-      },
-      buttons: [
-        {
-          title: '모바일 청첩장',
-          link: {
-            mobileWebUrl: 'https://hyyuunaah.github.io/ssha-wedding/',
-            webUrl: 'https://hyyuunaah.github.io/ssha-wedding/'
-          }
-        }
-      ]
-    });
-  //]]>
-</script>
 
   <!-- ═══ Curtain Opening (Watercolor Wash) ═══ -->
   <div id="curtain" class="curtain">
@@ -244,14 +206,6 @@
       </div>
     </section>
 
-    <section class="section share">
-      <div class="section__inner">
-        <button class="btn btn--kakao" id="kakaoShareBtn">
-          카카오톡으로 청첩장 공유하기
-        </button>
-      </div>
-    </section>
-
     <!-- ─── Footer ─── -->
     <footer class="footer">
       <p class="footer__text" id="footerText"></p>
@@ -260,6 +214,5 @@
   </main>
 
   <script src="script.js"></script>
- 
 </body>
 </html>
