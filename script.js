@@ -599,6 +599,8 @@
     $('#locationAddress').textContent = w.address;
     $('#locationTel').textContent = w.tel ? `Tel. ${w.tel}` : '';
     
+    // 기존의 #locationMapImg.src 코드는 에러를 유발하므로 완전히 삭제했습니다.
+    
     $('#kakaoMapBtn').href = ml.kakao || '#';
     $('#naverMapBtn').href = ml.naver || '#';
 
@@ -606,47 +608,47 @@
       copyToClipboard(w.address, '주소가 복사되었습니다');
     });
 
-    // ─── 카카오 지도 안전하게 로드 후 생성 ───
+    // ─── 카카오 지도 로드 및 생성 ───
     const mapContainer = document.getElementById('daumMap'); 
     if (!mapContainer || typeof kakao === 'undefined') return; 
 
-    // API가 완전히 준비되었을 때 지도를 그리도록 kakao.maps.load 사용
+    // API 스크립트가 완벽히 로드된 후 실행하도록 보장
     kakao.maps.load(function () {
       const mapOption = {
-          center: new kakao.maps.LatLng(37.8853, 127.7544), // 스카이컨벤션 대략적 기본 좌표
-          level: 3 
+          center: new kakao.maps.LatLng(37.8853, 127.7544), // 기본 중심 좌표
+          level: 3 // 확대 레벨
       };
 
       const map = new kakao.maps.Map(mapContainer, mapOption);
       const geocoder = new kakao.maps.services.Geocoder();
 
-      // 주소로 정확한 좌표 검색
+      // config.js의 주소를 기반으로 좌표 검색
       geocoder.addressSearch(w.address, function(result, status) {
           if (status === kakao.maps.services.Status.OK) {
               const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-              // 마커 생성
+              // 예식장 위치에 마커 생성
               const marker = new kakao.maps.Marker({
                   map: map,
                   position: coords
               });
 
-              // 예식장 이름 말풍선 표시
+              // 마커 위에 띄울 이쁜 말풍선(인포윈도우) 생성
               const infowindow = new kakao.maps.InfoWindow({
-                  content: `<div style="width:150px; text-align:center; padding:6px 0; font-family:'Nanum Myeongjo', serif; font-size:13px; color:#333;">${w.venue}</div>`
+                  content: `<div style="width:150px; text-align:center; padding:6px 0; font-family:'Nanum Myeongjo', serif; font-size:12px; color:#4a4a4a; border:none;">${w.venue}</div>`
               });
               infowindow.open(map, marker);
 
-              // 지도 중심 이동
+              // 지도의 중심을 예식장 좌표로 세팅
               map.setCenter(coords);
               
-              // 화면 리사이즈 및 레이아웃 깨짐 보정
+              // 초대장 애니메이션(Fade-in 등)과 타이밍이 겹쳐서 지도가 깨지거나 하얗게 보이는 현상 방지
               setTimeout(() => {
                   map.relayout();
                   map.setCenter(coords);
               }, 600);
           } else {
-              console.error("카카오맵 주소 검색 실패: ", status);
+              console.error("카카오맵 주소 변환 실패. 상태 코드: ", status);
           }
       });
     });
