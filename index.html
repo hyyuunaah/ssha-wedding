@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+  
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
 
@@ -20,10 +22,45 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
-  <script src="config.js"></script>
+  <!-- <script src="config.js"></script> -->
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  
 </head>
 <body>
+
+  <a id="kakao-link-btn" href="javascript:;">
+<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"/>
+</a>
+<script type='text/javascript'>
+
+  //<![CDATA[
+    Kakao.init('발급받은 JavaScript 키');
+
+
+    Kakao.Link.createDefaultButton({
+      container: '#kakao-link-btn',
+      objectType: 'feed',
+      content: {
+        title: '대제목',
+        description: '소제목',
+        imageUrl: '이미지주소',
+        link: {
+          mobileWebUrl: '이미지클릭시 이동할 모바일용 링크주소',
+          webUrl: '이미지클릭시 이동할 PC용 링크주소'
+        }
+      },
+      buttons: [
+        {
+          title: '버튼 타이틀',
+          link: {
+            mobileWebUrl: '버튼클릭시 이동할 모바일용 링크주소',
+            webUrl: '버튼클릭시 이동할 PC용 링크주소'
+          }
+        }
+      ]
+    });
+  //]]>
+</script>
 
   <!-- ═══ Curtain Opening (Watercolor Wash) ═══ -->
   <div id="curtain" class="curtain">
@@ -223,20 +260,6 @@
   </main>
 
   <script src="script.js"></script>
-
-  <script>
-  Kakao.init('6469b34cd87b4922021e697dc1ac53cf');
-  
-  const kakaoShareBtn = document.getElementById('kakaoShareBtn');
-  
-  if (kakaoShareBtn) {
-    kakaoShareBtn.addEventListener('click', () => {
-      Kakao.Share.sendCustom({
-        templateId: 134228
-      });
-    });
-  }
-  </script>
  
 </body>
 </html>
