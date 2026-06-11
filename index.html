@@ -223,5 +223,20 @@
   </main>
 
   <script src="script.js"></script>
+
+  <script>
+  Kakao.init('6469b34cd87b4922021e697dc1ac53cf');
+  
+  const kakaoShareBtn = document.getElementById('kakaoShareBtn');
+  
+  if (kakaoShareBtn) {
+    kakaoShareBtn.addEventListener('click', () => {
+      Kakao.Share.sendCustom({
+        templateId: 134228
+      });
+    });
+  }
+  </script>
+ 
 </body>
 </html>
