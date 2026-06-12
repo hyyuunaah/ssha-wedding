@@ -500,4 +500,14 @@ body {
    ========================================================================== */
 .animate-item {
   opacity: 0;
-  transition: all
+  transition: all 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+  will-change: transform, opacity;
+}
+
+.animate-item.is-animated {
+  opacity: 1;
+  transform: none !important;
+}
+
+[data-animate="fade-up"] { transform: translateY(30px); }
+[data-animate="scale-in"] { transform: scale(0.95); }
