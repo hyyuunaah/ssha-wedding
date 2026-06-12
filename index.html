@@ -154,11 +154,12 @@
       <div class="wc-divider"></div>
     </section>
 
-    <!-- ─── Location Section ─── -->
-    <section class="section location" id="location">
+    <!-- ─── Location Section ─── -->  
+    <section class="section location" id="location" style="padding-left: 0; padding-right: 0;">
       <div class="wc-blob wc-blob--location"></div>
+      
       <div class="section__inner">
-        <h2 class="section__title animate-item" data-animate="fade-up">오시는 길</h2>
+        <h2 class="section__title animate-item" data-animate="fade-up" style="text-align: center;">오시는 길</h2>
         <div class="location__info animate-item" data-animate="fade-up">
           <p class="location__venue" id="locationVenue"></p>
           <p class="location__hall" id="locationHall"></p>
@@ -169,21 +170,22 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
           주소 복사
         </button>
-        <div class="location__map animate-item" data-animate="scale-in">
-        
-          <!-- 약도이미지를 카카오맵으로 대체 <img class="location__map-img" id="locationMapImg" src="" alt="약도" loading="lazy"> -->
-        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6469b34cd87b4922021e697dc1ac53cf&libraries=services&autoload=false"></script>
-        <div class="location__map animate-item" data-animate="scale-in">
-          <div id="daumMap" style="width:100%; height:100%; min-height:300px; background-color: #f8f4f0;"></div>
-        </div>
-          
-        </div>
+      </div>
+
+      <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6469b34cd87b4922021e697dc1ac53cf&libraries=services&autoload=false"></script>
+
+      <div class="location__map animate-item" data-animate="scale-in" style="width: 100%; max-width: none; margin: 20px 0; border-radius: 0;">
+        <div id="daumMap" style="width:100%; height:100%; min-height:300px; background-color: #f8f4f0;"></div>
+      </div>
+
+      <div class="section__inner" style="padding-top: 0;">
         <div class="location__links animate-item" data-animate="fade-up">
           <a class="btn btn--kakao" id="kakaoMapBtn" href="#" target="_blank" rel="noopener">카카오맵</a>
           <a class="btn btn--naver" id="naverMapBtn" href="#" target="_blank" rel="noopener">네이버지도</a>
         </div>
       </div>
-      <div class="wc-divider"></div>
+      
+      <div class="wc-divider" style="margin-top: 30px;"></div>
     </section>
 
     <!-- ─── Account Section (축의금) ─── -->
