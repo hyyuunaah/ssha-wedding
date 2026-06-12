@@ -623,22 +623,10 @@ a {
   border-color: var(--color-accent) !important;
 }
 
-/* ==== Firebase RSVP(참석여부) & Guestbook(방명록) ==== */
-
-/* ─── RSVP 및 방명록 컨테이너 여백 통일 ─── */
+/* ─── Firebase RSVP(참석여부) & Guestbook(방명록) ─── */
 .registry-block {
   width: 100% !important;
-  max-width: 640px !important;       /* 전체 레이아웃 폭과 일치 */
-  margin: 0 auto !important;         /* 중앙 정렬 */
-  padding: 0 var(--spacing-side) !important; /* 가이드라인과 동일한 좌우 여백 적용 */
-  box-sizing: border-box !important;
-}
-
-/* 내부 폼과 리스트가 여백을 꽉 채우도록 설정 */
-#rsvpForm, #guestbookForm, #guestbookList {
-  width: 100% !important;
-  max-width: none !important;
-  padding: 0 !important;
+   padding: 0 var(--spacing-side);
 }
 
 /* RSVP 및 방명록 구역 테두리와 불필요한 카드 흰 배경 완벽 박멸 */
@@ -813,4 +801,32 @@ a {
 @media print {
   .curtain, .sparkle-canvas, .photo-modal, .toast, .countdown, .calendar-actions, .location__links, .location__copy, .account-item__copy, .wc-blob, .wc-divider { display: none !important; }
   .animate-item { opacity: 1 !important; transform: none !important; }
+}
+
+/* ─── RSVP 및 방명록 폼 좌우 여백 강제 고정 ─── */
+#rsvpForm, 
+#guestbookForm {
+  padding-left: var(--spacing-side) !important;
+  padding-right: var(--spacing-side) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* 방명록 목록(리스트)도 동일한 여백을 갖도록 설정 */
+#guestbookList {
+  padding-left: var(--spacing-side) !important;
+  padding-right: var(--spacing-side) !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+/* 입력 필드들이 여백을 꽉 채우지 못하고 삐져나오는 경우 방어 */
+#rsvpForm input, 
+#rsvpForm select, 
+#guestbookForm input, 
+#guestbookForm textarea {
+  width: 100% !important;
+  box-sizing: border-box !important;
 }
