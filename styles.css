@@ -86,17 +86,6 @@ html {
 body {
   font-family: var(--font-serif);
   color: var(--color-text);
-  
-  /* 👈 스크롤 전체에 상단부의 따뜻하고 균일한 톤이 부드럽게 이어지도록 수채화 배율 전면 수정 */
-  /* background: linear-gradient(to bottom, 
-    #fdfbf8 0%, 
-    rgba(232, 223, 240, 0.35) 20%,  /* 은은한 라벤더 터치 
-    rgba(245, 224, 224, 0.4) 45%,   /* 피치 핑크빛 블러쉬 번짐 
-    #fdfbf8 65%,                    /* 중간 지점에서 맑게 한 번 잡아줌 
-    rgba(232, 223, 240, 0.25) 85%,  /* 하단부까지 부드럽게 이어지는 라벤더 
-    #fdfbf8 100%                    /* 파란색 톤을 걷어내고 미카도 톤으로 우아하게 마무리 
-  ) !important; 
-  */
 
   /* 섹션 간의 경계가 느껴지지 않도록 부드러운 수채화 그라데이션 통일 */
   background: linear-gradient(180deg, 
@@ -829,4 +818,54 @@ a {
 #guestbookForm textarea {
   width: 100% !important;
   box-sizing: border-box !important;
+}
+
+/* ─── 모바일 RSVP 폼 정렬 및 줄바꿈 방지 ─── */
+#rsvpForm .rsvp-group {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 12px 0 !important;
+  width: 100% !important;
+}
+
+#rsvpForm .rsvp-group__label {
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
+  white-space: nowrap !important; /* '명(본인포함)' 줄바꿈 방지 */
+  margin-right: 10px !important;
+}
+
+/* 라디오 버튼 구역 우측 정렬 */
+#rsvpForm .rsvp-options {
+  display: flex !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+  gap: 8px !important; /* 버튼 간격 */
+  flex-shrink: 0 !important;
+}
+
+#rsvpForm .rsvp-option {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  font-size: 0.8rem !important;
+  white-space: nowrap !important;
+}
+
+/* 라디오 버튼 크기 축소 */
+#rsvpForm .rsvp-option input[type="radio"] {
+  width: 14px !important;
+  height: 14px !important;
+  margin: 0 4px 0 0 !important;
+  flex-shrink: 0 !important;
+  cursor: pointer;
+}
+
+/* 숫자 입력칸 너비 조정 (참석인원 칸) */
+#rsvpForm input[type="number"] {
+  width: 60px !important;
+  padding: 6px 8px !important;
+  text-align: center !important;
 }
