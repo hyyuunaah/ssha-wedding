@@ -834,18 +834,18 @@
     const $gbForm = document.getElementById('guestbookForm');
     const $gbList = document.getElementById('guestbookList');
 
-    // [1] RSVP 참석 여부만 따로 저장하기 (인원수 반영 버전)
+    // [1] RSVP 참석 여부만 따로 저장하기 (인원수 직접 입력 버전)
     if ($rsvpForm) {
-      // 💡 미참석을 누르면 인원수 선택칸이 자동으로 숨겨지거나 보여지는 센스 있는 연동 기능 추가
       const attendRadios = document.querySelectorAll('input[name="rsvpAttend"]');
       const countGroup = document.getElementById('rsvpCountGroup');
+      const $rsvpCount = document.getElementById('rsvpCount');
       
       attendRadios.forEach(radio => {
         radio.addEventListener('change', (e) => {
           if (e.target.value === '미참석') {
-            countGroup.style.display = 'none'; // 미참석 시 인원수 선택 숨김
+            countGroup.style.display = 'none'; // 미참석 시 인원수 입력창 숨김
           } else {
-            countGroup.style.display = 'flex'; // 참석 시 인원수 선택 보임
+            countGroup.style.display = 'flex'; // 참석 시 인원수 입력창 보임
           }
         });
       });
@@ -858,26 +858,35 @@
         const attend = document.querySelector('input[name="rsvpAttend"]:checked').value;
         const meal = document.querySelector('input[name="rsvpMeal"]:checked').value;
         
-        // 미참석일 때는 인원수를 0명으로 처리, 참석일 때만 선택된 인원 저장
-        const count = (attend === '미참석') ? '0명' : document.getElementById('rsvpCount').value;
+        // 💡 미참석일 때는 0명, 참석일 때는 입력된 숫자 뒤에 '명'을 붙여서 저장
+        let count = '0명';
+        if (attend === '참석') {
+          const countVal = parseInt($rsvpCount.value, 10);
+          if (isNaN(countVal) || countVal < 1) {
+            alert('참석 인원은 1명 이상 입력해 주세요 🌸');
+            return;
+          }
+          count = countVal + '명';
+        }
 
         if (!name) return;
 
-        // rsvp 서랍에 데이터 넣기 (count 항목 추가)
+        // Firebase 데이터베이스에 깔끔하게 저장
         const newRsvpRef = rsvpRef.push();
         newRsvpRef.set({
           name: name,
           side: side,
           attend: attend,
           meal: meal,
-          count: count, // 📊 몇 명 오는지 데이터 저장!
+          count: count,
           timestamp: firebase.database.ServerValue.TIMESTAMP
         }, (error) => {
           if (error) {
             alert('전송에 실패했습니다. 다시 시도해 주세요.');
           } else {
             showToast('참석 의사가 신랑 신부에게 전달되었습니다 🌸');
-            document.getElementById('rsvpName').value = ''; // 성함 칸만 리셋
+            document.getElementById('rsvpName').value = ''; // 성함 칸 리셋
+            $rsvpCount.value = '1'; // 인원수 초기화
           }
         });
       });
