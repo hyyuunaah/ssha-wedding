@@ -284,6 +284,7 @@ a {
   max-width: 100% !important; /* 360px 제한을 풀고 부모 너비에 맞춤 */
   margin: 0 auto !important;
   padding: 0px !important;    /* 👈 안쪽 초록색 여백 완전 삭제 */
+  margin-bottom: 25px !important;   /* 👈 달력판 바로 밑에 있는 버튼들을 아래로 25px만큼 밀어내는 확실한 여백 추가 */
 }
 
 .calendar__header { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; letter-spacing: 2px; margin-bottom: var(--spacing-sm); color: var(--color-accent-dark); text-align: center; }
@@ -304,8 +305,8 @@ a {
 /* ⚠️ [추가] HTML 내의 div id="calendarGrid" 요소의 초록색 여백도 빈틈없이 방어 */
 #calendarGrid {
   padding: 0px !important;   /* 👈 개발자 도구에 뜨던 초록색 여백 완전 삭제 */
+  margin: 0px !important;
   max-width: 100% !important;
-  margin: 0px auto 25px auto !important;   /* 👈 위, 좌, 우 여백은 0으로 두고, 아래쪽(bottom)에만 25px 만큼의 여백을 줍니다 */
 }
 
 .calendar__day { 
