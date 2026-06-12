@@ -68,10 +68,37 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+/* body {
   font-family: var(--font-serif);
   color: var(--color-text);
   background-color: var(--color-bg);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+} */
+
+/* ⚠️ 기존 body 블록을 찾아서 아래 코드로 완전히 교체하세요 */
+body {
+  font-family: var(--font-serif);
+  color: var(--color-text);
+  
+  /* 👈 청첩장 전체를 부드럽게 관통하는 파스텔톤 수채화 그라데이션 주입 */
+  background: linear-gradient(135deg, 
+    #fdfbf8 0%, 
+    rgba(232, 223, 240, 0.45) 25%,  /* 연한 라벤더 번짐 */
+    rgba(245, 224, 224, 0.45) 50%,  /* 연한 블러쉬 핑크 번짐 */
+    rgba(220, 232, 240, 0.35) 75%,  /* 연한 스카이 블루 번짐 */
+    #fdfbf8 100%
+  ) !important;
+  
+  /* 스크롤을 내려도 배경이 밀리지 않고 고정되어 수채화 깊이감이 유지됩니다 */
+  background-attachment: fixed !important; 
+  
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
