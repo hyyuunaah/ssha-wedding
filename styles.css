@@ -30,7 +30,7 @@
   --font-display: 'Cormorant Garamond', 'Nanum Myeongjo', serif;
 
   /* 상하 간격 및 좌우 여백 표준화 */
-  --spacing-section: 4.5rem; /* 모든 섹션의 일관된 상하 간격 */
+  --spacing-section: 3.2rem; /* 모든 섹션의 일관된 상하 간격 */
   --spacing-side: 24px;      /* 모든 콘텐츠의 표준 좌우 여백 */
   
   --spacing-xs: 0.5rem;
