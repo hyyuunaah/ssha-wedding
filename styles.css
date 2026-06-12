@@ -277,6 +277,7 @@ a {
   background: transparent !important;
   border: none !important;
   margin: 0 auto !important;
+  margin-bottom: 25px !important;   /* 👈 달력판 바로 밑에 있는 버튼들을 아래로 25px만큼 밀어내는 확실한 여백 추가 */
 }
 
 /* ⚠️ [.calendar] 기존 padding 제거 및 상하좌우 여백 0(zero)화 */
