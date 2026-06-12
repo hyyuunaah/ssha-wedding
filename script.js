@@ -809,7 +809,7 @@
     initGallery(galleryImages);
 
     /* 2026.06.12. 방명록 및 참석여부 기능 추가 */
-    // ─── Firebase 방명록 및 RSVP 기능 연동 ───
+    // ─── Firebase 데이터 분리형 연동 (RSVP / 방명록) ───
     const firebaseConfig = {
       apiKey: "AIzaSyCuGgS156629uvEj6Qv5KSO6gtq4CHtHM4",
       authDomain: "ssha-wedding.firebaseapp.com",
@@ -820,58 +820,86 @@
       appId: "1:439719249640:web:0ba4c7676654ef54a12b5d"
     };
 
-    // Firebase 초기화 (중복 방지)
+    // Firebase 초기화
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
     const database = firebase.database();
+    
+    // 💡 저장 경로를 각각 분리합니다.
+    const rsvpRef = database.ref('rsvp');
     const guestbookRef = database.ref('guestbook');
 
-    const $form = document.getElementById('guestbookForm');
-    const $list = document.getElementById('guestbookList');
+    const $rsvpForm = document.getElementById('rsvpForm');
+    const $gbForm = document.getElementById('guestbookForm');
+    const $gbList = document.getElementById('guestbookList');
 
-    // [1] 방명록 & RSVP 데이터 저장 (Submit)
-    if ($form) {
-      $form.addEventListener('submit', (e) => {
+    // [1] RSVP 참석 여부만 따로 저장하기
+    if ($rsvpForm) {
+      $rsvpForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const name = document.getElementById('gbName').value.trim();
-        const password = document.getElementById('gbPassword').value.trim();
-        const message = document.getElementById('gbMessage').value.trim();
-        
+        const name = document.getElementById('rsvpName').value.trim();
         const side = document.querySelector('input[name="rsvpSide"]:checked').value;
         const attend = document.querySelector('input[name="rsvpAttend"]:checked').value;
         const meal = document.querySelector('input[name="rsvpMeal"]:checked').value;
 
-        if (!name || !password || !message) return;
+        if (!name) return;
 
-        // Firebase Realtime Database에 고유 키로 데이터 쏘기
-        const newPostRef = guestbookRef.push();
-        newPostRef.set({
+        // rsvp 서랍에 데이터 쏙 넣기
+        const newRsvpRef = rsvpRef.push();
+        newRsvpRef.set({
           name: name,
-          password: password,
-          message: message,
           side: side,
           attend: attend,
           meal: meal,
           timestamp: firebase.database.ServerValue.TIMESTAMP
         }, (error) => {
           if (error) {
-            alert('등록에 실패했습니다. 다시 시도해 주세요.');
+            alert('전송에 실패했습니다. 다시 시도해 주세요.');
           } else {
-            showToast('축하 메시지와 정보가 전달되었습니다 🌸');
-            $form.reset();
+            showToast('참석 의사가 신랑 신부에게 전달되었습니다 🌸');
+            document.getElementById('rsvpName').value = ''; // 이름 입력칸만 초기화
           }
         });
       });
     }
 
-    // [2] 데이터 실시간 조회 및 리스트 갱신 (Read)
+    // [2] 축하 메시지만 따로 저장하기 (방명록)
+    if ($gbForm) {
+      $gbForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('gbName').value.trim();
+        const password = document.getElementById('gbPassword').value.trim();
+        const message = document.getElementById('gbMessage').value.trim();
+
+        if (!name || !password || !message) return;
+
+        // guestbook 서랍에 데이터 넣기
+        const newGbRef = guestbookRef.push();
+        newGbRef.set({
+          name: name,
+          password: password,
+          message: message,
+          timestamp: firebase.database.ServerValue.TIMESTAMP
+        }, (error) => {
+          if (error) {
+            alert('등록에 실패했습니다. 다시 시도해 주세요.');
+          } else {
+            showToast('축하 메시지가 등록되었습니다 ✨');
+            $gbForm.reset();
+          }
+        });
+      });
+    }
+
+    // [3] 축하 메시지(방명록)만 실시간으로 읽어와서 하단에 뿌려주기
     guestbookRef.on('value', (snapshot) => {
-      $list.innerHTML = '';
+      $gbList.innerHTML = '';
       const data = snapshot.val();
       if (!data) {
-        $list.innerHTML = `<p style="text-align:center; color:var(--color-text-muted); font-size:0.9rem; padding: 40px 0; font-family: 'Nanum Myeongjo', serif;">첫 번째 축하 메시지를 남겨주세요 🌸</p>`;
+        $gbList.innerHTML = `<p style="text-align:center; color:var(--color-text-muted); font-size:0.9rem; padding: 30px 0; font-family: 'Nanum Myeongjo', serif;">첫 번째 축하 메시지를 남겨주세요 🌸</p>`;
         return;
       }
 
@@ -888,28 +916,27 @@
 
         const card = document.createElement('div');
         card.className = 'gb-card';
+        card.style.marginBottom = '12px';
         
         card.innerHTML = `
           <div class="gb-card__header">
-            <strong class="gb-card__name">${escapeHtml(post.name)} 
-              <span class="gb-card__badge">${post.side} · ${post.attend}</span>
-            </strong>
+            <strong class="gb-card__name">${escapeHtml(post.name)}</strong>
             <span class="gb-card__date">${date}</span>
           </div>
           <p class="gb-card__msg">${escapeHtml(post.message)}</p>
           <button class="gb-card__delete-btn" onclick="deleteGuestbookPost('${key}', '${post.password}')">삭제</button>
         `;
 
-        $list.appendChild(card);
+        $gbList.appendChild(card);
       });
     });
 
-    // 텍스트 변환 안전 처리 (XSS 예방)
+    // 안전장치 (XSS 공격 방지)
     function escapeHtml(str) {
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
-    // [3] 작성자 본인 비밀번호 확인 후 메시지 삭제 기능
+    // [4] 방명록 삭제 기능
     window.deleteGuestbookPost = function(key, correctPassword) {
       const inputPassword = prompt('글 작성 시 입력했던 비밀번호를 입력하세요:');
       if (!inputPassword) return;
