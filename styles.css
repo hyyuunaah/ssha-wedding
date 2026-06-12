@@ -304,8 +304,8 @@ a {
 /* ⚠️ [추가] HTML 내의 div id="calendarGrid" 요소의 초록색 여백도 빈틈없이 방어 */
 #calendarGrid {
   padding: 0px !important;   /* 👈 개발자 도구에 뜨던 초록색 여백 완전 삭제 */
-  margin: 0px auto !important;
   max-width: 100% !important;
+  margin: 0px auto 25px auto !important;   /* 👈 위, 좌, 우 여백은 0으로 두고, 아래쪽(bottom)에만 25px 만큼의 여백을 줍니다 */
 }
 
 .calendar__day { 
