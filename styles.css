@@ -88,17 +88,31 @@ body {
   color: var(--color-text);
   
   /* 👈 스크롤 전체에 상단부의 따뜻하고 균일한 톤이 부드럽게 이어지도록 수채화 배율 전면 수정 */
+  /* background: linear-gradient(to bottom, 
+    #fdfbf8 0%, 
+    rgba(232, 223, 240, 0.35) 20%,  /* 은은한 라벤더 터치 
+    rgba(245, 224, 224, 0.4) 45%,   /* 피치 핑크빛 블러쉬 번짐 
+    #fdfbf8 65%,                    /* 중간 지점에서 맑게 한 번 잡아줌 
+    rgba(232, 223, 240, 0.25) 85%,  /* 하단부까지 부드럽게 이어지는 라벤더 
+    #fdfbf8 100%                    /* 파란색 톤을 걷어내고 미카도 톤으로 우아하게 마무리 
+  ) !important; 
+  */
+
+  /* 모바일에서 배경이 튕길 때 파란색이 보이지 않도록 배경색을 단색(아이보리)으로 먼저 깔고 그라데이션을 얹음 */
+  background-color: #fdfbf8 !important; 
   background: linear-gradient(to bottom, 
     #fdfbf8 0%, 
-    rgba(232, 223, 240, 0.35) 20%,  /* 은은한 라벤더 터치 */
-    rgba(245, 224, 224, 0.4) 45%,   /* 피치 핑크빛 블러쉬 번짐 */
-    #fdfbf8 65%,                    /* 중간 지점에서 맑게 한 번 잡아줌 */
-    rgba(232, 223, 240, 0.25) 85%,  /* 하단부까지 부드럽게 이어지는 라벤더 */
-    #fdfbf8 100%                    /* 파란색 톤을 걷어내고 미카도 톤으로 우아하게 마무리 */
+    rgba(232, 223, 240, 0.25) 20%,  /* 라벤더 비중 축소 */
+    rgba(245, 224, 224, 0.25) 50%,  /* 피치 비중 축소 */
+    #fdfbf8 80%, 
+    #fdfbf8 100% 
   ) !important;
   
   /* 스크롤을 내려도 배경이 밀리지 않고 고정되어 수채화 깊이감이 유지됩니다 */
   background-attachment: fixed !important; 
+
+  /* 모바일 '고무줄 효과(바운스)' 시 배경색이 파랗게 드러나는 것을 방지 */
+  overscroll-behavior: none !important;
   
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
@@ -108,6 +122,11 @@ body {
   padding-bottom: var(--safe-bottom);
   padding-left: var(--safe-left);
   padding-right: var(--safe-right);
+}
+
+/* ⚠️ 혹시 모를 추가 요소 배경 강제 투명화 (모바일에서 하단 영역이 파랗게 보일 경우 대비) */
+#rsvpSection, #guestbookSection, #account, #location {
+  background-color: #fdfbf8 !important; /* 투명 대신 미세한 미카도 톤으로 덮음 */
 }
 
 body.no-scroll {
