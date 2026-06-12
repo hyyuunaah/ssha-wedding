@@ -987,4 +987,26 @@
   } else {
     init();
   }
+
+  // 계좌번호 아코디언 토글 함수
+  window.toggleRemit = function(id) {
+    const target = document.getElementById(id);
+    if (target.style.display === 'none') {
+      target.style.display = 'block';
+    } else {
+      target.style.display = 'none';
+    }
+  };
+  
+  // 텍스트 클립보드 복사 함수
+  window.copyText = function(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      if (typeof showToast === 'function') {
+        showToast('계좌번호가 복사되었습니다 🌸');
+      } else {
+        alert('계좌번호가 복사되었습니다.');
+      }
+    });
+  };
+  
 })();
