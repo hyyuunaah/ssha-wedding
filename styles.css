@@ -654,15 +654,19 @@ a {
 #rsvpForm .rsvp-options {
   display: flex !important;
   justify-content: flex-end !important;
-  gap: 12px !important; /* 모바일에서 겹치지 않는 안전한 간격 */
+  align-items: center !important;
+  flex-wrap: nowrap !important; /* 강제 줄바꿈 금지 */
+  gap: 6px !important;           /* 버튼 간 간격을 좁게 */
+  /* gap: 12px !important; /* 모바일에서 겹치지 않는 안전한 간격 */ */
 }
 
 #rsvpForm .rsvp-option {
   display: inline-flex !important;
-  align-items: center !important;
+  align-items: center !important;      /* 핵심: 텍스트와 라디오버튼 수직 중앙 정렬 */
   justify-content: flex-start !important; 
-  width: 110px !important;       /* 👈 항목별 너비를 동일하게 고정하여 세로선 정렬 */
+  /*width: 110px !important;       /* 👈 항목별 너비를 동일하게 고정하여 세로선 정렬
   min-width: 110px !important;   /* 👈 모바일 화면에서도 찌그러지지 않도록 방지 */
+  width: auto !important;              /* 너비 고정 해제하여 글자 길이에 유연하게 대응 */
   margin: 0 !important;
   padding: 0 !important;
   font-size: 0.85rem !important;
@@ -673,9 +677,9 @@ a {
 
 /* 모바일 브라우저 라디오 크기 및 간격 최적화 */
 #rsvpForm .rsvp-option input[type="radio"] {
-  width: 15px !important;  
-  height: 15px !important;
-  margin: 0 6px 0 0 !important; /* 버튼과 글자 사이의 자잘한 간격 */
+  width: 12px !important;  /* 15px -> 12px로 축소 */
+  height: 12px !important; /* 15px -> 12px로 축소 */
+  margin: 0 4px 0 0 !important;
   flex-shrink: 0 !important;
   accent-color: var(--color-accent-dark);
 }
@@ -818,54 +822,4 @@ a {
 #guestbookForm textarea {
   width: 100% !important;
   box-sizing: border-box !important;
-}
-
-/* ─── 모바일 RSVP 폼 정렬 및 줄바꿈 방지 ─── */
-#rsvpForm .rsvp-group {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 12px 0 !important;
-  width: 100% !important;
-}
-
-#rsvpForm .rsvp-group__label {
-  font-size: 0.85rem !important;
-  font-weight: 700 !important;
-  white-space: nowrap !important; /* '명(본인포함)' 줄바꿈 방지 */
-  margin-right: 10px !important;
-}
-
-/* 라디오 버튼 구역 우측 정렬 */
-#rsvpForm .rsvp-options {
-  display: flex !important;
-  justify-content: flex-end !important;
-  align-items: center !important;
-  gap: 8px !important; /* 버튼 간격 */
-  flex-shrink: 0 !important;
-}
-
-#rsvpForm .rsvp-option {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  margin: 0 !important;
-  font-size: 0.8rem !important;
-  white-space: nowrap !important;
-}
-
-/* 라디오 버튼 크기 축소 */
-#rsvpForm .rsvp-option input[type="radio"] {
-  width: 14px !important;
-  height: 14px !important;
-  margin: 0 4px 0 0 !important;
-  flex-shrink: 0 !important;
-  cursor: pointer;
-}
-
-/* 숫자 입력칸 너비 조정 (참석인원 칸) */
-#rsvpForm input[type="number"] {
-  width: 60px !important;
-  padding: 6px 8px !important;
-  text-align: center !important;
 }
