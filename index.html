@@ -220,50 +220,65 @@
     </section>
 
     <!-- 2026.06.12. 방명록 및 참석여부 UI 레이아웃 추가 -->
-    <section class="section section--alt" id="guestbookSection">
+    <section class="section section--alt" id="weddingRegistrySection">
       <div class="container">
-        <h2 class="section__title animate-item" data-animate="fade-up">참석 여부 및 축하 메시지</h2>
-        <div class="wc-divider animate-item" data-animate="fade-up"></div>
+        
+        <div class="registry-block animate-item" data-animate="fade-up">
+          <h2 class="section__title">참석 여부 전달하기</h2>
+          <div class="wc-divider" style="margin-bottom: 20px;"></div>
+          
+          <form id="rsvpForm" class="rsvp-card">
+            <h3 class="rsvp-card__title">✉ 신랑 신부에게 참석 여부 보내기</h3>
+            
+            <div class="rsvp-group">
+              <input type="text" id="rsvpName" placeholder="성함을 입력해 주세요" required style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.875rem; font-family: inherit;">
+            </div>
 
-        <div class="rsvp-card animate-item" data-animate="fade-up">
-          <h3 class="rsvp-card__title">✉ 참석 여부 전달하기</h3>
-          
-          <div class="rsvp-group">
-            <span class="rsvp-group__label">구분</span>
-            <div class="rsvp-options">
-              <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신랑측" checked> 신랑측</label>
-              <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신부측"> 신부측</label>
+            <div class="rsvp-group">
+              <span class="rsvp-group__label">구분</span>
+              <div class="rsvp-options">
+                <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신랑측" checked> 신랑측</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신부측"> 신부측</label>
+              </div>
             </div>
-          </div>
-          
-          <div class="rsvp-group">
-            <span class="rsvp-group__label">참석 여부</span>
-            <div class="rsvp-options">
-              <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 참석합니다</label>
-              <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> 마음으로 축하합니다</label>
+            
+            <div class="rsvp-group">
+              <span class="rsvp-group__label">참석 여부</span>
+              <div class="rsvp-options">
+                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 참석합니다</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> 마음으로 축하합니다</label>
+              </div>
             </div>
-          </div>
-          
-          <div class="rsvp-group">
-            <span class="rsvp-group__label">식사 여부</span>
-            <div class="rsvp-options">
-              <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사함" checked> 식사 예정</label>
-              <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사안함"> 식사 안함</label>
+            
+            <div class="rsvp-group">
+              <span class="rsvp-group__label">식사 여부</span>
+              <div class="rsvp-options">
+                <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사함" checked> 식사 예정</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사안함"> 식사 안함</label>
+              </div>
             </div>
-          </div>
+            
+            <button type="submit" class="gb-submit-btn" style="margin-top: 15px;">참석 정보 전송하기</button>
+          </form>
         </div>
 
-        <form id="guestbookForm" class="animate-item" data-animate="fade-up">
-          <div class="gb-input-row">
-            <input type="text" id="gbName" placeholder="성함" required>
-            <input type="password" id="gbPassword" placeholder="비밀번호 (삭제용)" required>
-          </div>
-          <textarea id="gbMessage" placeholder="축하 메시지를 남겨주세요." rows="3" required></textarea>
-          <button type="submit" class="gb-submit-btn">축하 메시지 등록</button>
-        </form>
+        <div class="registry-block animate-item" data-animate="fade-up" style="margin-top: 50px;">
+          <h2 class="section__title">축하 메시지</h2>
+          <div class="wc-divider" style="margin-bottom: 20px;"></div>
+          
+          <form id="guestbookForm">
+            <div class="gb-input-row">
+              <input type="text" id="gbName" placeholder="성함" required>
+              <input type="password" id="gbPassword" placeholder="비밀번호 (삭제용)" required>
+            </div>
+            <textarea id="gbMessage" placeholder="따뜻한 축하의 한마디를 남겨주세요." rows="3" required></textarea>
+            <button type="submit" class="gb-submit-btn">축하 메시지 등록</button>
+          </form>
 
-        <div id="guestbookList">
-          </div>
+          <div id="guestbookList" style="margin-top: 25px;">
+            </div>
+        </div>
+
       </div>
     </section>
 
