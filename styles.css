@@ -1688,16 +1688,21 @@ a {
 }
 
 /* 3. 신랑측/신부측 계좌번호 확인하기 버튼 */
-#remittanceSection .remit-toggle-btn,
-.remit-wrap button {
+.remit-toggle-btn,
+.remit-wrap button,
+#remittanceSection button,
+.remit-box button {
   display: block !important;
   width: 100% !important;
-  max-width: 300px !important;
-  margin: 0 auto !important;
+  max-width: 300px !important;    /* 버튼이 너무 뚱뚱해지지 않게 제한 */
+  margin: 0 auto !important;       /* 화면 정중앙 정렬 */
   padding: 12px 24px !important;
   background-color: var(--color-bg-card, #ffffff) !important;
   border: 1px solid var(--color-border, #ece4f0) !important;
-  border-radius: 999px !important; /* 완전한 알약형 */
+  
+  /* 💡 사각형이나 둥근 네모를 완전히 무시하고 완벽한 알약형(타원)으로 만듭니다 */
+  border-radius: 999px !important; 
+  
   color: var(--color-text, #4a4a4a) !important;
   font-family: 'Nanum Myeongjo', serif;
   font-size: 0.875rem !important;
@@ -1707,7 +1712,9 @@ a {
   transition: all 0.2s ease;
 }
 
-#remittanceSection .remit-toggle-btn:hover {
+/* 호버 및 터치 효과 강력 적용 */
+.remit-toggle-btn:hover,
+.remit-box button:hover {
   background-color: var(--color-bg-alt, #f8f4f0) !important;
   border-color: var(--color-accent-light, #dcc8e8) !important;
 }
