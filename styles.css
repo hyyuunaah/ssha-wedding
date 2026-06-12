@@ -263,7 +263,7 @@ a {
 /* ═══════════════════════════════════════════
    Calendar Section (투명화 반영)
    ═══════════════════════════════════════════ */
-#calendarSection { background-color: var(--color-bg-alt); padding-top: 0px !important; padding-bottom: 2rem !important;}
+#calendarSection { background-color: var(--color-bg-alt);}
 
 /* 11월 달력 감싸는 큰 카드 박스 완전 투명화 */
 #calendarSection, #calendar, #calendarSection .card, #calendar .calendar-wrap, .calendar-box {
@@ -279,17 +279,35 @@ a {
   margin: 0 auto !important;
 }
 
+/* ⚠️ [.calendar] 기존 padding 제거 및 상하좌우 여백 0(zero)화 */
 .calendar {
-  max-width: 360px;
-  margin: 0 auto var(--spacing-lg);
-  padding: var(--spacing-md);
+  max-width: 100% !important; /* 360px 제한을 풀고 부모 너비에 맞춤 */
+  margin: 0 auto !important;
+  padding: 0px !important;    /* 👈 안쪽 초록색 여백 완전 삭제 */
 }
+
 .calendar__header { font-family: var(--font-display); font-size: 1.125rem; font-weight: 400; letter-spacing: 2px; margin-bottom: var(--spacing-sm); color: var(--color-accent-dark); text-align: center; }
 .calendar__weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; margin-bottom: 0.25rem; }
 .calendar__weekday { font-size: 0.6875rem; font-weight: 400; color: var(--color-text-muted); text-align: center; padding: 0.5rem 0; }
 .calendar__weekday:first-child { color: #d4a0a0; }
 .calendar__weekday:last-child { color: #8eaec4; }
-.calendar__days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+
+/* ⚠️ [.calendar__days] 기존 gap 설정을 유지하되 상하좌우 여백을 0화 */
+.calendar__days { 
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 0; 
+  padding: 0px !important;  /* 👈 날짜들이 모여 있는 그리드 안쪽 여백 삭제 */
+  margin: 0px !important;
+}
+
+/* ⚠️ [추가] HTML 내의 div id="calendarGrid" 요소의 초록색 여백도 빈틈없이 방어 */
+#calendarGrid {
+  padding: 0px !important;   /* 👈 개발자 도구에 뜨던 초록색 여백 완전 삭제 */
+  margin: 0px auto !important;
+  max-width: 100% !important;
+}
+
 .calendar__day { text-align: center; padding: 0.5rem 0; font-size: 0.8125rem; font-weight: 400; color: var(--color-text-light); position: relative; }
 .calendar__day:nth-child(7n+1) { color: #d4a0a0; }
 .calendar__day:nth-child(7n) { color: #8eaec4; }
