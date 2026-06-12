@@ -174,7 +174,7 @@
 
       <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6469b34cd87b4922021e697dc1ac53cf&libraries=services&autoload=false"></script>
 
-      <div class="location__map animate-item" data-animate="scale-in" style="width: 100%; max-width: none; margin: 20px 0; border-radius: 0;">
+      <div class="location__map animate-item" data-animate="scale-in" style="width: 100%; max-width: none; margin: 8px 0 20px 0; border-radius: 0;">
         <div id="daumMap" style="width:100%; height:100%; min-height:300px; background-color: #f8f4f0;"></div>
       </div>
 
@@ -242,7 +242,7 @@
           <form id="rsvpForm" class="rsvp-card">
             <h3 class="rsvp-card__title">✉ 신랑 신부에게 참석 여부 보내기</h3>
             
-            <div class="rsvp-group">
+            <div class="rsvp-group" style="border-bottom: none; padding-bottom: 5px;">
               <input type="text" id="rsvpName" placeholder="성함을 입력해 주세요" required style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.875rem; font-family: inherit;">
             </div>
 
@@ -257,8 +257,8 @@
             <div class="rsvp-group">
               <span class="rsvp-group__label">참석 여부</span>
               <div class="rsvp-options">
-                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 참석합니다</label>
-                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> 마음으로 축하합니다</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 🌸 참석</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> ✨ 미참석</label>
               </div>
             </div>
             
@@ -267,6 +267,19 @@
               <div class="rsvp-options">
                 <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사함" checked> 식사 예정</label>
                 <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사안함"> 식사 안함</label>
+              </div>
+            </div>
+
+            <div class="rsvp-group" id="rsvpCountGroup">
+              <span class="rsvp-group__label">참석 인원</span>
+              <div class="rsvp-options">
+                <select id="rsvpCount" style="padding: 6px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.85rem; font-family: inherit; color: var(--color-text); background-color: var(--color-bg-card);">
+                  <option value="1명" selected>본인 포함 1명</option>
+                  <option value="2명">2명</option>
+                  <option value="3명">3명</option>
+                  <option value="4명">4명</option>
+                  <option value="5명 이상">5명 이상</option>
+                </select>
               </div>
             </div>
             
