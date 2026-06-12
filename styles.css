@@ -1593,38 +1593,49 @@ a {
   padding: 0 var(--spacing-md, 20px); /* 양옆 여백 정돈 */
 }
 
-/* 2026.06.12. 캘린더 버튼의 형태를 본뜬 스타일 보정 */
+/*2026.06.12. 지도 아이콘 변경 */
+/* ==========================================================================
+   Location Navigation Buttons (Calendar Oval Style)
+   ========================================================================== */
+.location__links {
+  display: flex;             /* grid 대신 flex로 유연하게 정렬 */
+  justify-content: center;   /* 가운데로 정렬 */
+  gap: 12px;                 /* 버튼 사이 간격 */
+  margin-top: 22px;
+  padding: 0 24px;
+}
+
 .location__link-btn {
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  width: 100%;
-  padding: 12px var(--spacing-md) !important;
+  flex: 1;                   /* 좌우 버튼이 균등한 너비를 가짐 */
+  max-width: 140px;          /* 버튼이 너무 뚱뚱해지지 않도록 최대 너비 제한 */
+  padding: 10px 20px !important;
   background-color: var(--color-bg-card, #ffffff) !important;
   border: 1px solid var(--color-border, #ece4f0) !important;
-  border-radius: var(--radius-sm, 4px) !important;
+  
+  /* 💡 둥근 네모가 아닌 완전한 타원(알약 모양)으로 변경 */
+  border-radius: 999px !important; 
+  
   color: var(--color-text, #4a4a4a) !important;
   font-family: 'Nanum Myeongjo', serif;
-  font-size: 0.875rem !important;
+  font-size: 0.85rem !important;
   font-weight: 500;
   text-decoration: none;
   box-shadow: 0 2px 6px rgba(232, 223, 240, 0.1);
   transition: all 0.2s ease;
+
+  /* 💡 글자가 모바일에서 절대 쪼개져서 두 줄로 나오지 않게 제어 */
+  white-space: nowrap !important; 
 }
 
-/* 2026.06.12. 버튼에 마우스를 올리거나 터치했을 때 은은한 효과 */
+/* 터치 및 호버 효과 유지 */
 .location__link-btn:hover,
 .location__link-btn:active {
   background-color: var(--color-bg-alt, #f8f4f0) !important;
   border-color: var(--color-accent-light, #dcc8e8) !important;
   color: var(--color-accent-dark, #9a7baa) !important;
-}
-
-.location__link-btn .btn__icon {
-  font-size: 0.95rem;
-  display: inline-block;
-  line-height: 1;
 }
 
 }
