@@ -1637,3 +1637,59 @@ a {
   border-color: var(--color-accent-light, #dcc8e8) !important;
   color: var(--color-accent-dark, #9a7baa) !important;
 }
+
+/* ==========================================================================
+   RSVP & Guestbook Submit Button Custom (Pill-Shape)
+   ========================================================================== */
+
+/* 1. 참석 정보 전송하기 버튼 (알약 모양 스타일) */
+#rsvpForm .gb-submit-btn,
+#rsvpForm button[type="submit"] {
+  display: block !important;
+  width: 100% !important;
+  max-width: 280px !important; /* 버튼이 너무 뚱뚱해지지 않도록 가로 제한 */
+  margin: 20px auto 0 auto !important; /* 화면 중앙 정렬 */
+  padding: 14px 24px !important;
+  background: var(--color-accent) !important;
+  color: var(--color-white) !important;
+  border: none !important;
+  
+  /* 사각형을 완전한 타원형(알약)으로 깎아줍니다 */
+  border-radius: 999px !important; 
+  
+  font-size: 0.9rem !important;
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(154, 123, 170, 0.15);
+  transition: background 0.2s ease;
+}
+
+/* 2. 축하 메시지 등록 버튼 (알약 모양 스타일) */
+#guestbookForm .gb-submit-btn,
+#guestbookForm button[type="submit"] {
+  display: block !important;
+  width: 100% !important;
+  max-width: 280px !important;
+  margin: 20px auto 0 auto !important;
+  padding: 14px 24px !important;
+  background: var(--color-accent) !important;
+  color: var(--color-white) !important;
+  border: none !important;
+  
+  /* 사각형을 완전한 타원형(알약)으로 깎아줍니다 */
+  border-radius: 999px !important; 
+  
+  font-size: 0.9rem !important;
+  font-family: 'Nanum Myeongjo', serif;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(154, 123, 170, 0.15);
+  transition: background 0.2s ease;
+}
+
+/* 버튼 마우스 호버 및 터치 시 은은하게 어두워지는 효과 */
+#rsvpForm button[type="submit"]:hover,
+#guestbookForm button[type="submit"]:hover {
+  background: var(--color-accent-dark) !important;
+}
