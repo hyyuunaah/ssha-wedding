@@ -1942,3 +1942,34 @@ a {
   color: var(--color-text-light, #555555) !important;
   margin: 0 !important;
 }
+
+/* ==========================================================================
+   달력(캘린더) 구역 - 제목 제거 및 배경/테두리 투명화
+   ========================================================================== */
+
+/* 1. '예식일시' 큰 제목만 깔끔하게 숨기기 */
+#calendarSection .section__title,
+#calendar .section__title,
+#calendarSection h2.title {
+  display: none !important;
+}
+
+/* 2. 11월 달력을 감싸고 있는 큰 카드 박스의 배경, 테두리, 그림자 완전 제거 */
+#calendarSection,
+#calendar,
+#calendarSection .card,
+#calendar .calendar-wrap,
+.calendar-box {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* 3. 달력 내부 숫자들이나 요일 텍스트가 잘 보이도록 정돈 */
+#calendarSection table,
+#calendarSection .calendar {
+  background: transparent !important;
+  border: none !important;
+  margin: 0 auto !important; /* 달력 자체는 정가운데 정렬 */
+}
