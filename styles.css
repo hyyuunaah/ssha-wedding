@@ -1907,7 +1907,7 @@ a {
   max-width: 450px !important;
   margin: 0 auto !important;
   
-  /* 💡 좌우 여백을 똑같이 24px씩 주어 화면 안쪽으로 균형감 있게 들여씁니다 */
+  /* 좌우 여백을 똑같이 24px씩 주어 화면 안쪽으로 균형감 있게 들여씁니다 */
   padding: 0 24px !important; 
   
   text-align: left !important; /* 좌측 정렬 */
@@ -1922,13 +1922,13 @@ a {
   margin-bottom: 0 !important;
 }
 
-/* 💡 소제목 스타일: 폰트 두께를 살짝 다듬고 테마 색상(연보라) 반영 */
+/* 소제목 스타일: 폰트 두께를 살짝 다듬고 테마 색상(연보라) 반영 */
 .guide-title {
   font-family: 'Nanum Myeongjo', serif;
   font-size: 0.95rem !important;
   font-weight: 800 !important; /* 눈에 잘 띄도록 두께감 부여 */
   
-  /* 💡 청첩장 메인 테마인 연보라 변수(--color-accent)를 쓰고, 없을 경우를 대비해 #9a7baa 지정 */
+  /* 청첩장 메인 테마인 연보라 변수(--color-accent)를 쓰고, 없을 경우를 대비해 #9a7baa 지정 */
   color: var(--color-accent, #9a7baa) !important; 
   
   margin: 0 0 6px 0 !important;
