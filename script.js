@@ -986,9 +986,10 @@
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
-  }
+  }  
+})();
 
-  // 계좌번호 아코디언 토글 함수
+// 계좌번호 아코디언 토글 함수
   window.toggleRemit = function(id) {
     const target = document.getElementById(id);
     if (target.style.display === 'none') {
@@ -1008,5 +1009,3 @@
       }
     });
   };
-  
-})();
