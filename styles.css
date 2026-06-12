@@ -98,13 +98,12 @@ body {
   ) !important; 
   */
 
-  /* 모바일에서 배경이 튕길 때 파란색이 보이지 않도록 배경색을 단색(아이보리)으로 먼저 깔고 그라데이션을 얹음 */
-  background-color: #fdfbf8 !important; 
-  background: linear-gradient(to bottom, 
+  /* 섹션 간의 경계가 느껴지지 않도록 부드러운 수채화 그라데이션 통일 */
+  background: linear-gradient(180deg, 
     #fdfbf8 0%, 
-    rgba(232, 223, 240, 0.25) 20%,  /* 라벤더 비중 축소 */
-    rgba(245, 224, 224, 0.25) 50%,  /* 피치 비중 축소 */
-    #fdfbf8 80%, 
+    rgba(232, 223, 240, 0.25) 20%,  /* 라벤더 터치 */
+    #fdfbf8 50%,                   /* 아이보리로 차분하게 흐름 */
+    rgba(245, 224, 224, 0.25) 80%,  /* 하단부 피치 핑크 */
     #fdfbf8 100% 
   ) !important;
   
@@ -125,8 +124,17 @@ body {
 }
 
 /* ⚠️ 혹시 모를 추가 요소 배경 강제 투명화 (모바일에서 하단 영역이 파랗게 보일 경우 대비) */
-#rsvpSection, #guestbookSection, #account, #location {
-  background-color: #fdfbf8 !important; /* 투명 대신 미세한 미카도 톤으로 덮음 */
+/* #rsvpSection, #guestbookSection, #account, #location {
+  background-color: #fdfbf8 !important; /* 투명 대신 미세한 미카도 톤으로 덮음
+} */
+
+/* ─── 섹션 배경 강제 투명화 (경계선 방지) ─── */
+.section, #calendarSection, #location, #account, #rsvpSection, #guestbookSection, 
+.greeting, .story, .gallery, .card, .calendar-box, .guestbook-wrap, .rsvp-card {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 body.no-scroll {
