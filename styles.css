@@ -1827,35 +1827,30 @@ a {
    RSVP 라디오 버튼 정렬 (우측 구역 안에서 동그라미 위치 세로 일치)
    ========================================================================== */
 
-/* 1. 라디오 버튼 항목들을 감싸는 우측 구역 설정 */
-#rsvpForm .form-group .radio-group,
-#rsvpForm .form-row .radio-wrap {
+/* 1. 우측 선택 구역 안에서 라디오 버튼들이 들쭉날쭉하지 않게 정돈 */
+#rsvpForm .rsvp-options {
   display: flex !important;
-  justify-content: flex-end !important; /* 전체적인 구역은 우측 정렬 유지 */
-  gap: 16px !important;                 /* 항목들 사이의 간격 */
+  justify-content: flex-end !important; /* 전체 구역은 우측 정렬 유지 */
+  gap: 12px !important;                 /* 신랑측과 신부측 사이의 간격 */
 }
 
-/* 2. 각 라디오 버튼 항목(동그라미+글자)의 너비를 똑같이 맞춰 정렬 정돈 */
-#rsvpForm .form-group label.radio-label,
-#rsvpForm .form-group label.inline,
-#rsvpForm input[type="radio"] + label,
-#rsvpForm .radio-group label {
+/* 2. 각 라디오 버튼 세트의 너비를 똑같이 맞추어 동그라미 위치를 일치시킵니다 */
+#rsvpForm .rsvp-option {
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: flex-start !important; /* 💡 글자와 버튼은 왼쪽 정렬 */
+  justify-content: flex-start !important; /* 동그라미와 글자는 왼쪽 정렬 */
   
-  /* 💡 항목당 고정 너비를 주어 동그라미 위치를 세로로 똑같이 맞춥니다 */
-  width: 75px !important;                 
+  /* 💡 항목당 방 크기를 85px로 똑같이 고정하여 세로 줄을 맞춰줍니다 */
+  width: 85px !important;                 
   
   margin: 0 !important;
   padding: 0 !important;
   cursor: pointer;
-  text-align: left !important;
 }
 
-/* 3. 동그라미 버튼과 글자 사이의 간격 미세 조정 */
-#rsvpForm input[type="radio"] {
-  margin-right: 6px !important;
-  margin-left: 0 !important;
+/* 3. 동그라미 아이콘 자체와 글자 사이의 간격 정돈 */
+#rsvpForm .rsvp-option input[type="radio"] {
+  margin: 0 6px 0 0 !important; /* 동그라미 오른쪽에만 6px 간격 지정 */
+  flex-shrink: 0 !important;     /* 동그라미가 찌그러지지 않게 방지 */
   cursor: pointer;
 }
