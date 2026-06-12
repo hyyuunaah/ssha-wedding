@@ -255,10 +255,8 @@ a {
 
 .main-content { max-width: 100%; overflow: hidden; }
 
-/* ═══════════════════════════════════════════
-   Hero & Countdown Section
-   ═══════════════════════════════════════════ */
-.hero { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0; overflow: hidden; background-color: var(--color-bg); }
+/* ─── Hero & Countdown Section ─── */
+.hero { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0; overflow: hidden; background: transparent !important; }
 .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(253, 251, 248, 0.2) 55%, rgba(253, 251, 248, 0.6) 75%, rgba(253, 251, 248, 0.92) 100%); z-index: 1; }
 .hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
 .hero__content { position: relative; z-index: 2; text-align: center; color: var(--color-text); padding: 0 var(--spacing-side) var(--spacing-lg); width: 100%; }
@@ -268,7 +266,7 @@ a {
 .hero__date, .hero__venue { font-size: 0.8125rem; font-weight: 400; letter-spacing: 2px; opacity: 0.75; line-height: 1.6; color: var(--color-text-light); }
 .hero__venue { margin-top: 0.25rem; }
 
-.countdown { position: relative; z-index: 2; padding: var(--spacing-lg) var(--spacing-side) calc(var(--spacing-lg) + var(--safe-bottom)); text-align: center; color: var(--color-text); }
+.countdown { position: relative; z-index: 2; padding: var(--spacing-lg) var(--spacing-side) calc(var(--spacing-lg) + var(--safe-bottom)); text-align: center; color: var(--color-text); background: transparent !important; }
 .countdown__label { font-size: 0.75rem; font-weight: 400; letter-spacing: 3px; opacity: 0.5; margin-bottom: var(--spacing-sm); color: var(--color-accent-dark); }
 .countdown__timer { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
 .countdown__item { display: flex; flex-direction: column; align-items: center; min-width: 3.5rem; }
@@ -276,10 +274,8 @@ a {
 .countdown__unit { font-size: 0.625rem; font-weight: 400; letter-spacing: 2px; opacity: 0.5; margin-top: 0.25rem; }
 .countdown__sep { font-family: var(--font-display); font-size: 1.5rem; font-weight: 300; opacity: 0.3; margin-top: -1rem; color: var(--color-accent); }
 
-/* ═══════════════════════════════════════════
-   Greeting & Parents Info
-   ═══════════════════════════════════════════ */
-.greeting { background-color: var(--color-bg); }
+/* ─── Greeting & Parents Info ─── */
+.greeting { background: transparent !important; }
 .greeting__text { font-size: 0.9375rem; font-weight: 400; line-height: 2; color: var(--color-text-light); white-space: pre-line; margin-bottom: var(--spacing-xl); }
 .greeting__parents { font-size: 0.875rem; font-weight: 400; line-height: 2.2; color: var(--color-text); letter-spacing: 1px; }
 .greeting__parents .parent-row { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
@@ -287,10 +283,8 @@ a {
 .greeting__parents .child-name { font-weight: 700; }
 .greeting__parents .deceased::before { content: "故 "; font-size: 0.75em; opacity: 0.6; }
 
-/* ═══════════════════════════════════════════
-   Calendar Section (투명화 반영)
-   ═══════════════════════════════════════════ */
-#calendarSection { background-color: var(--color-bg-alt);}
+/* ─── Calendar Section (투명화 반영) ─── */
+#calendarSection { background: transparent !important; }
 
 /* 11월 달력 감싸는 큰 카드 박스 완전 투명화 */
 #calendarSection, #calendar, #calendarSection .card, #calendar .calendar-wrap, .calendar-box {
@@ -373,17 +367,15 @@ a {
 
 .calendar-actions { display: flex; gap: var(--spacing-sm); justify-content: center; flex-wrap: wrap; }
 
-/* ═══════════════════════════════════════════
-   Our Story & Gallery Section
-   ═══════════════════════════════════════════ */
-.story { background-color: var(--color-bg); }
+/* ─── Our Story & Gallery Section ─── */
+.story { background: transparent !important; }
 .story__text { font-size: 0.9375rem; font-weight: 400; line-height: 2; color: var(--color-text-light); white-space: pre-line; margin-bottom: var(--spacing-xl); }
 .story__photos { display: flex; flex-direction: column; gap: var(--spacing-md); }
 .story__photo-item { border-radius: var(--radius-lg); overflow: hidden; cursor: pointer; box-shadow: 0 4px 20px rgba(232, 223, 240, 0.3); }
 .story__photo-item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform var(--transition-slow); }
 .story__photo-item:hover img { transform: scale(1.03); }
 
-.gallery { background-color: var(--color-bg-alt); }
+.gallery { background: transparent !important; }
 .gallery__grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -395,10 +387,8 @@ a {
 .gallery__item img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--transition-slow); }
 .gallery__item:hover img { transform: scale(1.08); }
 
-/* ═══════════════════════════════════════════
-   Location Section (카카오맵 전체 너비 및 상세안내)
-   ═══════════════════════════════════════════ */
-.location { background-color: var(--color-bg); }
+/* ─── Location Section (카카오맵 전체 너비 및 상세안내) ─── */
+.location { background: transparent !important; }
 .location__info { margin-bottom: var(--spacing-md); }
 .location__venue { font-size: 1.0625rem; font-weight: 700; margin-bottom: 0.25rem; letter-spacing: 1px; }
 .location__hall { font-size: 0.875rem; font-weight: 400; color: var(--color-text-light); margin-bottom: var(--spacing-xs); }
@@ -480,10 +470,8 @@ a {
   margin: 0 !important;
 }
 
-/* ═══════════════════════════════════════════
-   Account Section (축의금 계좌 및 아코디언 제어 수정)
-   ═══════════════════════════════════════════ */
-.account { background-color: var(--color-bg-alt); }
+/* ─── Account Section (축의금 계좌 및 아코디언 제어 수정) ─── */
+.account { background: transparent !important; }
 .account__desc { font-size: 0.875rem; font-weight: 400; color: var(--color-text-light); margin-bottom: var(--spacing-lg); }
 
 /* 계좌 아코디언 컨테이너 기본 설정 */
@@ -580,10 +568,7 @@ a {
   border-color: var(--color-accent) !important;
 }
 
-/* ═══════════════════════════════════════════
-   Firebase RSVP(참석여부) & Guestbook(방명록) 
-   박스 완전 투명화 및 모바일 라디오 버튼 최적화
-   ═══════════════════════════════════════════ */
+/* ─── Firebase RSVP(참석여부) & Guestbook(방명록) ─── */
 .registry-block {
   width: 100% !important;
    padding: 0 var(--spacing-side);
@@ -712,16 +697,14 @@ a {
 .gb-card__delete-btn { position: absolute; bottom: var(--spacing-md); right: var(--spacing-lg); background: none; border: none; color: var(--color-text-muted); font-size: 0.6875rem; cursor: pointer; text-decoration: underline; }
 .gb-card__delete-btn:hover { color: #ff7675; }
 
-/* ═══════════════════════════════════════════
-   Global Buttons & Loading & Animations
-   ═══════════════════════════════════════════ */
+/* ─── Global Buttons & Loading & Animations ─── */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.5rem; font-family: var(--font-serif); font-size: 0.8125rem; font-weight: 400; letter-spacing: 1px; border-radius: 100px; transition: var(--transition); cursor: pointer; line-height: 1; }
 .btn--outline { border: 1px solid var(--border); color: var(--color-text-light); background: var(--color-bg-card); }
 .btn--outline:hover { border-color: var(--color-accent); color: var(--color-accent-dark); background: rgba(232, 223, 240, 0.2); }
 .btn--text { color: var(--color-accent-dark); font-size: 0.8125rem; display: inline-flex; align-items: center; gap: 0.375rem; }
 .btn--text:hover { color: var(--color-accent); }
 
-.footer { padding: var(--spacing-lg) var(--spacing-side); padding-bottom: calc(var(--spacing-lg) + var(--safe-bottom)); text-align: center; background: var(--color-bg); position: relative; }
+.footer { padding: var(--spacing-lg) var(--spacing-side); padding-bottom: calc(var(--spacing-lg) + var(--safe-bottom)); text-align: center; background: transparent !important; position: relative; }
 .footer::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 200px; height: 1px; background: linear-gradient(to right, transparent, var(--color-lavender), var(--color-blush), transparent); opacity: 0.5; }
 .footer__text { font-size: 0.75rem; font-weight: 400; color: var(--color-text-muted); letter-spacing: 2px; }
 
