@@ -196,9 +196,7 @@ a {
   opacity: 0.5;
 }
 
-/* ═══════════════════════════════════════════
-   Curtain Opening & Canvas & System UI
-   ═══════════════════════════════════════════ */
+/* ─── Curtain Opening & Canvas & System UI ─── */
 .curtain { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: var(--color-bg); }
 .curtain__wash { position: absolute; left: 0; right: 0; height: 55%; transition: transform 1.4s cubic-bezier(0.77, 0, 0.18, 1); will-change: transform; }
 .curtain__wash--top { top: 0; background: linear-gradient(180deg, var(--color-lavender) 0%, rgba(232, 223, 240, 0.6) 30%, rgba(245, 224, 224, 0.3) 60%, transparent 100%); }
@@ -414,29 +412,29 @@ a {
 .account { background-color: var(--color-bg-alt); }
 .account__desc { font-size: 0.875rem; font-weight: 400; color: var(--color-text-light); margin-bottom: var(--spacing-lg); }
 
-/* 계좌번호 박스 투명화 및 여백 미세 정돈 */
+/* 계좌 아코디언 컨테이너 기본 설정 */
 #account .accordion {
   background: transparent !important;
   border: none !important;
   box-shadow: none !important;
-  margin: 0 auto 12px auto !important;
-  max-width: 300px !important;
+  margin: 0 auto 16px auto !important;
+  max-width: 320px !important;
+  width: 100% !important;
 }
-#account .accordion__icon { display: none !important; } /* 아코디언 내부 꽃 무늬 제거 */
+#account .accordion__icon { display: none !important; }
 
-/* 계좌 열기 실제 작동 버튼 (글자 정가운데 + 화살표 오른쪽 배치) */
+/* 계좌 열기 버튼 (타원형 알약형태 유지 및 레이어 겹침 방지) */
 #account .accordion__trigger {
   position: relative !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   width: 100% !important;
-  max-width: 300px !important;
-  padding: 12px 24px !important;
-  margin: 0 auto !important;
+  padding: 14px 24px !important;
+  margin-bottom: 8px !important; /* 아래 콘텐츠와 겹치지 않도록 안전 마진 확보 */
   background-color: var(--color-bg-card, #ffffff) !important;
   border: 1px solid var(--color-border, #ece4f0) !important;
-  border-radius: 999px !important; /* 타원형 */
+  border-radius: 999px !important;
   color: var(--color-text, #4a4a4a) !important;
   font-family: var(--font-serif);
   font-size: 0.875rem !important;
@@ -444,30 +442,56 @@ a {
   box-shadow: 0 2px 8px rgba(232, 223, 240, 0.15);
   cursor: pointer;
   transition: all 0.2s ease;
+  z-index: 2; /* 버튼이 항상 위로 오도록 설정 */
 }
+
 #account .accordion__trigger .accordion__arrow {
   position: absolute !important;
-  right: 20px !important;
+  right: 24px !important;
   top: 50% !important;
   transform: translateY(-50%) !important;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
-/* 펼쳐지는 내부 구역 투명화 */
-#account .accordion__panel { background: transparent !important; border: none !important; max-width: 300px !important; margin: 0 auto !important; box-shadow: none !important; }
-#account .accordion__panel-inner { background: transparent !important; padding: 8px 12px !important; }
+/* ⚠️ 핵심 수정: 닫혀있을 때는 보이지 않도록 기본 높이 및 흐름 제어 */
+#account .accordion__panel {
+  display: none; /* JS 동작 방식에 맞춰 기본적으로 레이아웃에서 숨김 처리 */
+  background: transparent !important; 
+  border: none !important; 
+  max-width: 100% !important; 
+  margin: 0 auto !important; 
+  box-shadow: none !important;
+  overflow: hidden;
+}
 
-/* 계좌 목록 정보 텍스트 구분 실선 */
+/* JS가 아코디언을 열었을 때(active 클래스 등이 붙거나 활성화 시 리셋되도록 보장) */
+#account .accordion.is-active .accordion__panel,
+#account .accordion.open .accordion__panel,
+#account .accordion__panel[style*="display: block"],
+#account .accordion__panel[style*="display: border"] {
+  display: block !important;
+}
+
+/* 계좌 내부 상세 패딩 정돈 */
+#account .accordion__panel-inner { 
+  background: transparent !important; 
+  padding: 12px 8px !important; 
+}
+
+/* 계좌 목록 정보 텍스트 구분 실선 및 유연한 정렬 */
 .account .remit-row, #account .accordion__panel-inner > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0 !important;
-  font-size: 0.85rem;
-  color: var(--color-text-light, #555555);
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 12px 4px !important;
+  font-size: 0.875rem !important;
+  color: var(--color-text-light, #555555) !important;
   border-bottom: 1px dashed var(--color-border, #ece4f0) !important;
+  background: transparent !important;
 }
-.account .remit-row:last-child, #account .accordion__panel-inner > div:last-child { border-bottom: none !important; }
+.account .remit-row:last-child, #account .accordion__panel-inner > div:last-child { 
+  border-bottom: none !important; 
+}
 
 /* [복사] 버튼 알약 모양 스타일화 */
 .account .remit-copy-btn, #account button[onclick*="copyText"], .account-item__copy {
@@ -530,23 +554,27 @@ a {
 .rsvp-group:last-child { border-bottom: none; }
 .rsvp-group__label { font-size: 0.875rem; color: var(--color-text-light); font-weight: 700; }
 
-/* ⭐ 핵심 요구사항: RSVP 라디오버튼 우측 선택 동그라미 세로 줄 정렬 맞춤 */
+/* ⭐ 핵심 요구사항 수정: 라디오버튼 텍스트가 절대 세로로 깨지지 않도록 너비 확보 */
 #rsvpForm .rsvp-options {
   display: flex !important;
   justify-content: flex-end !important; /* 우측 정렬 유지 */
-  gap: 12px !important;
+  gap: 16px !important; /* 선택지 간의 여백 확보 */
 }
+
 #rsvpForm .rsvp-option {
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: flex-start !important; /* 텍스트와 라디오는 내부 왼쪽 정렬 */
-  width: 85px !important; /* 방 크기를 똑같이 맞추어 라디오 버튼 동그라미 세로줄이 완벽히 일치됨 ⭐ */
+  justify-content: flex-start !important; 
+  width: auto !important; /* ❌ 기존 85px 고정값을 지우고 유연하게 확장 */
+  min-width: 75px !important; /* 최소 너비만 보장 */
   margin: 0 !important;
   padding: 0 !important;
-  font-size: 0.875rem;
-  color: var(--color-text);
+  font-size: 0.875rem !important;
+  color: var(--color-text) !important;
   cursor: pointer;
+  white-space: nowrap !important; /* 텍스트가 절대 아래 줄로 떨어지지 않게 처리 */
 }
+
 #rsvpForm .rsvp-option input[type="radio"] {
   margin: 0 6px 0 0 !important;
   flex-shrink: 0 !important;
