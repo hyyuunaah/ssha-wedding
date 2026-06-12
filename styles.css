@@ -1707,17 +1707,21 @@ a {
   gap: 8px !important;               /* 글자와 화살표 사이의 간격 */
 }
 
-/* 4. 신랑측/신부측 계좌번호 실제 클릭 버튼 (알약형) */
+/* 4. 신랑측/신부측 계좌번호 실제 클릭 버튼 (글자 정가운데 + 화살표 오른쪽 끝 정렬) */
 #account .accordion__trigger {
+  position: relative !important;     /* 💡 화살표의 기준점을 이 버튼으로 설정 */
   display: flex !important;
-  justify-content: space-between !important;
+  justify-content: center !important; /* 💡 글자를 무조건 가로 정가운데로! */
   align-items: center !important;
   width: 100% !important;
   max-width: 300px !important;   
   padding: 12px 24px !important;
+  margin: 0 auto !important;
+  
   background-color: var(--color-bg-card, #ffffff) !important;
   border: 1px solid var(--color-border, #ece4f0) !important;
   border-radius: 999px !important; 
+  
   color: var(--color-text, #4a4a4a) !important;
   font-family: 'Nanum Myeongjo', serif;
   font-size: 0.875rem !important;
@@ -1725,6 +1729,15 @@ a {
   box-shadow: 0 2px 8px rgba(232, 223, 240, 0.15);
   cursor: pointer;
   transition: all 0.2s ease;
+}
+
+/* 오른쪽 아래 화살표(svg)만 따로 떼어내서 오른쪽 끝으로 강제 배정 */
+#account .accordion__trigger .accordion__arrow {
+  position: absolute !important;
+  right: 20px !important;        /* 오른쪽 끝에서 20px 띄움 */
+  top: 50% !important;           /* 세로 중앙 정렬 */
+  transform: translateY(-50%) !important; 
+  transition: transform 0.2s ease;
 }
 
 /* 5. 버튼 클릭 시 아래로 펼쳐지는 계좌 내용물 투명화 */
