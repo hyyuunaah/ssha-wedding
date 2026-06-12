@@ -820,16 +820,3 @@ a {
   box-sizing: border-box !important;
 }
 
-/* ─── 모바일 전용: RSVP 버튼 그룹 우측 여백 조정 ─── */
-@media (max-width: 480px) {
-  #rsvpForm .rsvp-options {
-    justify-content: flex-end !important;
-    padding-right: 5px !important; /* 여기서 오른쪽 여백을 조절하세요 */
-  }
-
-  #rsvpForm .rsvp-option {
-    width: auto !important;     /* 고정 너비를 풀어줍니다 */
-    min-width: auto !important;
-    margin-left: 10px !important; /* 버튼들 사이 간격을 확보합니다 */
-  }
-}
