@@ -1582,23 +1582,4 @@ a {
   color: #ff7675;
 }
 
-/* 오시는 길 지도를 좌우 여백 없이 꽉 차게 만들기 */
-#weddingRegistrySection -가아닌 기존 지도 섹션의 클래스를 타겟팅합니다 */
-.location__map {
-  margin-left: calc(var(--spacing-md) * -1) !important;
-  margin-right: calc(var(--spacing-md) * -1) !important;
-  width: calc(100% + (var(--spacing-md) * 2)) !important;
-  max-width: none !important;
-  border-radius: 0 !important; /* 꽉 찼을 때 어색하지 않게 모서리 둥글기 제거 */
-}
-
-/* 모바일 해상도 대응 (반응형 여백이 다를 경우를 대비) */
-@media (max-width: 768px) {
-  .location__map {
-    margin-left: -20px !important; /* 기본 컨테이너 좌우 패딩이 20px일 경우 */
-    margin-right: -20px !important;
-    width: calc(100% + 40px) !important;
-  }
-}
-
 }
