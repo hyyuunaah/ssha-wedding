@@ -199,83 +199,54 @@
     </section>
 
     <!-- ─── Account Section (축의금) ─── -->
-    <section class="section" id="remittanceSection">
-      <div class="container">
-        <h2 class="section__title" style="text-align: center;">마음 전하실 곳</h2>
-        <div class="wc-divider" style="margin-bottom: 25px;"></div>
-        
-        <div class="remit-wrap">
-          <div class="remit-box">
-            <button class="btn remit-toggle-btn" onclick="toggleRemit('groomRemit')">신랑측 계좌번호 확인하기</button>
-            <div id="groomRemit" class="remit-content" style="display: none;">
-              <div class="remit-row">
-                <span>신랑 신한 110-123-456789</span>
-                <button class="btn remit-copy-btn" onclick="copyText('110123456789')">복사</button>
-              </div>
-              <div class="remit-row">
-                <span>아버님 국민 1234-56-7890</span>
-                <button class="btn remit-copy-btn" onclick="copyText('1234567890')">복사</button>
-              </div>
-            </div>
-          </div>
+    <section class="section account" id="account">
+      <div class="wc-blob wc-blob--account"></div>
+      <div class="section__inner">
+        <h2 class="section__title animate-item" data-animate="fade-up">마음 전하실 곳</h2>
+        <p class="account__desc animate-item" data-animate="fade-up">참석이 어려우신 분들을 위해 안내드립니다.</p>
 
-          <div class="remit-box" style="margin-top: 15px;">
-            <button class="btn remit-toggle-btn" onclick="toggleRemit('brideRemit')">신부측 계좌번호 확인하기</button>
-            <div id="brideRemit" class="remit-content" style="display: none;">
-              <div class="remit-row">
-                <span>신부 우리 1002-123-456789</span>
-                <button class="btn remit-copy-btn" onclick="copyText('1002123456789')">복사</button>
-              </div>
-              <div class="remit-row">
-                <span>어머님 기업 987-65432-10</span>
-                <button class="btn remit-copy-btn" onclick="copyText('9876543210')">복사</button>
-              </div>
-            </div>
+        <!-- Groom Accounts -->
+        <div class="accordion animate-item" data-animate="fade-up">
+          <button class="accordion__trigger" id="groomAccordion" aria-expanded="false">
+            <span class="accordion__icon">&#10047;</span>
+            <span>신랑측 계좌번호</span>
+            <svg class="accordion__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion__panel" id="groomAccordionPanel">
+            <div class="accordion__panel-inner" id="groomAccountList"></div>
+          </div>
+        </div>
+
+        <!-- Bride Accounts -->
+        <div class="accordion animate-item" data-animate="fade-up">
+          <button class="accordion__trigger" id="brideAccordion" aria-expanded="false">
+            <span class="accordion__icon">&#10047;</span>
+            <span>신부측 계좌번호</span>
+            <svg class="accordion__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="accordion__panel" id="brideAccordionPanel">
+            <div class="accordion__panel-inner" id="brideAccountList"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section section--alt" id="contactSection">
-      <div class="container">
-        <h2 class="section__title" style="text-align: center;">혼주에게 연락하기</h2>
-        <div class="wc-divider" style="margin-bottom: 25px;"></div>
-        
-        <div class="contact-wrap">
-          <div class="contact-zone">
-            <h4 class="contact-zone__title">신랑측 혼주</h4>
-            <div class="contact-buttons">
-              <a href="tel:010-1234-5678" class="btn contact-btn contact-btn--call">📞 아버님</a>
-              <a href="sms:010-1234-5678" class="btn contact-btn contact-btn--sms">✉️ 메시지</a>
-            </div>
-          </div>
-
-          <div class="contact-zone" style="margin-top: 20px;">
-            <h4 class="contact-zone__title">신부측 혼주</h4>
-            <div class="contact-buttons">
-              <a href="tel:010-9876-5432" class="btn contact-btn contact-btn--call">📞 어머님</a>
-              <a href="sms:010-9876-5432" class="btn contact-btn contact-btn--sms">✉️ 메시지</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="weddingRegistrySection" style="background-color: var(--color-bg); padding-top: 30px;">
+    <!-- 2026.06.12. 방명록 및 참석여부 UI 레이아웃 추가 -->
+    <section class="section section--alt" id="weddingRegistrySection">
       <div class="container">
         
-        <div class="registry-block">
+        <div class="registry-block animate-item" data-animate="fade-up">
           <h2 class="section__title" style="text-align: center;">참석 여부 전달하기</h2>
           <div class="wc-divider" style="margin-bottom: 20px;"></div>
           
-          <form id="rsvpForm" class="rsvp-card-clean">
+          <form id="rsvpForm" class="rsvp-card">
             <h3 class="rsvp-card__title">✉ 신랑 신부에게 참석 여부 보내기</h3>
             
-            <div class="rsvp-group-clean">
+            <div class="rsvp-group" style="border-bottom: none; padding-bottom: 5px;">
               <input type="text" id="rsvpName" placeholder="성함을 입력해 주세요" required style="width: 100%; padding: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.875rem; font-family: inherit;">
             </div>
 
-            <div class="rsvp-group-clean">
+            <div class="rsvp-group">
               <span class="rsvp-group__label">구분</span>
               <div class="rsvp-options">
                 <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신랑측" checked> 신랑측</label>
@@ -283,15 +254,15 @@
               </div>
             </div>
             
-            <div class="rsvp-group-clean">
+            <div class="rsvp-group">
               <span class="rsvp-group__label">참석 여부</span>
               <div class="rsvp-options">
-                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 🌸 참석</label>
-                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> ✨ 미참석</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 참석</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> 미참석</label>
               </div>
             </div>
             
-            <div class="rsvp-group-clean">
+            <div class="rsvp-group">
               <span class="rsvp-group__label">식사 여부</span>
               <div class="rsvp-options">
                 <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사함" checked> 식사 예정</label>
@@ -299,7 +270,7 @@
               </div>
             </div>
 
-            <div class="rsvp-group-clean" id="rsvpCountGroup">
+            <div class="rsvp-group" id="rsvpCountGroup">
               <span class="rsvp-group__label">참석 인원</span>
               <div class="rsvp-options" style="justify-content: flex-start; align-items: center; gap: 8px;">
                 <input type="number" id="rsvpCount" value="1" min="1" max="99" style="width: 70px; padding: 8px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.875rem; text-align: center; font-family: inherit; color: var(--color-text); background-color: var(--color-bg-card);">
@@ -307,22 +278,21 @@
               </div>
             </div>
             
-            <button type="submit" class="gb-submit-btn-round">참석 정보 전송하기</button>
+            <button type="submit" class="gb-submit-btn" style="margin-top: 15px;">참석 정보 전송하기</button>
           </form>
         </div>
 
-        <div class="registry-block" style="margin-top: 50px;">
+        <div class="registry-block animate-item" data-animate="fade-up" style="margin-top: 50px;">
           <h2 class="section__title" style="text-align: center;">축하 메시지</h2>
           <div class="wc-divider" style="margin-bottom: 20px;"></div>
           
-          <form id="guestbookForm" class="guestbook-form-clean">
+          <form id="guestbookForm">
             <div class="gb-input-row">
               <input type="text" id="gbName" placeholder="성함" required>
-              <input type="password" id="gbPassword" placeholder="비밀번호" required>
+              <input type="password" id="gbPassword" placeholder="비밀번호 (삭제용)" required>
             </div>
             <textarea id="gbMessage" placeholder="따뜻한 축하의 한마디를 남겨주세요." rows="3" required></textarea>
-            
-            <button type="submit" class="gb-submit-btn-round">축하 메시지 등록</button>
+            <button type="submit" class="gb-submit-btn">축하 메시지 등록</button>
           </form>
 
           <div id="guestbookList" style="margin-top: 25px;">
