@@ -1696,6 +1696,17 @@ a {
   max-width: 300px !important; 
 }
 
+/* 계좌번호 버튼 안의 꽃 그림 숨기기 */
+#account .accordion__icon {
+  display: none !important;
+}
+
+/* 텍스트와 화살표를 버튼 정가운데로 정렬 */
+#account .accordion__trigger {
+  justify-content: center !important; /* 양끝 정렬을 가운데 정렬로 변경 */
+  gap: 8px !important;               /* 글자와 화살표 사이의 간격 */
+}
+
 /* 4. 신랑측/신부측 계좌번호 실제 클릭 버튼 (알약형) */
 #account .accordion__trigger {
   display: flex !important;
