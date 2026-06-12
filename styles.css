@@ -651,37 +651,48 @@ a {
 .rsvp-group__label { font-size: 0.875rem; color: var(--color-text-light); font-weight: 700; }
 
 /* ⚠️ 모바일 화면 최적화: 라디오 버튼들이 잘리지 않고 촘촘히 우측 정렬되게 세팅 */
+/* 1. 라디오 버튼 전체 그룹 */
 #rsvpForm .rsvp-options {
   display: flex !important;
   justify-content: flex-end !important;
   align-items: center !important;
-  flex-wrap: nowrap !important; /* 강제 줄바꿈 금지 */
-  gap: 6px !important;           /* 버튼 간 간격을 좁게 */
-  /* gap: 12px !important; /* 모바일에서 겹치지 않는 안전한 간격 */ */
+  gap: 12px !important;
+  margin-top: 5px !important;
 }
 
+/* 2. 개별 라디오 버튼 항목 (라벨 포함) */
 #rsvpForm .rsvp-option {
   display: inline-flex !important;
-  align-items: center !important;      /* 핵심: 텍스트와 라디오버튼 수직 중앙 정렬 */
-  justify-content: flex-start !important; 
-  /*width: 110px !important;       /* 👈 항목별 너비를 동일하게 고정하여 세로선 정렬
-  min-width: 110px !important;   /* 👈 모바일 화면에서도 찌그러지지 않도록 방지 */
-  width: auto !important;              /* 너비 고정 해제하여 글자 길이에 유연하게 대응 */
+  align-items: center !important; /* 이 속성이 텍스트와 버튼의 수직 높이를 맞춥니다 */
+  justify-content: flex-start !important;
+  width: auto !important;
   margin: 0 !important;
   padding: 0 !important;
   font-size: 0.85rem !important;
-  color: var(--color-text) !important;
   cursor: pointer;
   white-space: nowrap !important;
+  line-height: 1 !important; /* 줄 간격 초기화 */
 }
 
-/* 모바일 브라우저 라디오 크기 및 간격 최적화 */
+/* 3. 라디오 버튼 크기 및 브라우저 스타일 초기화 */
 #rsvpForm .rsvp-option input[type="radio"] {
-  width: 12px !important;  /* 15px -> 12px로 축소 */
-  height: 12px !important; /* 15px -> 12px로 축소 */
+  appearance: none !important; /* 브라우저 기본 디자인 제거 */
+  -webkit-appearance: none !important;
+  width: 12px !important;
+  height: 12px !important;
   margin: 0 4px 0 0 !important;
+  border: 1px solid var(--color-accent-dark) !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
   flex-shrink: 0 !important;
-  accent-color: var(--color-accent-dark);
+}
+
+/* 4. 라디오 버튼 선택 시 내부 채움 */
+#rsvpForm .rsvp-option input[type="radio"]:checked {
+  background-color: var(--color-accent-dark) !important;
+  background-clip: content-box !important;
+  padding: 2px !important; /* 안쪽 여백으로 체크 표시 느낌 구현 */
 }
 
 /* 방명록 입력 창 세부 레이아웃 */
