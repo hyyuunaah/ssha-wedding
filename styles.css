@@ -1642,21 +1642,18 @@ a {
    RSVP & Guestbook Submit Button Custom (Pill-Shape)
    ========================================================================== */
 
-/* 1. 참석 정보 전송하기 버튼 (알약 모양 스타일) */
+/* 1. 참석 정보 전송하기 버튼 */
 #rsvpForm .gb-submit-btn,
 #rsvpForm button[type="submit"] {
   display: block !important;
   width: 100% !important;
-  max-width: 280px !important; /* 버튼이 너무 뚱뚱해지지 않도록 가로 제한 */
-  margin: 20px auto 0 auto !important; /* 화면 중앙 정렬 */
+  max-width: 280px !important;
+  margin: 20px auto 0 auto !important;
   padding: 14px 24px !important;
   background: var(--color-accent) !important;
   color: var(--color-white) !important;
   border: none !important;
-  
-  /* 사각형을 완전한 타원형(알약)으로 깎아줍니다 */
-  border-radius: 999px !important; 
-  
+  border-radius: 999px !important; /* 완전한 알약형 */
   font-size: 0.9rem !important;
   font-family: 'Nanum Myeongjo', serif;
   font-weight: 700;
@@ -1665,7 +1662,7 @@ a {
   transition: background 0.2s ease;
 }
 
-/* 2. 축하 메시지 등록 버튼 (알약 모양 스타일) */
+/* 2. 축하 메시지 등록 버튼 */
 #guestbookForm .gb-submit-btn,
 #guestbookForm button[type="submit"] {
   display: block !important;
@@ -1676,10 +1673,7 @@ a {
   background: var(--color-accent) !important;
   color: var(--color-white) !important;
   border: none !important;
-  
-  /* 사각형을 완전한 타원형(알약)으로 깎아줍니다 */
-  border-radius: 999px !important; 
-  
+  border-radius: 999px !important; /* 완전한 알약형 */
   font-size: 0.9rem !important;
   font-family: 'Nanum Myeongjo', serif;
   font-weight: 700;
@@ -1688,8 +1682,74 @@ a {
   transition: background 0.2s ease;
 }
 
-/* 버튼 마우스 호버 및 터치 시 은은하게 어두워지는 효과 */
 #rsvpForm button[type="submit"]:hover,
 #guestbookForm button[type="submit"]:hover {
   background: var(--color-accent-dark) !important;
+}
+
+/* 3. 신랑측/신부측 계좌번호 확인하기 버튼 */
+#remittanceSection .remit-toggle-btn,
+.remit-wrap button {
+  display: block !important;
+  width: 100% !important;
+  max-width: 300px !important;
+  margin: 0 auto !important;
+  padding: 12px 24px !important;
+  background-color: var(--color-bg-card, #ffffff) !important;
+  border: 1px solid var(--color-border, #ece4f0) !important;
+  border-radius: 999px !important; /* 완전한 알약형 */
+  color: var(--color-text, #4a4a4a) !important;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 0.875rem !important;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(232, 223, 240, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#remittanceSection .remit-toggle-btn:hover {
+  background-color: var(--color-bg-alt, #f8f4f0) !important;
+  border-color: var(--color-accent-light, #dcc8e8) !important;
+}
+
+/* 4. 펼쳐지는 계좌 내용물 투명화 */
+#remittanceSection .remit-content,
+.remit-wrap .remit-content {
+  max-width: 300px !important;
+  margin: 8px auto 0 auto !important;
+  background: transparent !important; /* 테두리 박스 배경 완벽 제거 */
+  border: none !important;            /* 테두리선 제거 */
+  padding: 4px 12px !important;
+  box-shadow: none !important;
+}
+
+#remittanceSection .remit-row,
+.remit-wrap .remit-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 !important;
+  font-size: 0.85rem;
+  color: var(--color-text-light, #555555);
+  border-bottom: 1px dashed var(--color-border, #ece4f0) !important; 
+}
+
+#remittanceSection .remit-row:last-child,
+.remit-wrap .remit-row:last-child {
+  border-bottom: none !important;
+}
+
+/* 5. 복사 버튼 미니 알약형 */
+#remittanceSection .remit-copy-btn,
+.remit-wrap .remit-copy-btn {
+  padding: 3px 12px !important;
+  font-size: 0.75rem !important;
+  border-radius: 999px !important; 
+  border: 1px solid var(--color-border, #ece4f0) !important;
+  background-color: var(--color-bg-card, #ffffff) !important;
+  color: var(--color-text, #4a4a4a) !important;
+  cursor: pointer;
+}
+#remittanceSection .remit-copy-btn:hover {
+  background-color: var(--color-bg-alt, #f8f4f0) !important;
 }
