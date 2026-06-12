@@ -834,8 +834,22 @@
     const $gbForm = document.getElementById('guestbookForm');
     const $gbList = document.getElementById('guestbookList');
 
-    // [1] RSVP 참석 여부만 따로 저장하기
+    // [1] RSVP 참석 여부만 따로 저장하기 (인원수 반영 버전)
     if ($rsvpForm) {
+      // 💡 미참석을 누르면 인원수 선택칸이 자동으로 숨겨지거나 보여지는 센스 있는 연동 기능 추가
+      const attendRadios = document.querySelectorAll('input[name="rsvpAttend"]');
+      const countGroup = document.getElementById('rsvpCountGroup');
+      
+      attendRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          if (e.target.value === '미참석') {
+            countGroup.style.display = 'none'; // 미참석 시 인원수 선택 숨김
+          } else {
+            countGroup.style.display = 'flex'; // 참석 시 인원수 선택 보임
+          }
+        });
+      });
+
       $rsvpForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -843,23 +857,27 @@
         const side = document.querySelector('input[name="rsvpSide"]:checked').value;
         const attend = document.querySelector('input[name="rsvpAttend"]:checked').value;
         const meal = document.querySelector('input[name="rsvpMeal"]:checked').value;
+        
+        // 미참석일 때는 인원수를 0명으로 처리, 참석일 때만 선택된 인원 저장
+        const count = (attend === '미참석') ? '0명' : document.getElementById('rsvpCount').value;
 
         if (!name) return;
 
-        // rsvp 서랍에 데이터 쏙 넣기
+        // rsvp 서랍에 데이터 넣기 (count 항목 추가)
         const newRsvpRef = rsvpRef.push();
         newRsvpRef.set({
           name: name,
           side: side,
           attend: attend,
           meal: meal,
+          count: count, // 📊 몇 명 오는지 데이터 저장!
           timestamp: firebase.database.ServerValue.TIMESTAMP
         }, (error) => {
           if (error) {
             alert('전송에 실패했습니다. 다시 시도해 주세요.');
           } else {
             showToast('참석 의사가 신랑 신부에게 전달되었습니다 🌸');
-            document.getElementById('rsvpName').value = ''; // 이름 입력칸만 초기화
+            document.getElementById('rsvpName').value = ''; // 성함 칸만 리셋
           }
         });
       });
