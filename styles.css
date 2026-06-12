@@ -1897,3 +1897,48 @@ a {
 #guestbookList > div:last-child {
   border-bottom: none !important;
 }
+
+/* ==========================================================================
+   오시는 길 하단 상세 안내 텍스트 (좌우 여백 + 연보라 소제목 포인트)
+   ========================================================================== */
+
+/* 전체를 감싸는 박스: 화면 중앙 정렬 및 좌우 대칭 여백 확보 */
+.location__detail-guide {
+  max-width: 450px !important;
+  margin: 0 auto !important;
+  
+  /* 💡 좌우 여백을 똑같이 24px씩 주어 화면 안쪽으로 균형감 있게 들여씁니다 */
+  padding: 0 24px !important; 
+  
+  text-align: left !important; /* 좌측 정렬 */
+  box-sizing: border-box !important;
+}
+
+/* 각 안내 항목 간의 간격 */
+.guide-item {
+  margin-bottom: 22px !important;
+}
+.guide-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* 💡 소제목 스타일: 폰트 두께를 살짝 다듬고 테마 색상(연보라) 반영 */
+.guide-title {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important; /* 눈에 잘 띄도록 두께감 부여 */
+  
+  /* 💡 청첩장 메인 테마인 연보라 변수(--color-accent)를 쓰고, 없을 경우를 대비해 #9a7baa 지정 */
+  color: var(--color-accent, #9a7baa) !important; 
+  
+  margin: 0 0 6px 0 !important;
+}
+
+/* 본문 안내 글귀 스타일 */
+.guide-text {
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 0.85rem !important;
+  line-height: 1.6 !important;
+  color: var(--color-text-light, #555555) !important;
+  margin: 0 !important;
+}
