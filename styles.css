@@ -1582,4 +1582,49 @@ a {
   color: #ff7675;
 }
 
+/* ==========================================================================
+   Location Navigation Buttons (Calendar Style)
+   ========================================================================== */
+.location__links {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 가로로 사이좋게 50%씩 배치 */
+  gap: var(--spacing-sm, 10px);
+  margin-top: 20px;
+  padding: 0 var(--spacing-md, 20px); /* 양옆 여백 정돈 */
+}
+
+/* 2026.06.12. 캘린더 버튼의 형태를 본뜬 스타일 보정 */
+.location__link-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 12px var(--spacing-md) !important;
+  background-color: var(--color-bg-card, #ffffff) !important;
+  border: 1px solid var(--color-border, #ece4f0) !important;
+  border-radius: var(--radius-sm, 4px) !important;
+  color: var(--color-text, #4a4a4a) !important;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 0.875rem !important;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(232, 223, 240, 0.1);
+  transition: all 0.2s ease;
+}
+
+/* 2026.06.12. 버튼에 마우스를 올리거나 터치했을 때 은은한 효과 */
+.location__link-btn:hover,
+.location__link-btn:active {
+  background-color: var(--color-bg-alt, #f8f4f0) !important;
+  border-color: var(--color-accent-light, #dcc8e8) !important;
+  color: var(--color-accent-dark, #9a7baa) !important;
+}
+
+.location__link-btn .btn__icon {
+  font-size: 0.95rem;
+  display: inline-block;
+  line-height: 1;
+}
+
 }
