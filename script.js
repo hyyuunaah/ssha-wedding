@@ -143,15 +143,7 @@
       document.body.classList.remove('no-scroll');
       setTimeout(() => {
         curtain.classList.add('is-hidden');
-        initSparkles();
-
-        // ─── 💡 [여기서부터 추가] 첫 메인 화면 사르륵 강제 트리거 ───
-        const heroEl = document.getElementById('hero') || $('#hero');
-        if (heroEl) {
-          heroEl.classList.add('is-animated'); // 혹은 프로젝트 스크립트 규칙에 따라 'active'
-        }
-        // ─────────────────────────────────────────────────────────────
-        
+        initSparkles();      
       }, 1400);
     });
 
