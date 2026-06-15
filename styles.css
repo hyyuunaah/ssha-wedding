@@ -832,3 +832,19 @@ a {
   box-sizing: border-box !important;
 }
 
+/* ─── 커튼이 열릴 때 메인 화면 사르륵 나타나기 ─── */
+
+/* 1. 커튼이 열리기 전, 메인 화면(hero)을 일단 투명하게 숨겨둡니다. */
+.hero.animate-item {
+  opacity: 0 !important;
+  transform: translateY(20px) !important; /* 살짝 아래에 위치 */
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out !important;
+}
+
+/* 2. 커튼 버튼을 눌러서 커튼에 'is-open' 클래스가 붙으면, 메인 화면을 사르륵 띄웁니다. */
+#curtain.is-open + .main-content .hero.animate-item,
+#curtain.is-open ~ .main-content .hero.animate-item,
+body:not(.no-scroll) .hero.animate-item {
+  opacity: 1 !important;
+  transform: translateY(0) !important; /* 원래 위치로 스르륵 */
+}
