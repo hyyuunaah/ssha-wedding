@@ -570,26 +570,16 @@ a {
   overflow: hidden; /* JS가 내부 높이(max-height 등)를 제어할 수 있도록 세팅 
 } */
 #account .accordion__panel {
-  /* 1. 처음에는 높이를 0으로 만들어 숨깁니다. (display: none 대신 이 방법을 써야 합니다) */
-  max-height: 0 !important;
-  overflow: hidden !important;
-  
-  /* 2. 버튼을 누를 때 부드럽게 스르륵 열리는 효과를 줍니다. */
-  transition: max-height 0.3s ease-out !important;
+  /* 1. 처음에는 닫혀 있도록 높이를 0으로 만듭니다. (자바스크립트가 연동되도록 !important는 절대 붙이지 않습니다) */
+  max-height: 0;
+  overflow: hidden;
 
-  /* 기존에 있던 스타일 유지 */
+  /* 2. 기존에 들어가 있던 스타일 그대로 유지 */
   background: transparent !important; 
   border: none !important; 
   max-width: 100% !important;
   margin: 0 auto !important; 
   box-shadow: none !important;
-}
-
-/* 3. 자바스크립트가 버튼을 눌러서 'active'나 'open' 클래스를 붙였을 때 열리도록 설정 */
-#account .accordion.active .accordion__panel,
-#account .accordion__panel.open,
-#account .accordion__panel.active {
-  max-height: 500px !important; /* 내부 계좌 정보가 다 보일 수 있는 넉넉한 높이 */
 }
 
 /* 계좌 내부 상세 패딩 정돈 */
