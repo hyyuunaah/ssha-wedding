@@ -361,7 +361,8 @@
 
     const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December'];
-    grid.innerHTML = `<div class="calendar__header">${monthNames[month]} ${year}</div>`;
+    // grid.innerHTML = `<div class="calendar__header">${monthNames[month]} ${year}</div>`;
+    grid.innerHTML = `<div class="calendar__header">${year}년 ${month + 1}월</div>`;
 
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
     const wdRow = document.createElement('div');
