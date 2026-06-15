@@ -27,6 +27,26 @@
   <!-- 2026.06.12. 방명록 및 참석여부 전달 기능을 위한 라이브러리 추 : 파이어베이스 -->
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+  <!-- ─── 카카오톡 공유하기 ───-->
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script>
+    // 초기화 (JS 키 넣기)
+    Kakao.init('6469b34cd87b4922021e697dc1ac53cf');
+    console.log('Kakao initialized:', Kakao.isInitialized());
+
+    // 공유 함수 (핵심)
+    function shareKakao() {
+      console.log("카카오 공유 실행됨");
+      Kakao.Share.sendCustom({
+        templateId: 134228,
+        templateArgs: {  // 템플릿에 변수가 있을 때만 사용
+          title: '저희 결혼합니다',
+          description: '소중한 분들을 초대합니다.'
+        }
+      });
+    }
+  </script>
   
 </head>
 <body>
@@ -328,7 +348,7 @@
     <!-- ─── 카카오톡 공유하기 ───-->
     <section>
       <div class="share-actions" style="text-align: center; margin-top: 50px; margin-bottom: 30px; padding: 0 20px;">
-        <button id="kakaotalk-sharing-btn" style="background: none; border: none; color: var(--color-accent-dark, #9a7baa); font-size: 0.85rem; font-family: 'Nanum Myeongjo', serif; letter-spacing: 1px; cursor: pointer; text-decoration: none; padding: 10px 20px; transition: opacity 0.3s;">
+        <button id="kakaotalk-sharing-btn" onclick="shareKakao()" style="background: none; border: none; color: var(--color-accent-dark, #9a7baa); font-size: 0.85rem; font-family: 'Nanum Myeongjo', serif; letter-spacing: 1px; cursor: pointer; text-decoration: none; padding: 10px 20px; transition: opacity 0.3s;">
           카카오톡 공유하기
         </button>
       </div>
@@ -340,28 +360,7 @@
     </footer>
 
   </main>
-
-  <!-- ─── 카카오톡 공유하기 script ───-->
-  <script src="https://t1.kakaocdn.net/v2/js/kakao.min.js" integrity="sha384-0rrY739j7M7n0ov5k2k01wcd3gquwkkfexwzndx7m9as8jfk3e5h7t/n9ofmdx7p" crossorigin="anonymous"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // 본인의 자바스크립트 앱 키로 교체하세요
-      if (!Kakao.isInitialized()) {
-        Kakao.init('6469b34cd87b4922021e697dc1ac53cf'); 
-      }
-
-      // 연보라색 버튼(#kakaotalk-sharing-btn)에 카카오 메시지 템플릿 연동
-      Kakao.Share.createCustomButton({
-        container: '#kakaotalk-sharing-btn',
-        templateId: 134228, // 여기에 카카오디벨로퍼스에서 만든 '템플릿 ID 숫자'를 넣으세요
-        templateArgs: {
-          title: (typeof CONFIG !== 'undefined' && CONFIG.ogTitle) || '저희 결혼합니다',
-          description: (typeof CONFIG !== 'undefined' && CONFIG.ogDesc) || '소중한 분들을 초대합니다.'
-        }
-      });
-    });
-  </script>
-
+  
   <script src="script.js"></script>
 </body>
 </html>
