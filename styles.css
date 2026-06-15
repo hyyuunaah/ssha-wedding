@@ -122,7 +122,7 @@ body {
 .greeting, .story, .gallery, .card, .calendar-box, .guestbook-wrap, .rsvp-card {
   background: transparent !important;
   background-color: transparent !important;
-  border: none !important;
+  /* border: none !important; */
   box-shadow: none !important;
 }
 
