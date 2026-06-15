@@ -663,18 +663,32 @@
     accounts.forEach((acc) => {
       const item = document.createElement('div');
       item.className = 'account-item';
+      // item.innerHTML = `
+      //   <div class="account-item__info">
+      //     <div class="account-item__role">${acc.role}</div>
+      //     <div class="account-item__detail">
+      //       <span class="account-item__name">${acc.name || ''}</span>
+      //       ${acc.bank} ${acc.number}
+      //     </div>
+      //   </div>
+      //   <button class="account-item__copy" data-account="${acc.bank} ${acc.number}">
+      //     복사
+      //   </button>
+      // `;
       item.innerHTML = `
-        <div class="account-item__info">
-          <div class="account-item__role">${acc.role}</div>
-          <div class="account-item__detail">
-            <span class="account-item__name"><strong>${acc.name || ''}</strong></span>
-            ${acc.bank} ${acc.number}
-          </div>
+      <div class="account-item__info">
+        <div class="account-item__detail" style="text-align: left; line-height: 1.5;">
+          <span class="account-item__role" style="display: inline-block; min-width: 45px; color: #6e6e6e;">${acc.role}</span>
+          <span class="account-item__name"><strong>${acc.name || ''}</strong></span>
+          <br>
+          ${acc.bank} ${acc.number}
         </div>
-        <button class="account-item__copy" data-account="${acc.bank} ${acc.number}">
-          복사
-        </button>
-      `;
+      </div>
+      <button class="account-item__copy" data-account="${acc.bank} ${acc.number}" style="font-size: 0.8rem; background: none; border: 1px solid var(--color-border); padding: 4px 8px; border-radius: 4px; cursor: pointer;">
+        복사
+      </button>
+    `;
+      
       container.appendChild(item);
     });
   }
