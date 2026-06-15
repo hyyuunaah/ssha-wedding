@@ -325,7 +325,7 @@
       </div>
     </section>
 
-    <!-- 카카오톡 공유하기 -->
+    <!-- ─── 카카오톡 공유하기 ───-->
     <section>
       <div class="share-actions" style="text-align: center; margin-top: 50px; margin-bottom: 30px; padding: 0 20px;">
         <button id="kakaotalk-sharing-btn" style="background: none; border: none; color: var(--color-accent-dark, #9a7baa); font-size: 0.85rem; font-family: 'Nanum Myeongjo', serif; letter-spacing: 1px; cursor: pointer; text-decoration: none; padding: 10px 20px; transition: opacity 0.3s;">
@@ -334,24 +334,26 @@
       </div>
     </section>
 
+    <!-- ─── Footer ─── -->
     <footer class="footer">
       <p class="footer__text" id="footerText"></p>
     </footer>
 
   </main>
 
+  <!-- ─── 카카오톡 공유하기 script ───-->
   <script src="https://t1.kakaocdn.net/v2/js/kakao.min.js" integrity="sha384-0rrY739j7M7n0ov5k2k01wcd3gquwkkfexwzndx7m9as8jfk3e5h7t/n9ofmdx7p" crossorigin="anonymous"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      // 1. 카카오 SDK 초기화 (본인의 자바스크립트 앱 키로 교체하세요)
+      // 본인의 자바스크립트 앱 키로 교체하세요
       if (!Kakao.isInitialized()) {
         Kakao.init('6469b34cd87b4922021e697dc1ac53cf'); 
       }
 
-      // 2. 위 버튼 아이디(#kakaotalk-sharing-btn)에 카카오 메시지 템플릿 연동
+      // 연보라색 버튼(#kakaotalk-sharing-btn)에 카카오 메시지 템플릿 연동
       Kakao.Share.createCustomButton({
         container: '#kakaotalk-sharing-btn',
-        templateId: 134228, // 👈여기에 카카오디벨로퍼스에서 만든 '템플릿 ID 숫자'를 넣으세요
+        templateId: 134228, // 여기에 카카오디벨로퍼스에서 만든 '템플릿 ID 숫자'를 넣으세요
         templateArgs: {
           title: (typeof CONFIG !== 'undefined' && CONFIG.ogTitle) || '저희 결혼합니다',
           description: (typeof CONFIG !== 'undefined' && CONFIG.ogDesc) || '소중한 분들을 초대합니다.'
