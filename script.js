@@ -1004,7 +1004,7 @@
   }  
 })();
 
-// 계좌번호 아코디언 토글 함수
+  // 계좌번호 아코디언 토글 함수
   window.toggleRemit = function(id) {
     const target = document.getElementById(id);
     if (target.style.display === 'none') {
@@ -1024,3 +1024,41 @@
       }
     });
   };
+
+  // ─── 카카오톡 공유하기 (사용자 정의 템플릿 사용) ───
+  function initKakaoShare() {
+    // 1. 카카오 SDK 스크립트 동적 로드
+    if (!window.Kakao) {
+      const script = document.createElement('script');
+      script.src = 'https://t1.kakaocdn.net/v2/js/kakao.min.js';
+      script.integrity = 'sha384-0rrY739j7M7n0ov5k2k01wcd3gquwkkfexwzndx7m9as8jfk3e5h7t/n9ofmdx7p';
+      script.crossOrigin = 'anonymous';
+      script.onload = () => setupKakao();
+      document.head.appendChild(script);
+    } else {
+      setupKakao();
+    }
+  
+    function setupKakao() {
+      // 2. 카카오 SDK 초기화 (본인의 JavaScript 키를 입력하세요)
+      if (!Kakao.isInitialized()) {
+        Kakao.init('6469b34cd87b4922021e697dc1ac53cf'); // 👈 여기에 '발급받은 자바스크립트 키' 붙여넣기
+      }
+  
+      // 3. 직접 만든 카카오 메시지 템플릿 연동
+      Kakao.Share.createCustomButton({
+        container: '#kakaotalk-sharing-btn',
+        templateId: 134228, // 👈 여기에 카카오디벨로퍼스에서 생성한 '템플릿 ID 숫증' 붙여넣기
+        templateArgs: {
+          // 만약 템플릿 안에 ${title}, ${description} 같은 변수(Args)를 지정해두셨다면 여기에 적어줍니다.
+          title: CONFIG.ogTitle || '저희 결혼합니다',
+          description: CONFIG.ogDesc || '소중한 분들을 초대합니다.'
+        }
+      });
+    }
+  }
+  
+  // 청첩장이 실행될 때 카카오톡 공유 기능도 같이 켜지도록 호출
+  document.addEventListener('DOMContentLoaded', () => {
+    initKakaoShare();
+  });
