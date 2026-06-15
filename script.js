@@ -671,7 +671,7 @@
             ${acc.bank} ${acc.number}
           </div>
         </div>
-        <button class="account-item__copy" data-account="${acc.bank} ${acc.number} ${acc.name || ''}">
+        <button class="account-item__copy" data-account="${acc.bank} ${acc.number}">
           복사
         </button>
       `;
