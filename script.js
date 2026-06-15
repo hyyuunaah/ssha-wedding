@@ -667,7 +667,7 @@
         <div class="account-item__info">
           <div class="account-item__role">${acc.role}</div>
           <div class="account-item__detail">
-            <span class="account-item__name">${acc.name || ''}</span>
+            <span class="account-item__name"><strong>${acc.name || ''}</strong></span>
             ${acc.bank} ${acc.number}
           </div>
         </div>
