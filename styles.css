@@ -863,7 +863,7 @@ main, section, div, .swiper-slide, .slide-item {
    카운트다운 숫자만 다른 폰트 사용
    ═══════════════════════════════════════════ */
 
-/* 카운트다운 숫자와 중간 땡땡이(:) 기호만 Cormorant Garamond로 강제 변경 */
+/* 카운트다운 숫자와 중간 땡땡이(:) 기호만 Merriweather로 강제 변경 */
 .countdown__number, .countdown__sep {
   font-family: 'Merriweather', serif !important;
   font-weight: 400; /* 숫자를 더 얇고 감성적으로 바꾸고 싶다면 300으로 줄여보세요! */
