@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════ */
 
 /*─── 구글 폰트 import (모바일에서 웹폰트를 가져오지 못해서 import 방식으로) ─── */
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nanum+Myeongjo&display=swap');
 
 /* ─── CSS Variables ─── */
 :root {
