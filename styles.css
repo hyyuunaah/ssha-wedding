@@ -860,10 +860,17 @@ main, section, div, .swiper-slide, .slide-item {
 }
 
 /* ═══════════════════════════════════════════
-   카운트다운 숫자만 다른 폰트 사용
+   메인화면 신랑신부 이름(scrip.js) & 카운트다운 숫자(index.html)만 다른 폰트 사용
    ═══════════════════════════════════════════ */
+/* 1. 메인 화면 신랑신부 이름 폰트 변경 */
+#heroNames {
+  font-family: 'Gowun Dodum', serif !important; /* 특정 폰트명 직접 고정 */
+  font-size: 1.8rem;      /* 글씨 크기 (취향껏 조절) */
+  font-weight: 400;       /* 글씨 두께 */
+  letter-spacing: 2px;    /* 글자 자간 확산으로 고급스러움 연출 */
+}
 
-/* 카운트다운 숫자와 중간 땡땡이(:) 기호만 Merriweather로 강제 변경 */
+/* 2. 카운트다운 숫자와 중간 땡땡이(:) 기호만 Merriweather로 강제 변경 */
 .countdown__number, .countdown__sep {
   font-family: 'Merriweather', serif !important;
   font-weight: 400; /* 숫자를 더 얇고 감성적으로 바꾸고 싶다면 300으로 줄여보세요! */
