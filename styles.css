@@ -822,7 +822,7 @@ a {
   box-sizing: border-box !important;
   width: 100% !important;
   margin: 0 auto !important;
-  margin-top: 55px !important;
+  margin-top: 25px !important;
 }
 
 /* 입력 필드들이 여백을 꽉 채우지 못하고 삐져나오는 경우 방어 */
