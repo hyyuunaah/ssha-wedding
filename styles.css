@@ -26,8 +26,10 @@
   --color-white: #ffffff;
   --color-toast-bg: rgba(74, 74, 74, 0.88);
 
-  --font-serif: 'Nanum Myeongjo', 'Georgia', serif;
-  --font-display: 'Cormorant Garamond', 'Nanum Myeongjo', serif;
+  /* --font-serif: 'Nanum Myeongjo', 'Georgia', serif;
+  --font-display: 'Cormorant Garamond', 'Nanum Myeongjo', serif; */
+  --font-serif: 'Gowun Dodum', 'Georgia', serif;
+  --font-display: 'Cormorant Garamond', 'Gowun Dodum', serif;
 
   /* 상하 간격 및 좌우 여백 표준화 */
   --spacing-section: 3.2rem; /* 모든 섹션의 일관된 상하 간격 */
