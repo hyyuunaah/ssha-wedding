@@ -857,3 +857,18 @@ main, section, div, .swiper-slide, .slide-item {
   transform: translate3d(0, 0, 0);
   will-change: transform;                      /* 브라우저에게 이 영역이 곧 움직일 것이라고 미리 힌트를 주어 버퍼링 방지 */
 }
+
+/* ═══════════════════════════════════════════
+   카운트다운 숫자만 다른 폰트 사용
+   ═══════════════════════════════════════════ */
+
+/* 1. 카운트다운 기본 틀과 한글(일, 시간, 분, 초)은 본문 폰트(고운돋움) 유지 */
+.countdown, .countdown__unit {
+  font-family: var(--font-serif) !important;
+}
+
+/* 2. 자바스크립트가 실시간으로 숫자를 갈아끼우는 '방'과 중간 땡땡이(:) 기호만 조준 */
+.countdown__number, .countdown__sep {
+  font-family: var(--font-display) !important; /* Cormorant Garamond 폰트 강제 적용 */
+  font-weight: 400; /* 숫자를 더 슬림하고 감성적으로 보고 싶다면 300으로 낮추셔도 예쁩니다 */
+}
