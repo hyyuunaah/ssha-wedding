@@ -31,7 +31,7 @@
   /* --font-serif: 'Nanum Myeongjo', 'Georgia', serif;
   --font-display: 'Cormorant Garamond', 'Nanum Myeongjo', serif; */
   --font-serif: 'Gowun Dodum', 'Nanum Myeongjo', 'Georgia', serif;
-  --font-display: 'Cormorant Garamond', 'Gowun Dodum', 'Nanum Myeongjo', serif;
+  --font-display: 'Gowun Dodum', 'Nanum Myeongjo', 'Cormorant Garamond', serif;
 
   /* 상하 간격 및 좌우 여백 표준화 */
   --spacing-section: 3.2rem; /* 모든 섹션의 일관된 상하 간격 */
