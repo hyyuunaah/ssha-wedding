@@ -3,6 +3,7 @@
    Korean Mobile 청첩장 - Clean Styles
    ═══════════════════════════════════════════ */
 
+/*─── 구글 폰트 import (모바일에서 웹폰트를 가져오지 못해서 import 방식으로) ─── */
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
 
 /* ─── CSS Variables ─── */
