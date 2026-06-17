@@ -3,6 +3,8 @@
    Korean Mobile 청첩장 - Clean Styles
    ═══════════════════════════════════════════ */
 
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+
 /* ─── CSS Variables ─── */
 :root {
   --color-bg: #fdfbf8;
