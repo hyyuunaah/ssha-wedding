@@ -31,8 +31,8 @@
 
   /* --font-serif: 'Nanum Myeongjo', 'Georgia', serif;
   --font-display: 'Cormorant Garamond', 'Nanum Myeongjo', serif; */
-  --font-serif: 'Gowun Dodum', 'Nanum Myeongjo', 'Georgia', serif;
-  --font-display: 'Gowun Dodum', 'Nanum Myeongjo', 'Cormorant Garamond', serif;
+  --font-serif: 'Gowun Dodum', 'Nanum Myeongjo', 'Merriweather', serif;
+  --font-display: 'Gowun Dodum', 'Nanum Myeongjo', 'Merriweather', serif;
 
   /* 상하 간격 및 좌우 여백 표준화 */
   --spacing-section: 3.2rem; /* 모든 섹션의 일관된 상하 간격 */
@@ -865,6 +865,6 @@ main, section, div, .swiper-slide, .slide-item {
 
 /* 카운트다운 숫자와 중간 땡땡이(:) 기호만 Cormorant Garamond로 강제 변경 */
 .countdown__number, .countdown__sep {
-  font-family: 'Cormorant Garamond', serif !important;
+  font-family: 'Merriweather', serif !important;
   font-weight: 400; /* 숫자를 더 얇고 감성적으로 바꾸고 싶다면 300으로 줄여보세요! */
 }
