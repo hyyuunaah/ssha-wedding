@@ -840,23 +840,39 @@ a {
 }
 
 /* ═══════════════════════════════════════════
+   모바일 청첩장 스크롤 부드럽게 최적화
+   ═══════════════════════════════════════════ */
+
+/* 1. 모바일 터치 스크롤 부드럽게 최적화 */
+html, body {
+  -webkit-overflow-scrolling: touch !important; /* iOS 기기에서 고무줄 같은 부드러운 가속 스크롤 강제 */
+  scroll-behavior: smooth;                     /* 스크롤 이동 시 부드러운 애니메이션 적용 */
+  overscroll-behavior-y: none;                 /* 모바일 상하단 끝에서 당겼을 때 튕기는 브라우저 기본 내비게이션 방지 */
+}
+
+/* 2. 슬라이드/스크롤 시 화면 렌더링 팅김(버벅임) 방지 */
+main, section, div, .swiper-slide, .slide-item {
+  -webkit-backface-visibility: hidden;         /* 3D 가속 중 뒷면 숨김 처리로 리소스 절약 */
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);     /* 모바일 기기의 GPU(그래픽가속기)를 강제로 깨워 부드럽게 처리 */
+  transform: translate3d(0, 0, 0);
+  will-change: transform;                      /* 브라우저에게 이 영역이 곧 움직일 것이라고 미리 힌트를 주어 버퍼링 방지 */
+}
+
+/* ═══════════════════════════════════════════
    메인화면 페이드인
    ═══════════════════════════════════════════ */
 /* 1. 처음에 메인 섹션을 안 보이게(투명도 0) 설정하고 스타일 준비 */
-#hero {   
+#hero {
   opacity: 0;             /* 투명도 0 (안 보임) */
   visibility: hidden;    /* 영역 점유는 하되 클릭 방지 등 */
+  transition: opacity 1.5s ease-in-out, visibility 1.5s; /* 1.5초 동안 부드럽게 변함 */
 }
 
 /* 2. 자바스크립트가 이 클래스를 붙여주면 스르륵 나타남 */
-/* #hero.is-visible {
-  opacity: 1;  /* 투명도 1 (완전히 보임) 
+#hero.is-visible {
+  opacity: 1;  /* 투명도 1 (완전히 보임) */
   visibility: visible;
-} */
-#hero.is-visible .hero__content {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 1.5s ease;
 }
 
 /* ═══════════════════════════════════════════
