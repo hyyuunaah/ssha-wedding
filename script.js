@@ -129,9 +129,11 @@
     const curtain = $('#curtain');
     const btn = $('#curtainBtn');
     const namesEl = $('#curtainNames');
+    const heroSection = $('#hero'); // 메인 섹션 가져오기
 
     if (CONFIG.useCurtain === false) {
       curtain.style.display = 'none';
+      if (heroSection) heroSection.classList.add('is-visible'); // 커튼 안 쓰면 메인 즉시 노출
       initSparkles();
       return;
     }
@@ -139,11 +141,26 @@
     namesEl.textContent = `${CONFIG.groom.name}  &  ${CONFIG.bride.name}`;
 
     btn.addEventListener('click', () => {
+      // 1. 커튼이 열리는 애니메이션 시작
       curtain.classList.add('is-open');
       document.body.classList.remove('no-scroll');
+      
+      // 2. 💡 중요: 커튼이 절반쯤 걷혔을 때(0.5초 뒤) 메인 화면을 스르륵 페이드인 시킵니다.
+      setTimeout(() => {
+        if (heroSection) {
+          heroSection.classList.add('is-visible');
+        }
+      }, 500);
+
+      // 3. 커튼 완전히 치우기 및 꽃가루 효과 시작
       setTimeout(() => {
         curtain.classList.add('is-hidden');
         initSparkles();      
+        
+        // 4. 모든 등장이 완료되면 메인 화면 최상단으로 부드럽게 스크롤 이동
+        if (heroSection) {
+          heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }, 1400);
     });
 
@@ -1025,21 +1042,4 @@
     });
   };
 
-// ─── 💡 청첩장 열기 버튼 클릭 시 메인 섹션 페이드인 ───
-document.addEventListener('DOMContentLoaded', function() {
-  // '청첩장 열기' 버튼을 찾습니다. (이름이 다를 경우 각자의 id로 매칭)
-  const openButton = document.getElementById('curtainBtn');
-  const heroSection = document.getElementById('hero');
-
-  if (openButton && heroSection) {
-    openButton.addEventListener('click', function() {
-      // 1. 메인 섹션에 'is-visible' 클래스를 추가해서 스르륵 나타나게 만듭니다.
-      heroSection.classList.add('is-visible');
-      
-      // 2. 화면이 부드럽게 메인 섹션 시작 지점으로 스크롤되도록 처리합니다.
-      setTimeout(function() {
-        heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 50); // 아주 미세한 시차를 두어 애니메이션이 꼬이지 않게 합니다.
-    });
-  }
 });
