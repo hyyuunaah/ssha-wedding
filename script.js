@@ -151,7 +151,7 @@
     
       setTimeout(() => {
         heroSection.classList.add('is-visible');
-      }, 300);
+      }, 500);
     
       setTimeout(() => {
         curtain.classList.add('is-hidden');
