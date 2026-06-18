@@ -133,7 +133,10 @@
 
     if (CONFIG.useCurtain === false) {
       if (curtain) curtain.style.display = 'none';
-      if (heroSection) heroSection.classList.add('is-visible');
+      if (heroSection) {
+        heroSection.style.setProperty('opacity', '1', 'important');
+        heroSection.style.setProperty('visibility', 'visible', 'important');
+      }
       initSparkles();
       return;
     }
@@ -144,19 +147,20 @@
 
     if (btn) {
       btn.addEventListener('click', () => {
-        // 1. 대문 커튼 열리는 애니메이션(클래스 추가) 시작
+        // 1. 대문 커튼이 열리기 시작
         curtain.classList.add('is-open');
         document.body.classList.remove('no-scroll');
         
-        // 2. 💡 턱! 하고 나타나지 않게, 커튼이 자연스럽게 스르륵 걷히기 시작할 때(0.3초 뒤)
-        // 메인 hero 섹션에 클래스를 주어 1.5초 동안 투명도가 부드럽게 올라가도록 합니다.
+        // 2. 💡 [핵심] css의 !important를 강제로 이기고 부드럽게 페이드인 되도록 style 속성 주입
         setTimeout(() => {
           if (heroSection) {
-            heroSection.classList.add('is-visible');
+            heroSection.style.setProperty('transition', 'opacity 1.5s ease-in-out, visibility 1.5s', 'important');
+            heroSection.style.setProperty('opacity', '1', 'important');
+            heroSection.style.setProperty('visibility', 'visible', 'important');
           }
-        }, 300);
+        }, 100); // 클릭 후 0.1초 뒤 스르륵 시작
 
-        // 3. 커튼이 완전히 사라지는 시점 (1.4초 뒤 완전히 숨김 및 꽃가루)
+        // 3. 커튼 완전히 사라짐 및 스크롤 이동
         setTimeout(() => {
           curtain.classList.add('is-hidden');
           initSparkles();      
@@ -289,10 +293,24 @@
      ═══════════════════════════════════════════ */
 
   function initHero() {
-    $('#heroPhoto').src = 'images/hero/1.jpg';
-    $('#heroNames').textContent = `${CONFIG.groom.name}  ·  ${CONFIG.bride.name}`;
-    $('#heroDate').textContent = formatDate(CONFIG.wedding.date, CONFIG.wedding.time);
-    $('#heroVenue').textContent = CONFIG.wedding.venue;
+    // $('#heroPhoto').src = 'images/hero/1.jpg';
+    // $('#heroNames').textContent = `${CONFIG.groom.name}  ·  ${CONFIG.bride.name}`;
+    // $('#heroDate').textContent = formatDate(CONFIG.wedding.date, CONFIG.wedding.time);
+    // $('#heroVenue').textContent = CONFIG.wedding.venue;
+    
+    const heroImg = $('#heroPhoto');
+    if (heroImg) {
+      // 커튼 뒤에서 이미지가 미리 완벽하게 다운로드되도록 처리
+      const imgPreload = new Image();
+      imgPreload.src = 'images/hero/1.jpg';
+      imgPreload.onload = function() {
+        heroImg.src = 'images/hero/1.jpg';
+      };
+    }
+    
+    if ($('#heroNames')) $('#heroNames').textContent = `${CONFIG.groom.name}  ·  ${CONFIG.bride.name}`;
+    if ($('#heroDate')) $('#heroDate').textContent = formatDate(CONFIG.wedding.date, CONFIG.wedding.time);
+    if ($('#heroVenue')) $('#heroVenue').textContent = CONFIG.wedding.venue;
   }
 
   /* ═══════════════════════════════════════════
