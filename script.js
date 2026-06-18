@@ -278,14 +278,31 @@
      ═══════════════════════════════════════════ */
 
   function initHero() {
+    const heroSection = $('#hero');
     const heroImg = $('#heroPhoto');
+
+    // 1. 💡 모바일 주소창 변화를 무시하고 실제 화면 높이를 픽셀(px)로 대못 박기
+    if (heroSection) {
+      const actualHeight = window.innerHeight;
+      heroSection.style.setProperty('height', `${actualHeight}px`, 'important');
+      heroSection.style.setProperty('max-height', `${actualHeight}px`, 'important');
+      heroSection.style.setProperty('min-height', `${actualHeight}px`, 'important');
+      heroSection.style.setProperty('overflow', 'hidden', 'important');
+    }
+
+    // 2. 💡 기존에 만들어둔 프리로드(Preload) 안전장치도 그대로 유지
     if (heroImg) {
       const imgPreload = new Image();
       imgPreload.src = 'images/hero/1.jpg';
       imgPreload.onload = function() {
         heroImg.src = 'images/hero/1.jpg';
       };
+      
+      // 이미지 크기도 부모 박스(px 고정된)에 100% 맞추기
+      heroImg.style.setProperty('height', '100%', 'important');
+      heroImg.style.setProperty('width', '100%', 'important');
     }
+    
     if ($('#heroNames')) $('#heroNames').textContent = `${CONFIG.groom.name}  ·  ${CONFIG.bride.name}`;
     if ($('#heroDate')) $('#heroDate').textContent = formatDate(CONFIG.wedding.date, CONFIG.wedding.time);
     if ($('#heroVenue')) $('#heroVenue').textContent = CONFIG.wedding.venue;
