@@ -145,16 +145,13 @@
     if (btn) {
       
       btn.addEventListener('click', () => {
-
+      heroSection.classList.add('is-visible');
       curtain.classList.add('is-open');
-      document.body.classList.remove('no-scroll');
-    
       setTimeout(() => {
-        curtain.classList.add('is-hidden');    
-        heroSection.offsetHeight; // 강제 리플로우
-        heroSection.classList.add('is-visible');
+        curtain.remove();
+        initSparkles();
       }, 1400);
-      });
+    });
       
     }
     document.body.classList.add('no-scroll');
