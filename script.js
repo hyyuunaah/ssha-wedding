@@ -971,11 +971,11 @@
 window.toggleRemit = function(id) {
   const panel = document.getElementById(id);
   if (!panel) return;
-
-  // 강제 display 차단 해제
+  
+  // 1. 기존에 툭툭 끊기게 만들던 display 제어 잔재를 완전히 제거
   panel.style.display = ''; 
 
-  // 높이를 계산해서 부드럽게 늘리거나 줄입니다
+  // 2. 높이를 계산해서 부드럽게 밀고 당기기 (CSS transition과 연동)
   if (!panel.style.maxHeight || panel.style.maxHeight === '0px') {
     panel.style.maxHeight = panel.scrollHeight + 'px';
   } else {
