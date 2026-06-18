@@ -245,13 +245,21 @@ a {
 }
 
 /* ─── Curtain Opening & Canvas & System UI ─── */
-.curtain { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: var(--color-bg); }
+/* .curtain { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: var(--color-bg); } */
+.curtain {
+  opacity: 1;
+  transition: opacity 1.4s ease;
+}
 .curtain__wash { position: absolute; left: 0; right: 0; height: 55%; transition: transform 1.4s cubic-bezier(0.77, 0, 0.18, 1); will-change: transform; }
 .curtain__wash--top { top: 0; background: linear-gradient(180deg, var(--color-lavender) 0%, rgba(232, 223, 240, 0.6) 30%, rgba(245, 224, 224, 0.3) 60%, transparent 100%); }
 .curtain__wash--bottom { bottom: 0; background: linear-gradient(0deg, var(--color-sky) 0%, rgba(220, 232, 240, 0.6) 30%, rgba(224, 240, 232, 0.3) 60%, transparent 100%); }
 .curtain.is-open .curtain__wash--top { transform: translateY(-100%); }
 .curtain.is-open .curtain__wash--bottom { transform: translateY(100%); }
-.curtain.is-open .curtain__content { opacity: 0; transform: scale(0.92); }
+/* .curtain.is-open .curtain__content { opacity: 0; transform: scale(0.92); } */
+.curtain.is-open {
+  opacity: 0;
+  pointer-events: none;
+}
 .curtain.is-hidden { display: none; }
 .curtain__content { position: relative; z-index: 1; text-align: center; color: var(--color-text); transition: opacity 0.5s ease, transform 0.5s ease; }
 .curtain__subtitle { font-family: var(--font-display); font-size: 0.875rem; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; margin-bottom: var(--spacing-md); opacity: 0.6; color: var(--color-accent-dark); }
@@ -851,12 +859,6 @@ a {
 #hero {   
   opacity: 0;             /* 투명도 0 (안 보임) */
   visibility: hidden;    /* 영역 점유는 하되 클릭 방지 등 */
-
-  transform: none !important;
-   
-  transition:
-     opacity 1.5s ease,
-     visibility 1.5s ease; /* 1.5초 동안 부드럽게 변함 */
 }
 
 /* 2. 자바스크립트가 이 클래스를 붙여주면 스르륵 나타남 */
@@ -866,7 +868,8 @@ a {
 } */
 #hero.is-visible .hero__content {
   opacity: 1;
-  transform: translateY(0);
+  visibility: visible;
+  transition: opacity 1.5s ease;
 }
 
 /* ═══════════════════════════════════════════
