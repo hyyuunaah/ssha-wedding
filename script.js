@@ -1019,14 +1019,39 @@ window.copyText = function(text) {
   });
 };
 
-// [튕김 버그 완전 박멸] 갤러리 및 스토리 이미지 클릭 시 상단 이동 강제 차단
-document.addEventListener('click', function(e) {
-  // 클릭된 요소가 갤러리나 스토리 이미지이거나, 그 이미지의 부모 링크인 경우
-  const targetLink = e.target.closest('#gallery a, #story a, .gallery__item, .story__photo-item');
-  
-  if (targetLink) {
-    // 🎯 브라우저가 href="#"을 읽고 맨 위로 순간이동 하려는 허리를 딱 끊어버립니다.
-    e.preventDefault(); 
-    e.stopPropagation();
-  }
-}, true); // true 속성으로 브라우저 명령보다 최우선으로 실행되게 만듭니다.
+// 💡 script.js 맨 아래에 그대로 붙여넣으세요. 기존에 테스트로 넣었던 스크롤 코드가 있다면 지우고 넣으셔도 됩니다.
+(function() {
+  let lockScrollY = 0;
+  let isModalActive = false;
+
+  // 1. 스토리나 갤러리 사진을 누르는 '그 순간' 현재 스크롤 위치를 박제합니다.
+  document.addEventListener('click', function(e) {
+    const isTarget = e.target.closest('.gallery__item, .story__photo-item, #galleryGrid img, #storyPhotos img');
+    if (isTarget) {
+      lockScrollY = window.scrollY; // 현재 하객이 보고 있던 높이 저장
+      isModalActive = true;
+      
+      // 브라우저가 강제로 화면을 위로 올리려고 하면 바로 가로채서 원래 위치로 고정
+      setTimeout(() => {
+        window.scrollTo(0, lockScrollY);
+      }, 5);
+    }
+  }, { capture: true }); // 브라우저가 다른 명령을 처리하기 전에 최우선으로 가로챕니다.
+
+  // 2. 모달창을 닫거나 배경을 누를 때 화면이 위로 밀리는 현상 방어
+  document.addEventListener('click', function(e) {
+    const isClose = e.target.closest('#modalClose, #photoModal');
+    if (isClose && isModalActive) {
+      isModalActive = false;
+      
+      // 닫히는 과정에서 위로 튕기지 않도록 원래 위치로 0.05초 동안 꽉 붙잡아둡니다.
+      const keepPosition = setInterval(() => {
+        window.scrollTo(0, lockScrollY);
+      }, 5);
+      
+      setTimeout(() => {
+        clearInterval(keepPosition);
+      }, 100);
+    }
+  }, { capture: true });
+})();
