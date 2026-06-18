@@ -129,23 +129,44 @@
     const curtain = $('#curtain');
     const btn = $('#curtainBtn');
     const namesEl = $('#curtainNames');
+    const heroSection = $('#hero');
 
     if (CONFIG.useCurtain === false) {
-      curtain.style.display = 'none';
+      if (curtain) curtain.style.display = 'none';
+      if (heroSection) heroSection.classList.add('is-visible');
       initSparkles();
       return;
     }
 
-    namesEl.textContent = `${CONFIG.groom.name}  &  ${CONFIG.bride.name}`;
+    if (namesEl) {
+      namesEl.textContent = `${CONFIG.groom.name}  &  ${CONFIG.bride.name}`;
+    }
 
-    btn.addEventListener('click', () => {
-      curtain.classList.add('is-open');
-      document.body.classList.remove('no-scroll');
-      setTimeout(() => {
-        curtain.classList.add('is-hidden');
-        initSparkles();      
-      }, 1400);
-    });
+    if (btn) {
+      btn.addEventListener('click', () => {
+        // 1. 대문 커튼 열리는 애니메이션(클래스 추가) 시작
+        curtain.classList.add('is-open');
+        document.body.classList.remove('no-scroll');
+        
+        // 2. 💡 턱! 하고 나타나지 않게, 커튼이 자연스럽게 스르륵 걷히기 시작할 때(0.3초 뒤)
+        // 메인 hero 섹션에 클래스를 주어 1.5초 동안 투명도가 부드럽게 올라가도록 합니다.
+        setTimeout(() => {
+          if (heroSection) {
+            heroSection.classList.add('is-visible');
+          }
+        }, 300);
+
+        // 3. 커튼이 완전히 사라지는 시점 (1.4초 뒤 완전히 숨김 및 꽃가루)
+        setTimeout(() => {
+          curtain.classList.add('is-hidden');
+          initSparkles();      
+          
+          if (heroSection) {
+            heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 1400);
+      });
+    }
 
     document.body.classList.add('no-scroll');
   }
