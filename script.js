@@ -148,15 +148,12 @@
         curtain.classList.add('is-open');
         document.body.classList.remove('no-scroll');
         
-        // 2. 💡 [핵심 보정] 누르자마자 즉시 CSS !important를 이기고 
-        // 1.5초 동안 부드럽게 번지듯 페이드인 되도록 스타일을 주입합니다.
+        // 2. 💡 [원래 정석 로직] 클래스만 넣어주면 CSS3 transition에 의해 스르륵 켜집니다!
         if (heroSection) {
-          heroSection.style.setProperty('transition', 'opacity 1.5s ease-in-out, visibility 1.5s', 'important');
-          heroSection.style.setProperty('opacity', '1', 'important');
-          heroSection.style.setProperty('visibility', 'visible', 'important');
+          heroSection.classList.add('is-visible');
         }
 
-        // 3. 커튼 완전히 사라지는 타이밍 (1.4초 뒤 완전히 숨김 및 스크롤)
+        // 3. 커튼 완전히 사라지는 타이밍
         setTimeout(() => {
           curtain.classList.add('is-hidden');
           initSparkles();      
