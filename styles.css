@@ -320,7 +320,21 @@ a {
 .hero__date, .hero__venue { font-size: 0.8125rem; font-weight: 400; letter-spacing: 2px; opacity: 0.75; line-height: 1.6; color: var(--color-text-light); }
 .hero__venue { margin-top: 0.25rem; }
 
-.countdown { position: relative; z-index: 2; padding: var(--spacing-lg) var(--spacing-side) calc(var(--spacing-lg) + var(--safe-bottom)); text-align: center; color: var(--color-text); background: transparent !important; }
+/* .countdown { position: relative; z-index: 2; padding: var(--spacing-lg) var(--spacing-side) calc(var(--spacing-lg) + var(--safe-bottom)); text-align: center; color: var(--color-text); background: transparent !important; } */
+.countdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* 💡 [핵심] 주소창 변화에 영향을 받지 않도록 높이를 내용물 크기에 맞추거나(auto), 
+     필요하다면 고정 픽셀(예: 200px)이나 padding 여백으로만 높이를 형성합니다. */
+  height: auto !important; 
+  padding: 40px 20px; /* 위아래 여백을 고정 픽셀로 주어 단단하게 고정 */
+  
+  /* 💡 라벨과 타이머 사이의 간격을 고정합니다 */
+  gap: 15px; 
+}
 .countdown__label { font-size: 0.75rem; font-weight: 400; letter-spacing: 3px; opacity: 0.5; margin-bottom: var(--spacing-sm); color: var(--color-accent-dark); }
 .countdown__timer { display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
 .countdown__item { display: flex; flex-direction: column; align-items: center; min-width: 3.5rem; }
