@@ -556,7 +556,14 @@
   }
 
   function initPhotoModal() {
-    if ($('#modalClose')) $('#modalClose').addEventListener('click', closePhotoModal);
+    // 💡 [버그 해결] 닫기 버튼을 누를 때 페이지가 맨 위로 튕기는 기본 동작(href="#")을 차단합니다.
+    if ($('#modalClose')) {
+      $('#modalClose').addEventListener('click', (e) => {
+        e.preventDefault(); // 👈 맨 위로 이동하는 링크 기본 동작을 방패처럼 막아줌!
+        closePhotoModal();
+      });
+    }
+    
     if ($('#modalPrev')) $('#modalPrev').addEventListener('click', () => modalNavigate(-1));
     if ($('#modalNext')) $('#modalNext').addEventListener('click', () => modalNavigate(1));
 
@@ -564,6 +571,7 @@
     if (modal) {
       modal.addEventListener('click', (e) => {
         if (e.target === modal || e.target.id === 'modalContainer') {
+          // 배경을 눌러서 닫을 때도 안전하게 차단하려면 필요한 경우 처리
           closePhotoModal();
         }
       });
