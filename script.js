@@ -969,12 +969,17 @@
 
 // 계좌번호 아코디언 토글 외부 연동 함수
 window.toggleRemit = function(id) {
-  const target = document.getElementById(id);
-  if (!target) return;
-  if (target.style.display === 'none' || !target.style.display) {
-    target.style.display = 'block';
+  const panel = document.getElementById(id);
+  if (!panel) return;
+
+  // 강제 display 차단 해제
+  panel.style.display = ''; 
+
+  // 높이를 계산해서 부드럽게 늘리거나 줄입니다
+  if (!panel.style.maxHeight || panel.style.maxHeight === '0px') {
+    panel.style.maxHeight = panel.scrollHeight + 'px';
   } else {
-    target.style.display = 'none';
+    panel.style.maxHeight = '0px';
   }
 };
 
