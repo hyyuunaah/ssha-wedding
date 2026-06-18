@@ -279,7 +279,23 @@ a {
 /* ─── Hero & Countdown Section ─── */
 .hero { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0; overflow: hidden; background: transparent !important; }
 .hero__overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 0%, transparent 35%, rgba(253, 251, 248, 0.2) 55%, rgba(253, 251, 248, 0.6) 75%, rgba(253, 251, 248, 0.92) 100%); z-index: 1; }
-.hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+/* .hero__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; } */
+.hero__photo { 
+  position: absolute; 
+  inset: 0; 
+  width: 100%; 
+  
+  /* 💡 기존 height: 100% 대신 고정된 동적 뷰포트 높이(dvh)를 사용하거나 */
+  /* 주소창 유무와 관계없이 첫 스크린 크기로 고정되도록 유도합니다. */
+  height: 100dvh !important; 
+  
+  object-fit: cover; 
+  object-position: center 30%; 
+
+  /* 💡 [핵심] 스크롤 시 이미지를 다시 계산해서 그리지 않도록 모바일 GPU 가속을 켭니다. */
+  will-change: transform;
+  transform: translateZ(0);
+}
 .hero__content { position: relative; z-index: 2; text-align: center; color: var(--color-text); padding: 0 var(--spacing-side) var(--spacing-lg); width: 100%; }
 .hero__label { font-family: var(--font-display); font-size: 0.875rem; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; margin-bottom: var(--spacing-sm); opacity: 0.6; color: var(--color-accent-dark); }
 .hero__names { font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; letter-spacing: 8px; margin-bottom: var(--spacing-md); line-height: 1.4; color: var(--color-text); }
@@ -867,6 +883,11 @@ main, section, div, .swiper-slide, .slide-item {
   opacity: 0;             /* 투명도 0 (안 보임) */
   visibility: hidden;    /* 영역 점유는 하되 클릭 방지 등 */
   transition: opacity 1.5s ease-in-out, visibility 1.5s; /* 1.5초 동안 부드럽게 변함 */
+
+  position: relative;
+  width: 100%;
+  height: 100dvh; /* 모바일 주소창 변화에 꿀렁이지 않도록 dvh 단위로 고정 */
+  overflow: hidden;
 }
 
 /* 2. 자바스크립트가 이 클래스를 붙여주면 스르륵 나타남 */
