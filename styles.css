@@ -631,6 +631,9 @@ a {
   max-height: 0;
   overflow: hidden;
 
+  /* [핵심 추가] 자바스크립트가 높이를 변경할 때 0.35초 동안 스르륵 움직이게 만듭니다! */
+  transition: max-height 0.35s ease-in-out;
+
   /* 2. 기존에 들어가 있던 스타일 그대로 유지 */
   background: transparent !important; 
   border: none !important; 
