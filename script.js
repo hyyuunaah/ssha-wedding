@@ -33,7 +33,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Image Auto-Detection (완전 복구 완료)[cite: 4]
+     Image Auto-Detection
      ═══════════════════════════════════════════ */
 
   function loadImagesFromFolder(folder, maxAttempts = 50) {
@@ -68,13 +68,12 @@
   }
 
   /* ═══════════════════════════════════════════
-     Toast (완전 복구 완료)[cite: 4]
+     Toast
      ═══════════════════════════════════════════ */
 
   let toastTimer = null;
   function showToast(message) {
     const el = $('#toast');
-    if (!el) return;
     el.textContent = message;
     el.classList.add('is-visible');
     clearTimeout(toastTimer);
@@ -82,7 +81,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Clipboard[cite: 4]
+     Clipboard
      ═══════════════════════════════════════════ */
 
   async function copyToClipboard(text, successMsg) {
@@ -106,7 +105,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     OG Meta Tags[cite: 4]
+     OG Meta Tags
      ═══════════════════════════════════════════ */
 
   function setMetaTags() {
@@ -123,18 +122,16 @@
   }
 
   /* ═══════════════════════════════════════════
-     Curtain (Watercolor Wash) - 💡 페이드인 시차 융합 버전[cite: 4]
+     Curtain (Watercolor Wash)
      ═══════════════════════════════════════════ */
 
   function initCurtain() {
     const curtain = $('#curtain');
     const btn = $('#curtainBtn');
     const namesEl = $('#curtainNames');
-    const heroSection = $('#hero'); // 메인 섹션 대상 추가
 
     if (CONFIG.useCurtain === false) {
       curtain.style.display = 'none';
-      if (heroSection) heroSection.classList.add('is-visible');
       initSparkles();
       return;
     }
@@ -144,22 +141,9 @@
     btn.addEventListener('click', () => {
       curtain.classList.add('is-open');
       document.body.classList.remove('no-scroll');
-      
-      // 💡 커튼이 열리기 시작할 때 메인 화면에 'is-visible'을 주어 부드럽게 등장시킵니다.
-      setTimeout(() => {
-        if (heroSection) {
-          heroSection.classList.add('is-visible');
-        }
-      }, 500);
-
       setTimeout(() => {
         curtain.classList.add('is-hidden');
         initSparkles();      
-        
-        // 💡 화면이 자연스럽게 메인 섹션 상단으로 스크롤되도록 처리
-        if (heroSection) {
-          heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
       }, 1400);
     });
 
@@ -167,7 +151,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Falling Pastel Confetti / Sparkles[cite: 4]
+     Falling Pastel Confetti / Sparkles
      ═══════════════════════════════════════════ */
 
   function initSparkles() {
@@ -214,6 +198,7 @@
         this.opacity = 0.3 + Math.random() * 0.5;
         this.color = colors[Math.floor(Math.random() * colors.length)];
         this.t = 0;
+        // 0 = circle confetti, 1 = sparkle star, 2 = soft blob
         this.type = Math.floor(Math.random() * 3);
       }
 
@@ -232,11 +217,13 @@
         ctx.globalAlpha = this.opacity;
 
         if (this.type === 0) {
+          // Circle confetti
           ctx.fillStyle = this.color;
           ctx.beginPath();
           ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
           ctx.fill();
         } else if (this.type === 1) {
+          // Sparkle star (4-point)
           ctx.fillStyle = this.color;
           ctx.beginPath();
           const s = this.size * 0.8;
@@ -249,6 +236,7 @@
           ctx.closePath();
           ctx.fill();
         } else {
+          // Soft blob
           ctx.fillStyle = this.color;
           ctx.beginPath();
           ctx.arc(0, 0, this.size * 0.7, 0, Math.PI * 2);
@@ -276,7 +264,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Hero Section[cite: 4]
+     Hero Section
      ═══════════════════════════════════════════ */
 
   function initHero() {
@@ -287,7 +275,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Countdown[cite: 4]
+     Countdown
      ═══════════════════════════════════════════ */
 
   function initCountdown() {
@@ -296,6 +284,7 @@
     function update() {
       const now = new Date();
       const diff = target - now;
+
       const labelEl = $('#countdownLabel');
 
       if (diff <= 0) {
@@ -326,7 +315,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Greeting Section[cite: 4]
+     Greeting Section
      ═══════════════════════════════════════════ */
 
   function initGreeting() {
@@ -351,7 +340,7 @@
       <div class="parent-row">
         ${parentLine(b.father, b.mother, b.fatherDeceased, b.motherDeceased)}
         <span class="parent-dot">●</span>
-        의  딸 <span class="child-name">${b.name}</span>
+        의 　딸 <span class="child-name">${b.name}</span>
       </div>
     `;
 
@@ -359,7 +348,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Calendar Section[cite: 4]
+     Calendar Section
      ═══════════════════════════════════════════ */
 
   function initCalendar() {
@@ -367,8 +356,12 @@
     const year = dt.getFullYear();
     const month = dt.getMonth();
     const weddingDay = dt.getDate();
+
     const grid = $('#calendarGrid');
 
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    // grid.innerHTML = `<div class="calendar__header">${monthNames[month]} ${year}</div>`;
     grid.innerHTML = `<div class="calendar__header">${year}년 ${month + 1}월</div>`;
 
     const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
@@ -404,12 +397,14 @@
 
     grid.appendChild(daysContainer);
 
+    // Google Calendar link
     const startDate = dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     const endDt = new Date(dt.getTime() + 2 * 60 * 60 * 1000);
     const endDate = endDt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     const gcalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(CONFIG.groom.name + ' ♥ ' + CONFIG.bride.name + ' 결혼식')}&dates=${startDate}/${endDate}&location=${encodeURIComponent(CONFIG.wedding.venue + ' ' + CONFIG.wedding.address)}&details=${encodeURIComponent('결혼식에 초대합니다.')}`;
     $('#googleCalBtn').href = gcalUrl;
 
+    // ICS download (Apple Calendar)
     $('#icsDownloadBtn').addEventListener('click', () => {
       const icsContent = [
         'BEGIN:VCALENDAR',
@@ -437,7 +432,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Story Section[cite: 4]
+     Story Section
      ═══════════════════════════════════════════ */
 
   function initStory(storyImages) {
@@ -461,7 +456,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Gallery Section[cite: 4]
+     Gallery Section
      ═══════════════════════════════════════════ */
 
   function initGallery(galleryImages) {
@@ -486,7 +481,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Photo Modal (with swipe)[cite: 4]
+     Photo Modal (with swipe)
      ═══════════════════════════════════════════ */
 
   let modalImages = [];
@@ -538,6 +533,7 @@
       }
     });
 
+    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (!modal.classList.contains('is-open')) return;
       if (e.key === 'Escape') closePhotoModal();
@@ -545,7 +541,9 @@
       if (e.key === 'ArrowRight') modalNavigate(1);
     });
 
+    // Swipe support
     const container = $('#modalContainer');
+
     container.addEventListener('touchstart', (e) => {
       touchStartX = e.changedTouches[0].screenX;
       touchStartY = e.changedTouches[0].screenY;
@@ -562,7 +560,9 @@
     const diffX = touchStartX - touchEndX;
     const diffY = touchStartY - touchEndY;
     const minSwipe = 50;
+
     if (Math.abs(diffX) < minSwipe || Math.abs(diffX) < Math.abs(diffY)) return;
+
     if (diffX > 0) {
       modalNavigate(1);
     } else {
@@ -571,8 +571,26 @@
   }
 
   /* ═══════════════════════════════════════════
-     Location Section[cite: 4]
+     Location Section
      ═══════════════════════════════════════════ */
+
+  /*
+  function initLocation() {
+    const w = CONFIG.wedding;
+    const ml = CONFIG.mapLinks;
+    $('#locationVenue').textContent = w.venue;
+    $('#locationHall').textContent = w.hall;
+    $('#locationAddress').textContent = w.address;
+    $('#locationTel').textContent = w.tel ? `Tel. ${w.tel}` : '';
+    $('#locationMapImg').src = 'images/location/1.jpg';
+    $('#kakaoMapBtn').href = ml.kakao || '#';
+    $('#naverMapBtn').href = ml.naver || '#';
+
+    $('#copyAddressBtn').addEventListener('click', () => {
+      copyToClipboard(w.address, '주소가 복사되었습니다');
+    });
+  }
+  */
 
   function initLocation() {
     const w = CONFIG.wedding;
@@ -582,6 +600,8 @@
     $('#locationAddress').textContent = w.address;
     $('#locationTel').textContent = w.tel ? `Tel. ${w.tel}` : '';
     
+    // 기존의 #locationMapImg.src 코드는 에러를 유발하므로 완전히 삭제했습니다.
+    
     $('#kakaoMapBtn').href = ml.kakao || '#';
     $('#naverMapBtn').href = ml.naver || '#';
 
@@ -589,32 +609,41 @@
       copyToClipboard(w.address, '주소가 복사되었습니다');
     });
 
+    // ─── 카카오 지도 로드 및 생성 ───
     const mapContainer = document.getElementById('daumMap'); 
     if (!mapContainer || typeof kakao === 'undefined') return; 
 
+    // API 스크립트가 완벽히 로드된 후 실행하도록 보장
     kakao.maps.load(function () {
       const mapOption = {
-          center: new kakao.maps.LatLng(37.8853, 127.7544), 
-          level: 3 
+          center: new kakao.maps.LatLng(37.8853, 127.7544), // 기본 중심 좌표
+          level: 3 // 확대 레벨
       };
 
       const map = new kakao.maps.Map(mapContainer, mapOption);
       const geocoder = new kakao.maps.services.Geocoder();
 
+      // config.js의 주소를 기반으로 좌표 검색
       geocoder.addressSearch(w.address, function(result, status) {
           if (status === kakao.maps.services.Status.OK) {
               const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+              // 예식장 위치에 마커 생성
               const marker = new kakao.maps.Marker({
                   map: map,
                   position: coords
               });
 
+              // 마커 위에 띄울 이쁜 말풍선(인포윈도우) 생성
               const infowindow = new kakao.maps.InfoWindow({
                   content: `<div style="width:150px; text-align:center; padding:6px 0; font-family:'Nanum Myeongjo', serif; font-size:12px; color:#4a4a4a; border:none;">${w.venue}</div>`
               });
               infowindow.open(map, marker);
+
+              // 지도의 중심을 예식장 좌표로 세팅
               map.setCenter(coords);
               
+              // 초대장 애니메이션(Fade-in 등)과 타이밍이 겹쳐서 지도가 깨지거나 하얗게 보이는 현상 방지
               setTimeout(() => {
                   map.relayout();
                   map.setCenter(coords);
@@ -627,7 +656,7 @@
   }
   
   /* ═══════════════════════════════════════════
-     Account Section (축의금)[cite: 4]
+     Account Section (축의금)
      ═══════════════════════════════════════════ */
 
   function renderAccounts(accounts, containerId) {
@@ -635,6 +664,18 @@
     accounts.forEach((acc) => {
       const item = document.createElement('div');
       item.className = 'account-item';
+      // item.innerHTML = `
+      //   <div class="account-item__info">
+      //     <div class="account-item__role">${acc.role}</div>
+      //     <div class="account-item__detail">
+      //       <span class="account-item__name">${acc.name || ''}</span>
+      //       ${acc.bank} ${acc.number}
+      //     </div>
+      //   </div>
+      //   <button class="account-item__copy" data-account="${acc.bank} ${acc.number}">
+      //     복사
+      //   </button>
+      // `;
       item.innerHTML = `
       <div class="account-item__info">
         <div class="account-item__detail" style="text-align: left; line-height: 1.5;">
@@ -648,6 +689,7 @@
         복사
       </button>
     `;
+      
       container.appendChild(item);
     });
   }
@@ -655,6 +697,7 @@
   function initAccordion(triggerId, panelId) {
     const trigger = $(`#${triggerId}`);
     const panel = $(`#${panelId}`);
+
     trigger.addEventListener('click', () => {
       const expanded = trigger.getAttribute('aria-expanded') === 'true';
       trigger.setAttribute('aria-expanded', !expanded);
@@ -674,6 +717,7 @@
     initAccordion('groomAccordion', 'groomAccordionPanel');
     initAccordion('brideAccordion', 'brideAccordionPanel');
 
+    // Copy account delegates
     document.addEventListener('click', (e) => {
       const btn = e.target.closest('.account-item__copy');
       if (!btn) return;
@@ -683,7 +727,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Footer[cite: 4]
+     Footer
      ═══════════════════════════════════════════ */
 
   function initFooter() {
@@ -695,12 +739,13 @@
   }
 
   /* ═══════════════════════════════════════════
-     Loading Placeholders[cite: 4]
+     Loading Placeholders
      ═══════════════════════════════════════════ */
 
   function showLoadingPlaceholders() {
     const storyPhotos = $('#storyPhotos');
     const galleryGrid = $('#galleryGrid');
+
     const placeholderHTML = '<div class="loading-placeholder"><span class="loading-dot"></span><span class="loading-dot"></span><span class="loading-dot"></span></div>';
 
     if (storyPhotos) storyPhotos.innerHTML = placeholderHTML;
@@ -708,7 +753,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Scroll Animations (IntersectionObserver)[cite: 4]
+     Scroll Animations (IntersectionObserver)
      ═══════════════════════════════════════════ */
 
   function initScrollAnimations() {
@@ -721,11 +766,15 @@
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      }
     );
 
     $$('.animate-item').forEach((el) => observer.observe(el));
 
+    // Re-observe after dynamic content is added
     const mutObs = new MutationObserver((mutations) => {
       mutations.forEach((m) => {
         m.addedNodes.forEach((node) => {
@@ -744,7 +793,7 @@
   }
 
   /* ═══════════════════════════════════════════
-     Init[cite: 4]
+     Init
      ═══════════════════════════════════════════ */
 
   async function init() {
@@ -766,7 +815,6 @@
     $('#storyTitle').textContent = CONFIG.story.title;
     $('#storyContent').textContent = CONFIG.story.content;
 
-    // 💡 원래 스크립트대로 로컬 이미지 자동 탐색(loadImagesFromFolder) 호출구조 완전 보존
     const [storyImages, galleryImages] = await Promise.all([
       loadImagesFromFolder('story'),
       loadImagesFromFolder('gallery')
@@ -775,7 +823,8 @@
     initStory(storyImages);
     initGallery(galleryImages);
 
-    // ─── Firebase 데이터 RSVP / 방명록 연동 ───
+    /* 2026.06.12. 방명록 및 참석여부 기능 추가 */
+    // ─── Firebase 데이터 분리형 연동 (RSVP / 방명록) ───
     const firebaseConfig = {
       apiKey: "AIzaSyCuGgS156629uvEj6Qv5KSO6gtq4CHtHM4",
       authDomain: "ssha-wedding.firebaseapp.com",
@@ -786,11 +835,13 @@
       appId: "1:439719249640:web:0ba4c7676654ef54a12b5d"
     };
 
+    // Firebase 초기화
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
     const database = firebase.database();
     
+    // 💡 저장 경로를 각각 분리합니다.
     const rsvpRef = database.ref('rsvp');
     const guestbookRef = database.ref('guestbook');
 
@@ -798,6 +849,7 @@
     const $gbForm = document.getElementById('guestbookForm');
     const $gbList = document.getElementById('guestbookList');
 
+    // [1] RSVP 참석 여부만 따로 저장하기 (인원수 직접 입력 버전)
     if ($rsvpForm) {
       const attendRadios = document.querySelectorAll('input[name="rsvpAttend"]');
       const countGroup = document.getElementById('rsvpCountGroup');
@@ -806,9 +858,9 @@
       attendRadios.forEach(radio => {
         radio.addEventListener('change', (e) => {
           if (e.target.value === '미참석') {
-            countGroup.style.display = 'none';
+            countGroup.style.display = 'none'; // 미참석 시 인원수 입력창 숨김
           } else {
-            countGroup.style.display = 'flex';
+            countGroup.style.display = 'flex'; // 참석 시 인원수 입력창 보임
           }
         });
       });
@@ -821,6 +873,7 @@
         const attend = document.querySelector('input[name="rsvpAttend"]:checked').value;
         const meal = document.querySelector('input[name="rsvpMeal"]:checked').value;
         
+        // 💡 미참석일 때는 0명, 참석일 때는 입력된 숫자 뒤에 '명'을 붙여서 저장
         let count = '0명';
         if (attend === '참석') {
           const countVal = parseInt($rsvpCount.value, 10);
@@ -833,6 +886,7 @@
 
         if (!name) return;
 
+        // Firebase 데이터베이스에 깔끔하게 저장
         const newRsvpRef = rsvpRef.push();
         newRsvpRef.set({
           name: name,
@@ -846,13 +900,14 @@
             alert('전송에 실패했습니다. 다시 시도해 주세요.');
           } else {
             showToast('참석 의사가 신랑 신부에게 전달되었습니다 🌸');
-            document.getElementById('rsvpName').value = '';
-            $rsvpCount.value = '1';
+            document.getElementById('rsvpName').value = ''; // 성함 칸 리셋
+            $rsvpCount.value = '1'; // 인원수 초기화
           }
         });
       });
     }
 
+    // [2] 축하 메시지만 따로 저장하기 (방명록)
     if ($gbForm) {
       $gbForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -863,6 +918,7 @@
 
         if (!name || !password || !message) return;
 
+        // guestbook 서랍에 데이터 넣기
         const newGbRef = guestbookRef.push();
         newGbRef.set({
           name: name,
@@ -880,6 +936,7 @@
       });
     }
 
+    // [3] 축하 메시지(방명록)만 실시간으로 읽어와서 하단에 뿌려주기
     guestbookRef.on('value', (snapshot) => {
       $gbList.innerHTML = '';
       const data = snapshot.val();
@@ -888,6 +945,7 @@
         return;
       }
 
+      // 최신순 정렬
       const keys = Object.keys(data).reverse();
       keys.forEach((key) => {
         const post = data[key];
@@ -915,10 +973,12 @@
       });
     });
 
+    // 안전장치 (XSS 공격 방지)
     function escapeHtml(str) {
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
+    // [4] 방명록 삭제 기능
     window.deleteGuestbookPost = function(key, correctPassword) {
       const inputPassword = prompt('글 작성 시 입력했던 비밀번호를 입력하세요:');
       if (!inputPassword) return;
@@ -933,6 +993,8 @@
         alert('비밀번호가 일치하지 않습니다 😢');
       }
     };
+    // ─── Firebase 기능 끝 ───
+      
   }
 
   if (document.readyState === 'loading') {
@@ -942,25 +1004,25 @@
   }  
 })();
 
-// 계좌번호 아코디언 토글 외부 연동 함수[cite: 4]
+/* ═══════════════════════════════════════════
+   💡 글로벌 외부 호출 연동용 아코디언 & 복사 함수
+   ═══════════════════════════════════════════ */
+
+// [1] 계좌번호 아코디언 토글 함수
 window.toggleRemit = function(id) {
   const target = document.getElementById(id);
-  if (!target) return;
-  if (target.style.display === 'none' || !target.style.display) {
+  if (target.style.display === 'none') {
     target.style.display = 'block';
   } else {
     target.style.display = 'none';
   }
 };
 
-// 텍스트 클립보드 복사 외부 연동 함수[cite: 4]
+// [2] 텍스트 클립보드 복사 함수
 window.copyText = function(text) {
   navigator.clipboard.writeText(text).then(() => {
-    const el = document.querySelector('#toast');
-    if (el) {
-      el.textContent = '계좌번호가 복사되었습니다 🌸';
-      el.classList.add('is-visible');
-      setTimeout(() => el.classList.remove('is-visible'), 2500);
+    if (typeof showToast === 'function') {
+      showToast('계좌번호가 복사되었습니다 🌸');
     } else {
       alert('계좌번호가 복사되었습니다.');
     }
