@@ -157,10 +157,11 @@
         curtain.classList.add('is-hidden');
         initSparkles();
     
-        heroSection.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+        // heroSection.scrollIntoView({
+        //   behavior: 'smooth',
+        //   block: 'start'
+        // });
+        
       }, 1400);
     });
       
