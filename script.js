@@ -564,48 +564,49 @@
     }
   }
 
+  /* ═══════════════════════════════════════════
+     Photo Modal Section (기본 동작 차단 및 복원 버전)
+     ═══════════════════════════════════════════ */
   function initPhotoModal() {
-    // 💡 [버그 해결] 닫기 버튼을 누를 때 페이지가 맨 위로 튕기는 기본 동작(href="#")을 차단합니다.
+    // 닫기 버튼 클릭 시 맨 위로 튕기는 버그 차단
     if ($('#modalClose')) {
       $('#modalClose').addEventListener('click', (e) => {
-        e.preventDefault(); // 👈 맨 위로 이동하는 링크 기본 동작을 방패처럼 막아줌!
+        e.preventDefault(); // 👈 튕김 방지 핵심
         closePhotoModal();
       });
     }
     
-    if ($('#modalPrev')) $('#modalPrev').addEventListener('click', () => modalNavigate(-1));
-    if ($('#modalNext')) $('#modalNext').addEventListener('click', () => modalNavigate(1));
+    // 이전 / 다음 버튼 제어
+    if ($('#modalPrev')) {
+      $('#modalPrev').addEventListener('click', (e) => {
+        e.preventDefault();
+        modalNavigate(-1);
+      });
+    }
+    if ($('#modalNext')) {
+      $('#modalNext').addEventListener('click', (e) => {
+        e.preventDefault();
+        modalNavigate(1);
+      });
+    }
 
+    // 배경 어두운 곳을 눌러서 닫을 때
     const modal = $('#photoModal');
     if (modal) {
       modal.addEventListener('click', (e) => {
         if (e.target === modal || e.target.id === 'modalContainer') {
-          // 배경을 눌러서 닫을 때도 안전하게 차단하려면 필요한 경우 처리
           closePhotoModal();
         }
       });
     }
 
+    // 키보드 제어
     document.addEventListener('keydown', (e) => {
       if (!modal || !modal.classList.contains('is-open')) return;
       if (e.key === 'Escape') closePhotoModal();
       if (e.key === 'ArrowLeft') modalNavigate(-1);
       if (e.key === 'ArrowRight') modalNavigate(1);
     });
-
-    const container = $('#modalContainer');
-    if (container) {
-      container.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-      }, { passive: true });
-
-      container.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        touchEndY = e.changedTouches[0].screenY;
-        handleSwipe();
-      }, { passive: true });
-    }
   }
 
   function handleSwipe() {
