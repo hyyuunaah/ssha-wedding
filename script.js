@@ -143,17 +143,28 @@
     }
 
     if (btn) {
-      
       btn.addEventListener('click', () => {
-      heroSection.classList.add('is-visible');
-      curtain.classList.add('is-open');
-      setTimeout(() => {
-        curtain.remove();
-        initSparkles();
-      }, 1400);
-    });
-      
+        // 1. 대문 커튼 열림 애니메이션 시작
+        curtain.classList.add('is-open');
+        document.body.classList.remove('no-scroll');
+        
+        // 2. 💡 [원래 정석 로직] 클래스만 넣어주면 CSS3 transition에 의해 스르륵 켜집니다!
+        if (heroSection) {
+          heroSection.classList.add('is-visible');
+        }
+
+        // 3. 커튼 완전히 사라지는 타이밍
+        setTimeout(() => {
+          curtain.classList.add('is-hidden');
+          initSparkles();      
+          
+          if (heroSection) {
+            heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 1400);
+      });
     }
+    
     document.body.classList.add('no-scroll');
   }
 
