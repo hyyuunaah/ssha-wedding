@@ -131,8 +131,7 @@
     if (CONFIG.useCurtain === false) {
       if (curtain) curtain.style.display = 'none';
       if (heroSection) {
-        heroSection.style.setProperty('opacity', '1', 'important');
-        heroSection.style.setProperty('visibility', 'visible', 'important');
+        heroSection.classList.add('is-visible');
       }
       initSparkles();
       return;
@@ -148,26 +147,23 @@
         curtain.classList.add('is-open');
         document.body.classList.remove('no-scroll');
         
-        // 2. 💡 [원래 정석 로직] 클래스만 넣어주면 CSS3 transition에 의해 스르륵 켜집니다!
+        // 2. 💡 [핵심] 스크롤 이동 없이, 그 자리에서 바로 메인화면 스위치를 켭니다.
+        // 이제 CSS transition(1.5초)에 의해 메인 사진과 텍스트가 스르륵 차오릅니다.
         if (heroSection) {
           heroSection.classList.add('is-visible');
         }
 
-        // 3. 커튼 완전히 사라지는 타이밍
+        // 3. 커튼을 완전히 숨기고 이펙트를 켜는 최소한의 타이밍 (스크롤 이동 코드 삭제)
         setTimeout(() => {
           curtain.classList.add('is-hidden');
           initSparkles();      
-          
-          if (heroSection) {
-            heroSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 1400);
+        }, 1400); // 커튼이 완전히 걷히는 시간(1.4초)에 맞춤
       });
     }
 
     document.body.classList.add('no-scroll');
   }
-
+  
   /* ═══════════════════════════════════════════
      Falling Pastel Confetti / Sparkles
      ═══════════════════════════════════════════ */
