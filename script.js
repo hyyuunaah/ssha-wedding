@@ -985,6 +985,10 @@
   }  
 })();
 
+/* ═══════════════════════════════════════════
+   💡 외부 연동용 글로벌 함수 (안전하게 항아리 바깥 하단 배치)
+   ═══════════════════════════════════════════ */
+
 // 계좌번호 아코디언 토글 외부 연동 함수
 window.toggleRemit = function(id) {
   const panel = document.getElementById(id);
@@ -1014,3 +1018,15 @@ window.copyText = function(text) {
     }
   });
 };
+
+// [튕김 버그 완전 박멸] 갤러리 및 스토리 이미지 클릭 시 상단 이동 강제 차단
+document.addEventListener('click', function(e) {
+  // 클릭된 요소가 갤러리나 스토리 이미지이거나, 그 이미지의 부모 링크인 경우
+  const targetLink = e.target.closest('#gallery a, #story a, .gallery__item, .story__photo-item');
+  
+  if (targetLink) {
+    // 🎯 브라우저가 href="#"을 읽고 맨 위로 순간이동 하려는 허리를 딱 끊어버립니다.
+    e.preventDefault(); 
+    e.stopPropagation();
+  }
+}, true); // true 속성으로 브라우저 명령보다 최우선으로 실행되게 만듭니다.
