@@ -482,7 +482,12 @@
       div.className = 'story__photo-item animate-item';
       div.setAttribute('data-animate', 'fade-up');
       div.innerHTML = `<img src="${src}" alt="스토리 사진 ${i + 1}" loading="lazy">`;
-      div.addEventListener('click', () => openPhotoModal(storyImages, i));
+      // div.addEventListener('click', () => openPhotoModal(storyImages, i));
+      // [버그 해결] 스토리 사진 클릭 시 맨 위로 튕기는 현상 차단
+      div.addEventListener('click', (e) => {
+        e.preventDefault(); // 👈 최상단 이동 링크 동작을 원천 차단!
+        openPhotoModal(storyImages, i);
+      });
       container.appendChild(div);
     });
   }
@@ -508,7 +513,11 @@
       div.className = 'gallery__item animate-item';
       div.setAttribute('data-animate', 'scale-in');
       div.innerHTML = `<img src="${src}" alt="갤러리 사진 ${i + 1}" loading="lazy">`;
-      div.addEventListener('click', () => openPhotoModal(galleryImages, i));
+      // div.addEventListener('click', () => openPhotoModal(galleryImages, i));
+      div.addEventListener('click', (e) => {
+        e.preventDefault(); // 👈 최상단 이동 링크 동작을 원천 차단!
+        openPhotoModal(galleryImages, i);
+      });
       grid.appendChild(div);
     });
   }
