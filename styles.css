@@ -296,7 +296,24 @@ a {
   will-change: transform;
   transform: translateZ(0);
 }
-.hero__content { position: relative; z-index: 2; text-align: center; color: var(--color-text); padding: 0 var(--spacing-side) var(--spacing-lg); width: 100%; }
+/* .hero__content { position: relative; z-index: 2; text-align: center; color: var(--color-text); padding: 0 var(--spacing-side) var(--spacing-lg); width: 100%; } */
+.hero__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 화면 한가운데에 완벽 고정 */
+  width: 100%;
+  
+  /* 💡 [핵심] 주소창이 바뀌어도 정렬 기준이 깨지지 않도록 높이를 고정하거나 유연성을 제한합니다 */
+  height: auto !important; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  /* 💡 글씨들 사이의 간격이 꿀렁이지 않도록 마진이나 패딩을 픽셀(px)이나 고정 단위로 줍니다 */
+  gap: 15px; 
+}
 .hero__label { font-family: var(--font-display); font-size: 0.875rem; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; margin-bottom: var(--spacing-sm); opacity: 0.6; color: var(--color-accent-dark); }
 .hero__names { font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; letter-spacing: 8px; margin-bottom: var(--spacing-md); line-height: 1.4; color: var(--color-text); }
 .hero__divider { width: 50px; height: 2px; margin: 0 auto var(--spacing-md); background: linear-gradient(to right, transparent, var(--color-lavender), var(--color-blush), var(--color-lavender), transparent); }
