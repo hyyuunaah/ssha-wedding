@@ -1028,7 +1028,7 @@
 // ─── 💡 청첩장 열기 버튼 클릭 시 메인 섹션 페이드인 ───
 document.addEventListener('DOMContentLoaded', function() {
   // '청첩장 열기' 버튼을 찾습니다. (이름이 다를 경우 각자의 id로 매칭)
-  const openButton = document.getElementById('curtainBtn') || document.querySelector('.btn-open');
+  const openButton = document.getElementById('curtainBtn');
   const heroSection = document.getElementById('hero');
 
   if (openButton && heroSection) {
