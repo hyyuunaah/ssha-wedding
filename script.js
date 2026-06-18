@@ -164,7 +164,7 @@
         }, 1400);
       });
     }
-    
+
     document.body.classList.add('no-scroll');
   }
 
