@@ -150,19 +150,17 @@
       document.body.classList.remove('no-scroll');
     
       setTimeout(() => {
-        heroSection.classList.add('is-visible');
-      }, 500);
     
-      setTimeout(() => {
         curtain.classList.add('is-hidden');
+    
+        requestAnimationFrame(() => {
+          heroSection.classList.add('is-visible');
+        });
+    
         initSparkles();
     
-        // heroSection.scrollIntoView({
-        //   behavior: 'smooth',
-        //   block: 'start'
-        // });
-        
       }, 1400);
+    
     });
       
     }
