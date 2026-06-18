@@ -990,10 +990,17 @@ main, section, div, .swiper-slide, .slide-item {
      border: none !important;
      box-shadow: none !important;
      overflow: visible !important; /* 이미지가 잘리지 않도록 */
-     position: relative;
+     /* position: relative; */
      display: flex;
      align-items: center;
      justify-content: center;
+     
+     width: 550px !important;       /* 👈 웹 브라우저 창을 늘리거나 줄여도 가로 크기는 550px로 절대 안 변함 */
+     height: 450px !important;      /* 👈 세로 크기도 450px로 딱 고정 */
+     position: absolute !important;
+     top: 50% !important;
+     left: 50% !important;
+     transform: translate(-50%, -50%) !important; /* 👈 화면 정중앙에 완벽 고정 */
    }
    
    /* 이미지 스타일: 박스에 맞춰 크기 조정 및 object-fit 제거 */
@@ -1007,8 +1014,12 @@ main, section, div, .swiper-slide, .slide-item {
    
    /* 닫기 및 네비게이션 버튼: 어두운 배경에서 잘 보이도록 색상 변경 */
    #modalClose {
-     color: #fff !important;
-   }
+    position: absolute !important;
+    top: 15px !important;
+    right: 15px !important;
+    color: #333333 !important;
+    z-index: 10;
+  }
    
    #modalPrev, #modalNext {
      background: rgba(255, 255, 255, 0.3) !important;
