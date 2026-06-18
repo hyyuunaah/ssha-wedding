@@ -864,9 +864,9 @@ main, section, div, .swiper-slide, .slide-item {
    ═══════════════════════════════════════════ */
 /* 1. 처음에 메인 섹션을 안 보이게(투명도 0) 설정하고 스타일 준비 */
 #hero {
-  opacity: 0;             /* 투명도 0 (안 보임) */
-  visibility: hidden;    /* 영역 점유는 하되 클릭 방지 등 */
-  transition: opacity 1.5s ease-in-out, visibility 1.5s; /* 1.5초 동안 부드럽게 변함 */
+  opacity: 0 !important;             /* 투명도 0 (안 보임) */
+  visibility: hidden !important;    /* 영역 점유는 하되 클릭 방지 등 */
+  transition: opacity 1.5s ease-in-out, visibility 1.5s !important; /* 1.5초 동안 부드럽게 변함 */
 }
 
 /* 2. 자바스크립트가 이 클래스를 붙여주면 스르륵 나타남 */
