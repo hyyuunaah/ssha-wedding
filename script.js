@@ -151,14 +151,13 @@
         curtain.classList.add('is-open');
         document.body.classList.remove('no-scroll');
         
-        // 2. 💡 [핵심] css의 !important를 강제로 이기고 부드럽게 페이드인 되도록 style 속성 주입
-        setTimeout(() => {
-          if (heroSection) {
-            heroSection.style.setProperty('transition', 'opacity 1.5s ease-in-out, visibility 1.5s', 'important');
-            heroSection.style.setProperty('opacity', '1', 'important');
-            heroSection.style.setProperty('visibility', 'visible', 'important');
-          }
-        }, 100); // 클릭 후 0.1초 뒤 스르륵 시작
+        // 2. 💡 버튼 누르자마자 딜레이(setTimeout) 없이 즉시 트랜지션을 걸어 
+        // 커튼이 사라지는 궤적에 맞춰 자연스럽게 스르륵 떠오르도록 만듭니다.
+        if (heroSection) {
+          heroSection.style.setProperty('transition', 'opacity 1.5s ease-in-out, visibility 1.5s', 'important');
+          heroSection.style.setProperty('opacity', '1', 'important');
+          heroSection.style.setProperty('visibility', 'visible', 'important');
+        }
 
         // 3. 커튼 완전히 사라짐 및 스크롤 이동
         setTimeout(() => {
