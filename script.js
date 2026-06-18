@@ -150,18 +150,11 @@
       document.body.classList.remove('no-scroll');
     
       setTimeout(() => {
-    
-        curtain.classList.add('is-hidden');
-    
-        requestAnimationFrame(() => {
-          heroSection.classList.add('is-visible');
-        });
-    
-        initSparkles();
-    
+        curtain.classList.add('is-hidden');    
+        heroSection.offsetHeight; // 강제 리플로우
+        heroSection.classList.add('is-visible');
       }, 1400);
-    
-    });
+      });
       
     }
     document.body.classList.add('no-scroll');
