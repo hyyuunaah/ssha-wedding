@@ -983,7 +983,7 @@ a {
    }
    
    /* 이미지 스타일: 박스에 맞춰 크기 조정 및 object-fit 제거 */
-   #modalImage {
+   #modalImg, #modalImage {
      width: auto !important;
      height: auto !important;
      max-width: 90vw !important; /* 화면 너비의 90%를 넘지 않게 */
