@@ -523,84 +523,103 @@
   }
 
   /* ═══════════════════════════════════════════
-     Photo Modal
-     ═══════════════════════════════════════════ */
-
+   Photo Modal (스크롤 튕김 버그 완전 박멸 최종본)
+   ═══════════════════════════════════════════ */
   let modalImages = [];
   let modalIndex = 0;
   let touchStartX = 0;
   let touchEndX = 0;
   let touchStartY = 0;
   let touchEndY = 0;
-
+  
+  // 💡 하객이 사진을 누른 위치를 영구 저장할 메모리 변수
+  let globalWeddingScrollY = 0;
+  
   function openPhotoModal(images, index) {
+    // 1. 튕기기 전 현재 하객의 완벽한 스크롤 높이를 기억합니다.
+    globalWeddingScrollY = window.scrollY;
+  
     modalImages = images;
     modalIndex = index;
     showModalImage();
-    $('#photoModal').classList.add('is-open');
-    document.body.classList.add('no-scroll');
+    
+    // 2. 화면 강제 고정 (no-scroll을 쓰지 않고 튕김을 원천 차단)
+    const modal = $('#photoModal');
+    if (modal) {
+      modal.classList.add('is-open');
+    }
+  
+    // 3. 브라우저가 강제로 화면을 위로 올리려 시도하는 순간 원래 위치로 즉시 재고정시킵니다.
+    requestAnimationFrame(() => {
+      window.scrollTo(0, globalWeddingScrollY);
+    });
   }
-
+  
   function closePhotoModal() {
     $('#photoModal').classList.remove('is-open');
-    document.body.classList.remove('no-scroll');
+    
+    // 닫을 때도 하객이 원래 보던 그 자리에 완벽하게 세워둡니다.
+    window.scrollTo(0, globalWeddingScrollY);
   }
-
+  
   function showModalImage() {
+    // 💡 HTML 소스 원본에 맞게 정확히 매칭 (#modalImg)
     const img = $('#modalImg');
     if (!img) return;
+    
     img.src = modalImages[modalIndex];
+    
     if ($('#modalCounter')) $('#modalCounter').textContent = `${modalIndex + 1} / ${modalImages.length}`;
-
     if ($('#modalPrev')) $('#modalPrev').style.display = modalIndex > 0 ? '' : 'none';
     if ($('#modalNext')) $('#modalNext').style.display = modalIndex < modalImages.length - 1 ? '' : 'none';
   }
-
+  
   function modalNavigate(dir) {
     const newIndex = modalIndex + dir;
     if (newIndex >= 0 && newIndex < modalImages.length) {
       modalIndex = newIndex;
       showModalImage();
+      
+      // 사진을 옆으로 넘길 때도 스크롤 위치를 고정합니다.
+      window.scrollTo(0, globalWeddingScrollY);
     }
   }
-
+  
   /* ═══════════════════════════════════════════
-     Photo Modal Section (기본 동작 차단 및 복원 버전)
+     Photo Modal Section (초기화 및 클릭 차단)
      ═══════════════════════════════════════════ */
   function initPhotoModal() {
-    // 닫기 버튼 클릭 시 맨 위로 튕기는 버그 차단
     if ($('#modalClose')) {
       $('#modalClose').addEventListener('click', (e) => {
-        e.preventDefault(); // 👈 튕김 방지 핵심
+        e.preventDefault();
         closePhotoModal();
       });
     }
-    
-    // 이전 / 다음 버튼 제어
+  
     if ($('#modalPrev')) {
       $('#modalPrev').addEventListener('click', (e) => {
         e.preventDefault();
         modalNavigate(-1);
       });
     }
+  
     if ($('#modalNext')) {
       $('#modalNext').addEventListener('click', (e) => {
         e.preventDefault();
         modalNavigate(1);
       });
     }
-
-    // 배경 어두운 곳을 눌러서 닫을 때
+  
     const modal = $('#photoModal');
     if (modal) {
       modal.addEventListener('click', (e) => {
+        // 배경의 어두운 영역을 누르면 정상적으로 닫히도록 제어
         if (e.target === modal || e.target.id === 'modalContainer') {
           closePhotoModal();
         }
       });
     }
-
-    // 키보드 제어
+  
     document.addEventListener('keydown', (e) => {
       if (!modal || !modal.classList.contains('is-open')) return;
       if (e.key === 'Escape') closePhotoModal();
@@ -608,19 +627,6 @@
       if (e.key === 'ArrowRight') modalNavigate(1);
     });
   }
-
-  function handleSwipe() {
-    const diffX = touchStartX - touchEndX;
-    const diffY = touchStartY - touchEndY;
-    const minSwipe = 50;
-    if (Math.abs(diffX) < minSwipe || Math.abs(diffX) < Math.abs(diffY)) return;
-    if (diffX > 0) {
-      modalNavigate(1);
-    } else {
-      modalNavigate(-1);
-    }
-  }
-
   /* ═══════════════════════════════════════════
      Location Section
      ═══════════════════════════════════════════ */
