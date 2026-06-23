@@ -227,9 +227,30 @@ a {
 .curtain__wash { position: absolute; left: 0; right: 0; height: 55%; transition: transform 1.4s cubic-bezier(0.77, 0, 0.18, 1); will-change: transform; }
 .curtain__wash--top { top: 0; background: linear-gradient(180deg, var(--color-lavender) 0%, rgba(232, 223, 240, 0.6) 30%, rgba(245, 224, 224, 0.3) 60%, transparent 100%); }
 .curtain__wash--bottom { bottom: 0; background: linear-gradient(0deg, var(--color-sky) 0%, rgba(220, 232, 240, 0.6) 30%, rgba(224, 240, 232, 0.3) 60%, transparent 100%); }
-.curtain.is-open .curtain__wash--top { transform: translateY(-100%); }
+
+/* .curtain.is-open .curtain__wash--top { transform: translateY(-100%); }
 .curtain.is-open .curtain__wash--bottom { transform: translateY(100%); }
-.curtain.is-open .curtain__content { opacity: 0; transform: scale(0.92); }
+.curtain.is-open .curtain__content { opacity: 0; transform: scale(0.92); } */
+/* ─── Curtain Open 감성 연출 수정본 ─── */
+/* 1. 위쪽 수채화 배경: 살짝만 위로 올라가면서 사악 투명해지기 */
+.curtain.is-open .curtain__wash--top { 
+  transform: translateY(-30%); /* 기존 -100% 대신 -30%만 부드럽게 이동 */
+  opacity: 0;                  /* 투명하게 만들기 */
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out !important; /* 1.5초 동안 작동 */
+}
+/* 2. 아래쪽 수채화 배경: 살짝만 아래로 내려가면서 사악 투명해지기 */
+.curtain.is-open .curtain__wash--bottom { 
+  transform: translateY(30%);  /* 기존 100% 대신 30%만 부드럽게 이동 */
+  opacity: 0;                  /* 투명하게 만들기 */
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out !important; /* 1.5초 동안 작동 */
+}
+/* 3. 가운데 청첩장 열기 버튼 및 안내 문구: 자연스럽게 스르륵 사라지기 */
+.curtain.is-open .curtain__content { 
+  opacity: 0; 
+  transform: scale(0.92); 
+  transition: transform 1.0s ease-in-out, opacity 1.0s ease-in-out !important;
+}
+
 .curtain.is-hidden { display: none; }
 .curtain__content { position: relative; z-index: 1; text-align: center; color: var(--color-text); transition: opacity 0.5s ease, transform 0.5s ease; }
 .curtain__subtitle { font-family: var(--font-display); font-size: 0.875rem; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; margin-bottom: var(--spacing-md); opacity: 0.6; color: var(--color-accent-dark); }
@@ -271,20 +292,15 @@ a {
   object-position: center 30%; 
 
   /* 💡 [핵심] 스크롤 시 이미지를 다시 계산해서 그리지 않도록 모바일 GPU 가속을 켭니다. */
-  will-change: transform, opacity;
+  will-change: transform;
   transform: translateZ(0);
 
-  /* 💡 추가: 처음에 사진을 투명하게 숨기고, 부드러운 전환 효과(1.5초)를 부여합니다. */
-  opacity: 0;
-  transition: opacity 1.5s ease-in-out !important;
-}
-
-/* 💡 [새로 추가] 커튼 열기 버튼을 눌러 #hero에 is-visible이 붙으면 사진이 사악 나타납니다. */
-#hero.is-visible .hero__photo {
-  opacity: 0.85 !important; /* 배경 수채화 톤과 어우러지는 최적의 은은한 투명도 */
+  /* 💡 처음부터 메인 사진이 은은하게 잘 보이도록 설정합니다. */
+  opacity: 0.85 !important;
 }
 
 /* .hero__content { position: relative; z-index: 2; text-align: center; color: var(--color-text); padding: 0 var(--spacing-side) var(--spacing-lg); width: 100%; } */
+/* 텍스트들을 정중앙에 고정하고 주소창 꿀렁임을 막아줍니다. */
 .hero__content {
   position: absolute;
   top: 50%;
@@ -302,6 +318,7 @@ a {
   /* 💡 글씨들 사이의 간격이 꿀렁이지 않도록 마진이나 패딩을 픽셀(px)이나 고정 단위로 줍니다 */
   gap: 15px; 
 }
+
 .hero__label { font-family: var(--font-display); font-size: 0.875rem; font-weight: 300; letter-spacing: 6px; text-transform: uppercase; margin-bottom: var(--spacing-sm); opacity: 0.6; color: var(--color-accent-dark); }
 .hero__names { font-family: var(--font-serif); font-size: 1.875rem; font-weight: 700; letter-spacing: 8px; margin-bottom: var(--spacing-md); line-height: 1.4; color: var(--color-text); }
 .hero__divider { width: 50px; height: 2px; margin: 0 auto var(--spacing-md); background: linear-gradient(to right, transparent, var(--color-lavender), var(--color-blush), var(--color-lavender), transparent); }
@@ -871,27 +888,6 @@ a {
 #guestbookForm textarea {
   width: 100% !important;
   box-sizing: border-box !important;
-}
-
-/* ═══════════════════════════════════════════
-   메인화면 페이드인
-   ═══════════════════════════════════════════ */
-/* 1. 처음에 메인 섹션을 안 보이게(투명도 0) 설정하고 스타일 준비 */
-#hero {
-  opacity: 0;             /* 투명도 0 (안 보임) */
-  visibility: hidden;    /* 영역 점유는 하되 클릭 방지 등 */
-  transition: opacity 1.5s ease-in-out, visibility 1.5s !important; /* 1.5초 동안 부드럽게 변함 */
-
-  position: relative;
-  width: 100%;
-  height: 100dvh; /* 모바일 주소창 변화에 꿀렁이지 않도록 dvh 단위로 고정 */
-  overflow: hidden;
-}
-
-/* 2. 자바스크립트가 이 클래스를 붙여주면 스르륵 나타남 */
-#hero.is-visible {
-  opacity: 1 !important;  /* 투명도 1 (완전히 보임) */
-  visibility: visible !important;
 }
 
 /* ═══════════════════════════════════════════
