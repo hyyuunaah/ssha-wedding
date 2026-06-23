@@ -222,6 +222,28 @@ a {
   opacity: 0.5;
 }
 
+/* ==========================================================================
+   Curtain (대문 전체 틀 페이드아웃 효과 추가)
+   ========================================================================== */
+
+/* 1. 처음 대문 전체 틀 기본 상태 설정 */
+#curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: var(--color-bg); 
+  opacity: 1;
+  visibility: visible;
+  /* 💡 대문 틀 전체가 1.5초 동안 부드럽게 투명해지도록 설정 */
+  transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out !important;
+}
+
+/* 2. 버튼 클릭 시 대문 전체 틀이 사악 투명해짐 */
+#curtain.is-open {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 /* ─── Curtain Opening & Canvas & System UI ─── */
 .curtain { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: var(--color-bg); }
 .curtain__wash { position: absolute; left: 0; right: 0; height: 55%; transition: transform 1.4s cubic-bezier(0.77, 0, 0.18, 1); will-change: transform; }
@@ -234,15 +256,15 @@ a {
 /* ─── Curtain Open 감성 연출 수정본 ─── */
 /* 1. 위쪽 수채화 배경: 살짝만 위로 올라가면서 사악 투명해지기 */
 .curtain.is-open .curtain__wash--top { 
-  transform: translateY(-30%); /* 기존 -100% 대신 -30%만 부드럽게 이동 */
-  opacity: 0;                  /* 투명하게 만들기 */
-  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out !important; /* 1.5초 동안 작동 */
+  transform: translateY(-100%); 
+  opacity: 0; 
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out !important; 
 }
 /* 2. 아래쪽 수채화 배경: 살짝만 아래로 내려가면서 사악 투명해지기 */
 .curtain.is-open .curtain__wash--bottom { 
-  transform: translateY(30%);  /* 기존 100% 대신 30%만 부드럽게 이동 */
-  opacity: 0;                  /* 투명하게 만들기 */
-  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out !important; /* 1.5초 동안 작동 */
+  transform: translateY(100%); 
+  opacity: 0; 
+  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out !important; 
 }
 /* 3. 가운데 청첩장 열기 버튼 및 안내 문구: 자연스럽게 스르륵 사라지기 */
 .curtain.is-open .curtain__content { 
