@@ -28,9 +28,6 @@
   --color-naver: #03c75a;
   --color-white: #ffffff;
   --color-toast-bg: rgba(74, 74, 74, 0.88);
-
-  /* --font-serif: 'Nanum Myeongjo', 'Georgia', serif;
-  --font-display: 'Cormorant Garamond', 'Nanum Myeongjo', serif; */
   --font-serif: 'Gowun Dodum', 'Nanum Myeongjo', 'Merriweather', serif;
   --font-display: 'Gowun Dodum', 'Nanum Myeongjo', 'Merriweather', serif;
 
@@ -73,20 +70,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* body {
-  font-family: var(--font-serif);
-  color: var(--color-text);
-  background-color: var(--color-bg);
-  line-height: 1.8;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-  padding-top: var(--safe-top);
-  padding-bottom: var(--safe-bottom);
-  padding-left: var(--safe-left);
-  padding-right: var(--safe-right);
-} */
-
 body {
   font-family: var(--font-serif);
   color: var(--color-text);
@@ -115,11 +98,6 @@ body {
   padding-left: var(--safe-left);
   padding-right: var(--safe-right);
 }
-
-/* ⚠️ 혹시 모를 추가 요소 배경 강제 투명화 (모바일에서 하단 영역이 파랗게 보일 경우 대비) */
-/* #rsvpSection, #guestbookSection, #account, #location {
-  background-color: #fdfbf8 !important; /* 투명 대신 미세한 미카도 톤으로 덮음
-} */
 
 /* ─── 섹션 배경 강제 투명화 (경계선 방지) ─── */
 .section, #calendarSection, #location, #account, #rsvpSection, #guestbookSection, 
@@ -626,16 +604,6 @@ a {
   transition: transform 0.3s ease;
 }
 
-/* ⚠️ 기존 display: none 제거하고 JS의 조작 흐름에 완전히 맡김 */
-/* #account .accordion__panel {
-  display: none; /* 👈 처음에는 접혀 있도록 기본값 숨김 처리 
-  background: transparent !important; 
-  border: none !important; 
-  max-width: 100% !important; 
-  margin: 0 auto !important; 
-  box-shadow: none !important;
-  overflow: hidden; /* JS가 내부 높이(max-height 등)를 제어할 수 있도록 세팅 
-} */
 #account .accordion__panel {
   /* 1. 처음에는 닫혀 있도록 높이를 0으로 만듭니다. (자바스크립트가 연동되도록 !important는 절대 붙이지 않습니다) */
   max-height: 0;
