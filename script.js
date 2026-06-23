@@ -147,11 +147,11 @@
         curtain.classList.add('is-open');
         document.body.classList.remove('no-scroll');
         
-        // 2. 💡 [핵심] 스크롤 이동 없이, 그 자리에서 바로 메인화면 스위치를 켭니다.
-        // 이제 CSS transition(1.5초)에 의해 메인 사진과 텍스트가 스르륵 차오릅니다.
+        // 2. 💡 브라우저가 페이드인을 인지할 수 있도록 0.05초(50ms) 뒤에 클래스를 붙입니다.
         if (heroSection) {
-          heroSection.classList.add('is-visible');
-          heroSection.style.setProperty('opacity', '1', 'important');
+          setTimeout(() => {
+            heroSection.classList.add('is-visible');
+          }, 50);
         }
 
         // 3. 커튼을 완전히 숨기고 이펙트를 켜는 최소한의 타이밍 (스크롤 이동 코드 삭제)
