@@ -1024,25 +1024,3 @@ window.copyText = function(text) {
     }
   });
 };
-
-// 사진 클릭 시 맨상단 이동을 막기 위해 추가
-(function() {
-  let savedScrollY = 0;
-
-  // 하객이 사진을 누르는 순간의 스크롤 위치를 조용히 기억만 합니다. (클릭을 방해하지 않음)
-  document.addEventListener('click', function(e) {
-    const isTarget = e.target.closest('.gallery__item, .story__photo-item');
-    if (isTarget) {
-      savedScrollY = window.scrollY;
-    }
-  });
-
-  // 브라우저가 화면을 맨 위로 강제로 올려버리면, 0.01초만에 원래 보던 위치로 부드럽게 끌어내립니다.
-  window.addEventListener('scroll', function() {
-    const modal = document.getElementById('photoModal');
-    // 사진창(모달)이 열려있는데 스크롤이 맨 위(0)로 튕겼다면 작동
-    if (modal && modal.classList.contains('is-open') && window.scrollY === 0 && savedScrollY > 0) {
-      window.scrollTo(0, savedScrollY);
-    }
-  });
-})();
