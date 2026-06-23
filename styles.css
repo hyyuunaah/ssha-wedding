@@ -970,7 +970,6 @@ a {
      border: none !important;
      box-shadow: none !important;
      overflow: visible !important; /* 이미지가 잘리지 않도록 */
-     /* position: relative; */
      display: flex;
      align-items: center;
      justify-content: center;
@@ -1002,7 +1001,8 @@ a {
   }
    
    #modalPrev, #modalNext {
-     background: rgba(255, 255, 255, 0.3) !important;
-     color: #fff !important;
+     background: transparent !important; /* 배경을 투명하게 변경 */
+     border: none !important;             /* 혹시 모를 테두리도 제거 */
+     color: #fff !important;              /* 화살표 색상은 흰색 유지 */
    }
 }
