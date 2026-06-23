@@ -151,6 +151,7 @@
         // 이제 CSS transition(1.5초)에 의해 메인 사진과 텍스트가 스르륵 차오릅니다.
         if (heroSection) {
           heroSection.classList.add('is-visible');
+          heroSection.style.setProperty('opacity', '1', 'important');
         }
 
         // 3. 커튼을 완전히 숨기고 이펙트를 켜는 최소한의 타이밍 (스크롤 이동 코드 삭제)
