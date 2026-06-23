@@ -293,9 +293,19 @@ a {
   object-position: center 30%; 
 
   /* 💡 [핵심] 스크롤 시 이미지를 다시 계산해서 그리지 않도록 모바일 GPU 가속을 켭니다. */
-  will-change: transform;
+  will-change: transform, opacity;
   transform: translateZ(0);
+
+  /* 💡 추가: 처음에 사진을 투명하게 숨기고, 부드러운 전환 효과(1.5초)를 부여합니다. */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out !important;
 }
+
+/* 💡 [새로 추가] 커튼 열기 버튼을 눌러 #hero에 is-visible이 붙으면 사진이 사악 나타납니다. */
+#hero.is-visible .hero__photo {
+  opacity: 0.85 !important; /* 배경 수채화 톤과 어우러지는 최적의 은은한 투명도 */
+}
+
 /* .hero__content { position: relative; z-index: 2; text-align: center; color: var(--color-text); padding: 0 var(--spacing-side) var(--spacing-lg); width: 100%; } */
 .hero__content {
   position: absolute;
