@@ -825,11 +825,11 @@ a {
   font-weight: 500;              /* 💡 캘린더 버튼과 두께 통일 */
   cursor: pointer;
   
-  /* 캘린더 버튼의 색상 및 테두리 스타일 그대로 이식 */
-  background-color: var(--color-bg-card, #ffffff) !important;
+  background-color: var(--color-lavender) !important;   /*알약 버튼 배경색*/
+  color: var(--color-text, #4a4a4a) !important;         /*알약 버튼 글자색*/
+  /* box-shadow: 0 2px 6px rgba(232, 223, 240, 0.1);  */
+  box-shadow: 0 4px 12px rgba(232, 223, 240, 0.4);      /* 은은한 보랏빛 그림자 효과 */
   border: 1px solid var(--color-border, #ece4f0) !important; 
-  color: var(--color-text, #4a4a4a) !important;
-  box-shadow: 0 2px 6px rgba(232, 223, 240, 0.1); 
   
   transition: all 0.2s ease;
 }
