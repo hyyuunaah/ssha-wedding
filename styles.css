@@ -787,7 +787,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between; /* 행 제목과 선택 영역을 양 끝으로 균형있게 분할 */
-  padding: 14px 0;                 /* 위아래 터치 영역 소폭 확장 */
+  padding: 12px 0;                 /* 위아래 터치 영역 소폭 확장 */
   border-bottom: 1px dashed var(--color-border);
 }
 
@@ -799,7 +799,8 @@ a {
   font-size: 0.875rem;
   color: var(--color-text-light);
   font-weight: 700;
-  min-width: 70px;                /* 행 제목의 최소 너비를 잡아 우측 컨텐츠 여백 확보 */
+  width: 80px;                    /* 행 제목 너비를 고정하여 우측 컨텐츠의 시작선을 통일 */
+  min-width: 80px;                /* 행 제목의 최소 너비를 잡아 우측 컨텐츠 여백 확보 */
   text-align: left;
 }
 
@@ -808,7 +809,7 @@ a {
   display: flex !important;
   justify-content: flex-end !important; /* 우측 끝으로 정렬하되 여백 분배 */
   align-items: center !important;
-  gap: 8px !important;                 /* 항목 간의 깔끔한 간격 */
+  /* gap: 8px !important;                 /* 항목 간의 깔끔한 간격 */ */
   flex: 1;
 }
 
@@ -817,8 +818,8 @@ a {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  width: 85px !important;              /* 👈 항목별 너비를 간결하게 고정하여 라디오 간의 간격 균등화 */
-  min-width: 85px !important;
+  width: 75px !important;              /* 👈 항목별 너비를 간결하게 고정하여 라디오 간의 간격 균등화 */
+  min-width: 75px !important;
   margin: 0 !important;
   padding: 0 !important;
   font-size: 0.85rem !important;
@@ -832,12 +833,12 @@ a {
   -webkit-appearance: none;            /* 브라우저 기본 투박한 디자인 제거 */
   -moz-appearance: none;
   appearance: none;
-  width: 14px !important;              /* 너무 크지 않고 슬림한 크기로 조정 */
-  height: 14px !important;
+  width: 11px !important;              /* 너무 크지 않고 슬림한 크기로 조정 */
+  height: 11px !important;
   border: 1px solid var(--color-accent) !important; /* 청첩장 톤앤매너에 맞춘 테두리 */
   border-radius: 50% !important;
   outline: none;
-  margin: 0 6px 0 0 !important;        /* 버튼과 글자 사이의 자잘한 여백 고정 */
+  margin: 0 5px 0 0 !important;        /* 버튼과 글자 사이의 자잘한 여백 고정 */
   position: relative;
   background-color: var(--color-bg-card) !important;
   cursor: pointer;
@@ -855,15 +856,15 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   background-color: #ffffff;
   border-radius: 50%;
 }
 
 /* ─── 참석 인원 적는 부분 수직 정렬 매칭 ─── */
 #rsvpCountGroup .rsvp-options {
-  justify-content: flex-end !important; /* 👈 인원수 칸도 라디오 버튼들의 우측 시작 라인과 일치하도록 오른쪽 정렬 */
+  justify-content: flex-start !important; /* 👈 첫 번째 라디오 버튼과 똑같이 왼쪽에서 시작 */
   gap: 6px !important;
 }
 
