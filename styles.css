@@ -234,8 +234,8 @@ a {
   background-color: var(--color-bg); 
   opacity: 1;
   visibility: visible;
-  /* 💡 대문 틀 전체가 1.5초 동안 부드럽게 투명해지도록 설정 */
-  transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out !important;
+  /* 💡 대문 틀 전체가 1.2초 동안 부드럽게 투명해지도록 설정 */
+  transition: opacity 1.2s ease-in-out, visibility 1.2s ease-in-out !important;
 }
 
 /* 2. 버튼 클릭 시 대문 전체 틀이 사악 투명해짐 */
@@ -257,20 +257,18 @@ a {
 /* 1. 위쪽 수채화 배경: 살짝만 위로 올라가면서 사악 투명해지기 */
 .curtain.is-open .curtain__wash--top { 
   transform: translateY(-100%); 
-  opacity: 0; 
-  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out !important; 
+  transition: transform 1.2s ease-in-out;
 }
 /* 2. 아래쪽 수채화 배경: 살짝만 아래로 내려가면서 사악 투명해지기 */
 .curtain.is-open .curtain__wash--bottom { 
   transform: translateY(100%); 
-  opacity: 0; 
-  transition: transform 1.5s ease-in-out, opacity 1.5s ease-in-out !important; 
+  transition: transform 1.2s ease-in-out;
 }
 /* 3. 가운데 청첩장 열기 버튼 및 안내 문구: 자연스럽게 스르륵 사라지기 */
 .curtain.is-open .curtain__content { 
   opacity: 0; 
   transform: scale(0.92); 
-  transition: transform 1.0s ease-in-out, opacity 1.0s ease-in-out !important;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out !important;
 }
 
 .curtain.is-hidden { display: none; }
@@ -296,6 +294,29 @@ a {
 .photo-modal__counter { position: absolute; bottom: calc(1.5rem + var(--safe-bottom)); left: 50%; transform: translateX(-50%); color: rgba(255, 255, 255, 0.7); font-family: var(--font-display); font-size: 0.875rem; letter-spacing: 2px; }
 
 .main-content { max-width: 100%; overflow: hidden; }
+
+/* ==========================================================================
+   메인화면(히어로 섹션) 순차적 페이드인 - 글씨 겹침 방지
+   ========================================================================== */
+
+/* 1. 처음에 메인 섹션을 아예 안 보이게 숨겨둡니다. */
+#hero {
+  opacity: 0;
+  visibility: hidden;
+  /* 💡 커튼이 녹기 시작하고 0.5초 뒤부터 메인화면이 1.5초 동안 서서히 나타나도록 설정 */
+  transition: opacity 1.5s ease-in-out 0.5s, visibility 1.5s ease-in-out 0.5s !important;
+
+  position: relative;
+  width: 100%;
+  height: 100dvh; 
+  overflow: hidden;
+}
+
+/* 2. 자바스크립트가 클래스를 붙여주면 0.5초 쉬었다가 스르륵 등장 */
+#hero.is-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
 
 /* ─── Hero & Countdown Section ─── */
 .hero { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 0; overflow: hidden; background: transparent !important; }
