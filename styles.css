@@ -170,6 +170,17 @@ a {
   color: var(--color-text);
 }
 
+/* 맨 마지막 섹션을 제외한 모든 섹션 아래에 은은한 실선을 긋습니다. */
+.section:not(:last-of-type)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;              /* 섹션의 맨 아래 바닥에 딱 붙임 */
+  left: var(--spacing-side); /* 청첩장 양옆 여백만큼 선을 띄워 자연스럽게 유도 */
+  right: var(--spacing-side);
+  height: 1px;
+  background-color: rgba(232, 223, 240, 0.4); /* 청첩장 톤에 맞춘 은은한 연보라색 실선 */
+}
+
 /* ═══════════════════════════════════════════
    Watercolor Blob Backgrounds & Dividers
    ═══════════════════════════════════════════ */
