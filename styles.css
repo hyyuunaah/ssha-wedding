@@ -32,7 +32,7 @@
   --font-display: 'Gowun Dodum', 'Nanum Myeongjo', 'Merriweather', serif;
 
   /* 상하 간격 및 좌우 여백 표준화 */
-  --spacing-section: 3.2rem; /* 모든 섹션의 일관된 상하 간격 */
+  --spacing-section: 3.0rem; /* 모든 섹션의 일관된 상하 간격 */
   --spacing-side: 24px;      /* 모든 콘텐츠의 표준 좌우 여백 */
   
   --spacing-xs: 0.5rem;
@@ -174,11 +174,16 @@ a {
 .section:not(:last-of-type)::after {
   content: "";
   position: absolute;
-  bottom: 0;              /* 섹션의 맨 아래 바닥에 딱 붙임 */
-  left: var(--spacing-side); /* 청첩장 양옆 여백만큼 선을 띄워 자연스럽게 유도 */
-  right: var(--spacing-side);
-  height: 1px;
-  background-color: rgba(232, 223, 240, 0.4); /* 청첩장 톤에 맞춘 은은한 연보라색 실선 */
+  bottom: 0;              /* 섹션 바닥에 고정 */
+  left: 50%;
+  transform: translateX(-50%); /* 화면 가로 가운데 정렬 */
+  
+  /* wc-divider 디자인 그대로 이식 */
+  height: 2px;
+  width: 100%;
+  max-width: 280px;
+  background: linear-gradient(to right, transparent 0%, var(--color-lavender) 20%, var(--color-blush) 40%, var(--color-sky) 60%, var(--color-mint) 80%, transparent 100%);
+  opacity: 0.6;
 }
 
 /* ═══════════════════════════════════════════
