@@ -867,7 +867,7 @@
         const name = document.getElementById('rsvpName').value.trim();
         const side = document.querySelector('input[name="rsvpSide"]:checked').value;
         const attend = document.querySelector('input[name="rsvpAttend"]:checked').value;
-        const meal = document.querySelector('input[name="rsvpMeal"]:checked').value;
+        // const meal = document.querySelector('input[name="rsvpMeal"]:checked').value;
         
         let count = '0명';
         if (attend === '참석') {
@@ -886,7 +886,7 @@
           name: name,
           side: side,
           attend: attend,
-          meal: meal,
+          // meal: meal,
           count: count,
           timestamp: firebase.database.ServerValue.TIMESTAMP
         }, (error) => {
