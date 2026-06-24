@@ -816,9 +816,9 @@ a {
 #guestbookForm .gb-submit-btn, #guestbookForm button[type="submit"] {
   display: block !important;
   width: 100% !important;
-  max-width: 280px !important;
+  max-width: 180px !important;
   margin: 20px auto 0 auto !important;
-  padding: 14px 24px !important; /* 💡 전송 버튼의 큼직한 터치감은 유지 */
+  padding: 11px 24px !important; /* 💡 전송 버튼의 큼직한 터치감은 유지 */
   border-radius: 999px !important;
   font-family: var(--font-serif);
   font-size: 0.85rem !important;  /* 💡 캘린더 버튼과 크기 통일 */
