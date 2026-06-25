@@ -1284,9 +1284,3 @@ a {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* 범인 찾기: 무조건 화면에 띄우고 배경을 노란색으로 만듦 */
-#messageModal {
-    display: flex !important; 
-    background-color: yellow !important; 
-    z-index: 999999 !important;
-}
