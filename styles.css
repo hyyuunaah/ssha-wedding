@@ -841,61 +841,57 @@ a {
   justify-content: flex-end !important; 
 }
 
-/* 4️⃣ [모바일 라디오 버튼 크기 제어] */
+/* 1. 순정 라디오 버튼은 화면에서 아예 흔적도 없이 지웁니다 (찌그러짐 원천 차단) */
 #rsvpForm .rsvp-option input[type="radio"] {
-  /* -webkit-appearance: none !important;            
-  -moz-appearance: none !important;
-  appearance: none !important;
-  
-  width: 12px !important;                 
-  height: 12px !important;
-  min-width: 12px !important;
-  min-height: 12px !important;
-  flex-shrink: 0 !important;
-  box-sizing: border-box !important;
-  
-  border: 1px solid var(--color-accent) !important; 
-  border-radius: 50% !important;
-  background-color: var(--color-bg-card) !important;
-  margin: 0 6px 0 0 !important; 
-  outline: none !important;
-  cursor: pointer; */
-   
-  /* 1. 모바일 브라우저의 기본 거대화 속성을 완벽하게 강제 삭제 */
-  -webkit-appearance: none !important;            
-  -moz-appearance: none !important;
-  appearance: none !important;
-  
-  /* 2. 라디오 버튼의 크기를 기존보다 더 작고 아기자기한 10px 정원으로 고정 */
-  width: 10px !important;                 
-  height: 10px !important;
-  min-width: 10px !important;
-  min-height: 10px !important;
-  flex-shrink: 0 !important;
-  box-sizing: border-box !important;
-  
-  /* 3. 테두리선과 배경색 깔끔하게 지정 */
-  border: 1px solid var(--color-accent) !important; 
-  border-radius: 50% !important;
-  background-color: var(--color-bg-card) !important;
-  
-  /* 4. 글자(신랑측/참석 등)와의 미세 간격 조정 및 정렬선 유지 */
-  margin: 0 5px 0 0 !important; 
-  outline: none !important;
-  cursor: pointer;
-  
-  /* 5. 💡 세로축 정렬이 비뚤어지지 않도록 강제 수직 정렬 */
-  vertical-align: middle !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* 라디오 버튼 선택 시 내부 원 스타일 */
-#rsvpForm input[type="radio"]:checked {
-  /* border: 3.5px solid var(--color-accent-dark) !important; 
-  background-color: #ffffff !important; */
+/* 2. 대신 그 뒤에 나오는 글자 앞에 '진짜 작고 예쁜 동그라미'를 강제로 만듭니다 */
+#rsvpForm .rsvp-option {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-family: 'Gowun Dodum', sans-serif !important; /* 폰트 통일 */
+  font-size: 0.85rem !important;
+  color: var(--color-text) !important;
+  cursor: pointer;
+  white-space: nowrap !important;
+  width: 100% !important;
+}
 
-  /* 테두리 두께를 2.5px로 주어 내부 중앙에 아주 작고 선명한 점이 생기도록 유도 */
-  border: 2.5px solid var(--color-accent-dark) !important; 
+/* 3. 글자 왼쪽에 들어갈 아기자기한 11px짜리 커스텀 동그라미 공간 확보 */
+#rsvpForm .rsvp-option::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 11px !important;       /* 💡 드디어 원하는 크기로 완벽 고정! */
+  height: 11px !important;
+  min-width: 11px !important;
+  min-height: 11px !important;
+  border: 1px solid var(--color-accent) !important; /* 기본 연한 테두리 */
+  border-radius: 50% !important;
+  background-color: var(--color-bg-card) !important;
+  margin-right: 6px !important;  /* 동그라미와 글자 사이 간격 */
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+  
+  /* 세로축 칼정렬을 위한 마법의 한 줄 */
+  transform: translateY(-0.5px) !important; 
+}
+
+/* 4. 🔥 [핵심] 라디오 버튼이 '체크'되면, 옆에 있는 동그라미 서식을 변경합니다 */
+#rsvpForm .rsvp-option input[type="radio"]:checked + text, /* 일반 텍스트 대응 */
+#rsvpForm .rsvp-option:has(input[type="radio"]:checked)::before {
+  border: 3px solid var(--color-accent-dark) !important; /* 테두리를 두껍게 해서 중앙 점처럼 보이게 만듦 */
   background-color: #ffffff !important;
+}
+
+/* 2열(신부측 / 미참석) 항목 우측 밀착 유지 */
+#rsvpForm .rsvp-option:nth-child(2) {
+  justify-content: flex-end !important; 
 }
 
 /* 3️⃣ [참석인원 행 독립 정렬 및 박스 확장] */
