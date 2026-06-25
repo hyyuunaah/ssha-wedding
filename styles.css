@@ -772,7 +772,7 @@ a {
 }
 
 /* ==========================================================================
-   RSVP 레이아웃 완벽 구조화 종결본 (오차 0% 칼정렬 보장)
+   RSVP 레이아웃 최종 종결본 (라디오 버튼 기하학적 100% 원형 보장)
    ========================================================================== */
 .rsvp-card__title {
   font-family: var(--font-serif);
@@ -804,18 +804,19 @@ a {
   text-align: left;
 }
 
-/* [우측 컨테이너] 165px 안에 투명한 격자판 2칸 고정 */
+/* [우측 컨테이너] 165px 고정 바둑판 그리드 레이아웃 */
 #rsvpForm .rsvp-options {
   display: grid !important;
+  /* 1열 85px, 2열 80px 공간 고정 분할 */
   grid-template-columns: 85px 80px !important; 
   align-items: center !important;
   justify-content: flex-end !important;
   width: 165px !important;
   min-width: 165px !important;
-  gap: 0 !important;
+  gap: 0 !important; 
 }
 
-/* 레이블 박스 자체를 마우스 클릭 영역으로 온전히 활용 */
+/* 각 라디오 묶음 레이블 */
 #rsvpForm .rsvp-option {
   display: flex !important;
   align-items: center !important;
@@ -825,16 +826,15 @@ a {
   color: var(--color-text) !important;
   cursor: pointer;
   white-space: nowrap !important;
-  position: relative;
   width: 100% !important;
 }
 
-/* 2열(신부측/미참석)은 칸 안에서 무조건 우측 정렬 */
+/* 2열(신부측 / 미참석) 항목만 박스 안에서 오른쪽 끝 벽 밀착 */
 #rsvpForm .rsvp-option:nth-child(2) {
-  justify-content: flex-end !important;
+  justify-content: flex-end !important; 
 }
 
-/* 🔘 말 안 듣는 브라우저 순정 라디오 버튼은 완전히 투명하게 숨김 */
+/* 🔘 말 안 듣고 찌그러지는 브라우저 순정 라디오 버튼은 아예 흔적도 없이 숨김 */
 #rsvpForm .rsvp-option input[type="radio"] {
   position: absolute !important;
   opacity: 0 !important;
@@ -844,48 +844,57 @@ a {
   pointer-events: none !important;
 }
 
-/* ✨ [정석 구현] 순수 CSS로 따로 만든 가짜 바깥 원 (무조건 11px 고정) */
-#rsvpForm .radio-circle {
+/* ✨ [완벽한 외곽 원] 주변 글자 수나 그리드에 절대 압박받지 않는 절대 독립 원 */
+#rsvpForm .custom-radio {
   width: 11px !important;
   height: 11px !important;
   min-width: 11px !important;
   min-height: 11px !important;
+  
   border: 1px solid var(--color-accent) !important;
   border-radius: 50% !important;
   background-color: var(--color-bg-card) !important;
-  margin-right: 6px !important;
+  margin-right: 6px !important; /* 글자와의 고정 간격 */
+  
+  /* 💡 내부 요소를 수학적으로 완벽한 정중앙에 고정시키는 정렬 주입 */
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   box-sizing: border-box !important;
-  position: relative;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
+  position: relative !important;
 }
 
-/* ✨ [정석 구현] 선택 시 바깥 원 안에 짱짱하게 들어갈 한가운데 흰색 알맹이 */
-#rsvpForm .radio-circle::after {
+/* ✨ [완벽한 내부 하얀 원] 찌그러짐 원천 차단 */
+#rsvpForm .custom-radio::after {
   content: '' !important;
-  width: 7px !important;
-  height: 7px !important;
+  width: 5px !important; /* 11px 외곽 원 내부에서 가장 예쁜 비율의 정원(Circle) */
+  height: 5px !important;
+  min-width: 5px !important;
+  min-height: 5px !important;
+  
   background-color: #ffffff !important;
   border-radius: 50% !important;
   display: none !important; /* 평소엔 숨김 */
-  box-shrink: 0;
+  flex-shrink: 0 !important;
 }
 
-/* 라디오 버튼이 선택(checked)되었을 때의 스타일 주입 */
-#rsvpForm .rsvp-option input[type="radio"]:checked + .radio-circle {
+/* 🎯 라디오 버튼이 선택(checked)되었을 때 가짜 원 디자인 변경 */
+#rsvpForm .rsvp-option input[type="radio"]:checked + .custom-radio {
   background-color: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
 }
-#rsvpForm .rsvp-option input[type="radio"]:checked + .radio-circle::after {
-  display: block !important; /* 선택 시 정중앙에 흰 점 딱 출현 */
+
+/* 🎯 선택 상태일 때 내부의 완벽한 하얀 원을 짠! 하고 표출 */
+#rsvpForm .rsvp-option input[type="radio"]:checked + .custom-radio::after {
+  display: block !important;
 }
 
-/* ─── ✍️ 참석 인원 인풋창 및 '명' 글자 정렬선 100% 동기화 ─── */
+/* ─── ✍️ 참석 인원 및 '명' 글자 수직 정렬선 100% 동기화 ─── */
 #rsvpCountGroup .rsvp-options {
   display: flex !important;
-  justify-content: space-between !important;
+  justify-content: space-between !important; 
+  grid-column: 1 / span 2 !important; 
 }
 
 #rsvpCount {
@@ -902,12 +911,12 @@ a {
   margin: 0 !important;
 }
 
-/* 🎯 '명' 글씨 우측 정렬선 칼정렬 완료 */
-#rsvpCountGroup .count-unit {
+/* '명' 텍스트를 최우측 마감 벽면에 붙여 '측', '석'과 완벽 수직선 일치 */
+#rsvpCountGroup .rsvp-options span.count-unit {
   font-size: 0.85rem;
   color: var(--color-text);
   white-space: nowrap;
-  width: 35px !important;       /* 2열 80px 박스 마감라인과 완전히 결착시킴 */
+  width: 35px !important;       
   text-align: right !important; 
   padding: 0 !important;
   margin: 0 !important;
