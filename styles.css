@@ -777,20 +777,27 @@ a {
 
 .rsvp-card__title { font-family: var(--font-serif); font-size: 1rem; margin-bottom: var(--spacing-md); color: var(--color-accent-dark); text-align: center; font-weight: 700; }
 
-/* 1️⃣ [구분, 참석여부, 참석인원 행만 안으로 집어넣기] 
-   성함 칸은 건드리지 않고, 이 세 개 그룹(div)에만 좌우 마진을 주어 살짝 안으로 밀어 넣습니다. */
+/* 기본 그룹 스타일 (성함 칸을 포함한 전체 라인의 기본 패딩과 정렬) */
 .rsvp-group {
   display: flex;
   align-items: center;
   justify-content: space-between; 
-  padding: 12px 0; /* 상하 패딩만 유지 */
-  margin: 0 12px !important; /* 💡 좌우 12px씩 안으로 밀어 넣어 성함 칸보다 쏙 들어가게 만듭니다. */
-  border-bottom: 1px dashed var(--color-border);
+  padding: 12px 0; 
   box-sizing: border-box !important;
+  border-bottom: 1px dashed var(--color-border);
 }
 
 .rsvp-group:last-child {
   border-bottom: none;
+}
+
+/* 1️⃣ [성함 칸 완벽 보호 & 나머지 행만 안으로 넣기]
+   성함 입력창(rsvpName)이 들어있는 행은 마진을 주지 않고 원래 너비(100%)를 유지하며,
+   참석인원 행(#rsvpCountGroup)과 라디오 버튼이 있는 행들만 좌우 마진을 주어 살짝 안으로 밀어 넣습니다. */
+.rsvp-group:has(input[name="rsvpSide"]),
+.rsvp-group:has(input[name="rsvpAttend"]),
+#rsvpCountGroup {
+  margin: 0 12px !important; /* 💡 딱 이 세 행만 양옆에서 12px씩 쏙 들어가게 만듭니다! */
 }
 
 /* 행 제목 (구분, 참석여부, 참석인원) */
