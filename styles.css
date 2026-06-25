@@ -772,7 +772,7 @@ a {
 }
 
 /* ==========================================================================
-   RSVP 레이아웃 최종 종결본 (라디오 버튼 기하학적 100% 원형 보장)
+   RSVP 레이아웃 최종 무결점 종결본 (라디오 버튼 절대 찌그러짐 방지)
    ========================================================================== */
 .rsvp-card__title {
   font-family: var(--font-serif);
@@ -804,11 +804,10 @@ a {
   text-align: left;
 }
 
-/* [우측 컨테이너] 165px 고정 바둑판 그리드 레이아웃 */
+/* [우측 컨테이너] 165px 고정 정밀 격자판(Grid) */
 #rsvpForm .rsvp-options {
   display: grid !important;
-  /* 1열 85px, 2열 80px 공간 고정 분할 */
-  grid-template-columns: 85px 80px !important; 
+  grid-template-columns: 85px 80px !important; /* 1열 85px, 2열 80px 분할 */
   align-items: center !important;
   justify-content: flex-end !important;
   width: 165px !important;
@@ -816,9 +815,9 @@ a {
   gap: 0 !important; 
 }
 
-/* 각 라디오 묶음 레이블 */
+/* 각 라디오 항목 레이블 */
 #rsvpForm .rsvp-option {
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -829,68 +828,73 @@ a {
   width: 100% !important;
 }
 
-/* 2열(신부측 / 미참석) 항목만 박스 안에서 오른쪽 끝 벽 밀착 */
+/* 2열 라디오 항목 (신부측 / 미참석)만 우측 끝벽에 완전히 밀착 */
 #rsvpForm .rsvp-option:nth-child(2) {
   justify-content: flex-end !important; 
 }
 
-/* 🔘 말 안 듣고 찌그러지는 브라우저 순정 라디오 버튼은 아예 흔적도 없이 숨김 */
+/* 🔘 [완벽 찌그러짐 방지] 순수 원형 지름을 완벽하게 수호하는 11px 라디오 버튼 */
+#rsvpForm .rsvp-options input[type="radio"],
 #rsvpForm .rsvp-option input[type="radio"] {
-  position: absolute !important;
-  opacity: 0 !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-  pointer-events: none !important;
-}
-
-/* ✨ [완벽한 외곽 원] 주변 글자 수나 그리드에 절대 압박받지 않는 절대 독립 원 */
-#rsvpForm .custom-radio {
-  width: 11px !important;
+  -webkit-appearance: none !important;            
+  -moz-appearance: none !important;
+  appearance: none !important;
+  
+  /* 🎯 어떠한 압박에도 형태를 잃지 않는 강제 물리적 규격 고정 */
+  width: 11px !important;                
   height: 11px !important;
   min-width: 11px !important;
   min-height: 11px !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important; /* 💡 격자가 좁아져도 절대 원이 찌그러지지 않게 방어 */
   
-  border: 1px solid var(--color-accent) !important;
+  border: 1px solid var(--color-accent) !important; 
   border-radius: 50% !important;
   background-color: var(--color-bg-card) !important;
-  margin-right: 6px !important; /* 글자와의 고정 간격 */
+  margin: 0 6px 0 0 !important; 
+  outline: none !important;
+  position: relative !important;
+  cursor: pointer;
   
-  /* 💡 내부 요소를 수학적으로 완벽한 정중앙에 고정시키는 정렬 주입 */
+  /* 💡 내부 하얀색 알맹이를 수학적으로 정확한 한가운데에 고정시키는 배치 공식 */
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  box-sizing: border-box !important;
-  flex-shrink: 0 !important;
-  position: relative !important;
-}
-
-/* ✨ [완벽한 내부 하얀 원] 찌그러짐 원천 차단 */
-#rsvpForm .custom-radio::after {
-  content: '' !important;
-  width: 5px !important; /* 11px 외곽 원 내부에서 가장 예쁜 비율의 정원(Circle) */
-  height: 5px !important;
-  min-width: 5px !important;
-  min-height: 5px !important;
   
-  background-color: #ffffff !important;
-  border-radius: 50% !important;
-  display: none !important; /* 평소엔 숨김 */
-  flex-shrink: 0 !important;
+  transform: none !important;
+  -webkit-transform: none !important;
 }
 
-/* 🎯 라디오 버튼이 선택(checked)되었을 때 가짜 원 디자인 변경 */
-#rsvpForm .rsvp-option input[type="radio"]:checked + .custom-radio {
+/* 체크되었을 때 외곽 원 배경색 전환 */
+#rsvpForm .rsvp-options input[type="radio"]:checked,
+#rsvpForm .rsvp-option input[type="radio"]:checked {
   background-color: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
 }
 
-/* 🎯 선택 상태일 때 내부의 완벽한 하얀 원을 짠! 하고 표출 */
-#rsvpForm .rsvp-option input[type="radio"]:checked + .custom-radio::after {
+/* 🎯 [완벽 정원] 선택되었을 때 들어갈 하얀 원도 상하좌우 치우침 없는 완벽한 대칭형 배치 */
+#rsvpForm .rsvp-options input[type="radio"]:checked::after,
+#rsvpForm .rsvp-option input[type="radio"]:checked::after {
+  content: '' !important;
+  
+  /* 💡 상하좌우 절대 픽셀 크기를 똑같이 주어 타원형으로 밀리는 현상 완벽 방지 */
+  width: 5px !important;                            
+  height: 5px !important;
+  min-width: 5px !important;
+  min-height: 5px !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+  
+  background-color: #ffffff !important;
+  border-radius: 50% !important;
   display: block !important;
+  
+  /* 기존에 오차를 만들던 수동 top/left 마진 좌표계는 전부 무력화 */
+  position: static !important; 
+  transform: none !important;
 }
 
-/* ─── ✍️ 참석 인원 및 '명' 글자 수직 정렬선 100% 동기화 ─── */
+/* ─── ✍️ 참석 인원 및 '명' 글자 수직 정렬 최종 세밀 교정 ─── */
 #rsvpCountGroup .rsvp-options {
   display: flex !important;
   justify-content: space-between !important; 
@@ -912,13 +916,13 @@ a {
 }
 
 /* '명' 텍스트를 최우측 마감 벽면에 붙여 '측', '석'과 완벽 수직선 일치 */
-#rsvpCountGroup .rsvp-options span.count-unit {
+#rsvpCountGroup .rsvp-options span {
   font-size: 0.85rem;
   color: var(--color-text);
   white-space: nowrap;
   width: 35px !important;       
   text-align: right !important; 
-  padding: 0 !important;
+  padding: 0 !important;        
   margin: 0 !important;
 }
 
