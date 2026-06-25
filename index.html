@@ -23,7 +23,6 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet"> -->
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nanum+Myeongjo&display=swap" rel="stylesheet">
   <style>
   @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Nanum+Myeongjo&display=swap');
@@ -299,23 +298,23 @@
             </div>
             
             <div class="rsvp-group">
-              <span class="rsvp-group__label">참석 여부</span>
+              <span class="rsvp-group__label">참석여부</span>
               <div class="rsvp-options">
                 <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 참석</label>
                 <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> 미참석</label>
               </div>
             </div>
             
-            <div class="rsvp-group">
-              <span class="rsvp-group__label">식사 여부</span>
+            <!-- <div class="rsvp-group">
+              <span class="rsvp-group__label">식사여부</span>
               <div class="rsvp-options">
                 <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사함" checked> 식사 예정</label>
                 <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사안함"> 식사 안함</label>
               </div>
-            </div>
+            </div> -->
 
             <div class="rsvp-group" id="rsvpCountGroup">
-              <span class="rsvp-group__label">참석 인원</span>
+              <span class="rsvp-group__label">참석인원</span>
               <div class="rsvp-options" style="justify-content: flex-start; align-items: center; gap: 8px;">
                 <input type="number" id="rsvpCount" value="1" min="1" max="99" style="width: 70px; padding: 8px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.875rem; text-align: center; font-family: inherit; color: var(--color-text); background-color: var(--color-bg-card);">
                 <span style="font-size: 0.85rem; color: var(--color-text-light); font-family: 'Nanum Myeongjo', serif;">명</span>
