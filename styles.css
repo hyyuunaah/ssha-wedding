@@ -841,6 +841,7 @@ a {
   justify-content: flex-end !important; 
 }
 
+/* 라디오버튼 사이즈 줄이기 */
 /* 1. 순정 라디오 버튼은 화면에서 아예 흔적도 없이 지웁니다 (찌그러짐 원천 차단) */
 #rsvpForm .rsvp-option input[type="radio"] {
   position: absolute !important;
@@ -871,7 +872,7 @@ a {
   height: 11px !important;
   min-width: 11px !important;
   min-height: 11px !important;
-  border: 1px solid var(--color-accent) !important; /* 기본 연한 테두리 */
+  border: 1px solid var(--color-lavender) !important; /* 기본 연한 테두리 */
   border-radius: 50% !important;
   background-color: var(--color-bg-card) !important;
   margin-right: 6px !important;  /* 동그라미와 글자 사이 간격 */
@@ -885,7 +886,7 @@ a {
 /* 4. 🔥 [핵심] 라디오 버튼이 '체크'되면, 옆에 있는 동그라미 서식을 변경합니다 */
 #rsvpForm .rsvp-option input[type="radio"]:checked + text, /* 일반 텍스트 대응 */
 #rsvpForm .rsvp-option:has(input[type="radio"]:checked)::before {
-  border: 3px solid var(--color-accent-dark) !important; /* 테두리를 두껍게 해서 중앙 점처럼 보이게 만듦 */
+  border: 3px solid var(--color-lavender) !important; /* 테두리를 두껍게 해서 중앙 점처럼 보이게 만듦 */
   background-color: #ffffff !important;
 }
 
