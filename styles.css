@@ -772,7 +772,7 @@ a {
 }
 
 /* ==========================================================================
-   RSVP 레이아웃 최종 종결본 (가짜 원 렌더링으로 크기/비율/수직선 오차 0% 구현)
+   RSVP 레이아웃 완벽 구조화 종결본 (오차 0% 칼정렬 보장)
    ========================================================================== */
 .rsvp-card__title {
   font-family: var(--font-serif);
@@ -804,7 +804,7 @@ a {
   text-align: left;
 }
 
-/* [우측 컨테이너] 165px 고정폭 분할 격자판(Grid) */
+/* [우측 컨테이너] 165px 안에 투명한 격자판 2칸 고정 */
 #rsvpForm .rsvp-options {
   display: grid !important;
   grid-template-columns: 85px 80px !important; 
@@ -812,12 +812,12 @@ a {
   justify-content: flex-end !important;
   width: 165px !important;
   min-width: 165px !important;
-  gap: 0 !important; 
+  gap: 0 !important;
 }
 
-/* 각 라디오 항목 레이블 */
+/* 레이블 박스 자체를 마우스 클릭 영역으로 온전히 활용 */
 #rsvpForm .rsvp-option {
-  display: inline-flex !important;
+  display: flex !important;
   align-items: center !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -825,92 +825,67 @@ a {
   color: var(--color-text) !important;
   cursor: pointer;
   white-space: nowrap !important;
+  position: relative;
   width: 100% !important;
 }
 
-/* 2열 라디오 항목 (신부측 / 미참석)만 우측 벽 밀착 */
+/* 2열(신부측/미참석)은 칸 안에서 무조건 우측 정렬 */
 #rsvpForm .rsvp-option:nth-child(2) {
-  justify-content: flex-end !important; 
+  justify-content: flex-end !important;
 }
 
-/* 🔘 [핵심] 고집불통 브라우저 순정 원형 껍데기는 아예 안 보이게 숨깁니다 */
-#rsvpForm .rsvp-options input[type="radio"],
+/* 🔘 말 안 듣는 브라우저 순정 라디오 버튼은 완전히 투명하게 숨김 */
 #rsvpForm .rsvp-option input[type="radio"] {
   position: absolute !important;
   opacity: 0 !important;
   width: 0 !important;
   height: 0 !important;
   margin: 0 !important;
-  padding: 0 !important;
   pointer-events: none !important;
 }
 
-/* ✨ [핵심] 브라우저 대신 우리가 CSS로 직접 그리는 오차 0%의 '바깥 원' */
-#rsvpForm .rsvp-option::before {
-  content: '' !important;
-  display: inline-block !important;
-  
-  /* 🎯 지름을 딱 11px로 고정하여 어떤 기기에서도 무조건 아기자기하게 고정 */
+/* ✨ [정석 구현] 순수 CSS로 따로 만든 가짜 바깥 원 (무조건 11px 고정) */
+#rsvpForm .radio-circle {
   width: 11px !important;
   height: 11px !important;
   min-width: 11px !important;
   min-height: 11px !important;
-  
   border: 1px solid var(--color-accent) !important;
   border-radius: 50% !important;
   background-color: var(--color-bg-card) !important;
-  margin-right: 6px !important; /* 글자와의 고정 간격 */
+  margin-right: 6px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   box-sizing: border-box !important;
-  transition: all 0.2s ease;
-  flex-shrink: 0 !important;
+  position: relative;
+  flex-shrink: 0;
 }
 
-/* 🎯 라디오 버튼이 체크되었을 때 바깥 원의 색상 변화 */
-#rsvpForm .rsvp-option input[type="radio"]:checked + *, 
-#rsvpForm .rsvp-option:has(input[type="radio"]:checked)::before {
-  background-color: var(--color-accent-dark) !important;
-  border-color: var(--color-accent-dark) !important;
-}
-
-/* ✨ [핵심] 체크되었을 때 바깥 원(11px) 내부에 꽉 차게 그리는 '안쪽 하얀 원' */
-#rsvpForm .rsvp-option::after {
+/* ✨ [정석 구현] 선택 시 바깥 원 안에 짱짱하게 들어갈 한가운데 흰색 알맹이 */
+#rsvpForm .radio-circle::after {
   content: '' !important;
-  position: absolute !important;
-  
-  /* 💡 1열 가로선과 2열 가로선 위치에 맞춰 동그라미 한가운데 안착하도록 보정 */
-  left: 3px !important; 
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-  
-  /* 💡 전체 원(11px) 내부에서 아주 슬림한 보랏빛 도넛 선만 남기도록 7px로 꽉 채움 */
   width: 7px !important;
   height: 7px !important;
   background-color: #ffffff !important;
   border-radius: 50% !important;
-  
-  display: none !important; /* 평소에는 숨김 */
-  box-sizing: border-box !important;
+  display: none !important; /* 평소엔 숨김 */
+  box-shrink: 0;
 }
 
-/* 2열(신부측 / 미참석) 항목은 우측 밀착 정렬이므로 안쪽 하얀 원의 시작 좌측 좌표 미세 보정 */
-#rsvpForm .rsvp-option:nth-child(2)::after {
-  left: auto !important;
-  right: 64px !important; /* 2열 텍스트 길이에 맞춰 한가운데에 자석처럼 고정 */
+/* 라디오 버튼이 선택(checked)되었을 때의 스타일 주입 */
+#rsvpForm .rsvp-option input[type="radio"]:checked + .radio-circle {
+  background-color: var(--color-accent-dark) !important;
+  border-color: var(--color-accent-dark) !important;
 }
-#rsvpForm .rsvp-option:nth-child(2):has(span)::after {
-  right: 51px !important; /* 미참석 세 글자일 때의 안쪽 원 좌표 미세 매칭 */
-}
-
-/* 🎯 선택된 상태일 때만 안쪽 하얀 원을 짠! 하고 보여줍니다 */
-#rsvpForm .rsvp-option:has(input[type="radio"]:checked)::after {
-  display: block !important;
+#rsvpForm .rsvp-option input[type="radio"]:checked + .radio-circle::after {
+  display: block !important; /* 선택 시 정중앙에 흰 점 딱 출현 */
 }
 
-/* ─── ✍️ 참석 인원 및 '명' 글자 수직 정렬 유지 ─── */
+/* ─── ✍️ 참석 인원 인풋창 및 '명' 글자 정렬선 100% 동기화 ─── */
 #rsvpCountGroup .rsvp-options {
   display: flex !important;
-  justify-content: space-between !important; 
-  grid-column: 1 / span 2 !important; 
+  justify-content: space-between !important;
 }
 
 #rsvpCount {
@@ -927,12 +902,15 @@ a {
   margin: 0 !important;
 }
 
-#rsvpCountGroup .rsvp-options span {
+/* 🎯 '명' 글씨 우측 정렬선 칼정렬 완료 */
+#rsvpCountGroup .count-unit {
   font-size: 0.85rem;
   color: var(--color-text);
   white-space: nowrap;
-  width: 45px !important;       
+  width: 35px !important;       /* 2열 80px 박스 마감라인과 완전히 결착시킴 */
   text-align: right !important; 
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
 /* 방명록 입력 창 세부 레이아웃 */
