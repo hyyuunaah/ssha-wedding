@@ -1181,3 +1181,105 @@ a {
      color: #fff !important;              /* 화살표 색상은 흰색 유지 */
    }
 }
+
+/* ====================================================
+   2026.06.25. 축하 메시지 3개 제한 및 전체보기 모달(팝업) 
+   ==================================================== */
+
+/* 전체보기 버튼 스타일 */
+.btn-more-messages {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  margin: 20px auto 0 auto;
+  padding: 10px 16px;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  background-color: transparent;
+  border: 1px solid var(--color-lavender);
+  border-radius: var(--radius-sm, 8px);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-more-messages:hover {
+  background-color: var(--color-bg-card);
+  color: var(--color-accent-dark);
+}
+
+/* 팝업 전체 배경 (처음엔 숨김) */
+.msg-modal {
+  display: none; /* JS로 켜고 끌 겁니다 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* 화면 어둡게 */
+  z-index: 9999; /* 최상단 배치 */
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 팝업을 띄울 때 활성화되는 클래스 */
+.msg-modal.is-active {
+  display: flex;
+}
+
+/* 팝업 내부 흰색 상자 */
+.msg-modal__content {
+  background-color: var(--color-bg-card, #ffffff);
+  width: 100%;
+  max-width: 450px; /* 모바일 청첩장 너비에 맞춤 */
+  max-height: 70vh; /* 화면 높이의 70%까지만 커지고 내부 스크롤 */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalFadeIn 0.3s ease;
+}
+
+/* 팝업 상단 헤더 */
+.msg-modal__header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-bg-card);
+}
+
+.msg-modal__header h3 {
+  margin: 0;
+  font-family: 'Gowun Dodum', sans-serif;
+  font-size: 1rem;
+  color: var(--color-text);
+}
+
+/* 닫기 버튼(X) */
+.msg-modal__close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-text-light);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+/* 팝업 내부 메시지 리스트 스크롤 영역 */
+.msg-modal__body {
+  padding: 20px;
+  overflow-y: auto; /* 메시지 많으면 박스 안에서만 스크롤 */
+  flex: 1;
+}
+
+/* 팝업 등장 애니메이션 */
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
