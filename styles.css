@@ -1226,7 +1226,7 @@ a {
 
 /* 팝업을 띄울 때 활성화되는 클래스 */
 .msg-modal.is-active {
-  display: flex;
+  display: flex !important;
 }
 
 /* 팝업 내부 흰색 상자 */
