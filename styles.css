@@ -777,14 +777,14 @@ a {
 
 .rsvp-card__title { font-family: var(--font-serif); font-size: 1rem; margin-bottom: var(--spacing-md); color: var(--color-accent-dark); text-align: center; font-weight: 700; }
 
-/* 1️⃣ [전체 좌우 여백 교정] 
-   성함 입력 칸보다 안으로 살짝 들어가도록 카드 자체에 padding을 주거나 
-   그룹 좌우에 margin 대신 안전한 padding을 부여하여 내부 정렬을 보호합니다. */
+/* 1️⃣ [구분, 참석여부, 참석인원 행만 안으로 집어넣기] 
+   성함 칸은 건드리지 않고, 이 세 개 그룹(div)에만 좌우 마진을 주어 살짝 안으로 밀어 넣습니다. */
 .rsvp-group {
   display: flex;
   align-items: center;
   justify-content: space-between; 
-  padding: 12px 16px !important; /* 좌우 16px 패딩으로 성함 칸보다 안으로 밀어넣음 */
+  padding: 12px 0; /* 상하 패딩만 유지 */
+  margin: 0 12px !important; /* 💡 좌우 12px씩 안으로 밀어 넣어 성함 칸보다 쏙 들어가게 만듭니다. */
   border-bottom: 1px dashed var(--color-border);
   box-sizing: border-box !important;
 }
@@ -802,17 +802,15 @@ a {
   flex-shrink: 0 !important;
 }
 
-/* 2️⃣ [우측 격자 통제] 
-   우측 옵션 영역의 총 너비를 165px로 제한하고 오른쪽 끝으로 밀착시킵니다.
-   Grid를 사용하여 1열(85px)과 2열(80px)의 세로선을 완벽하게 일치시킵니다. */
+/* 2️⃣ [우측 격자 통제] */
 #rsvpForm .rsvp-options {
   display: grid !important;
-  grid-template-columns: 85px 80px !important; /* 1열과 2열의 절대 너비 지정 */
+  grid-template-columns: 85px 80px !important; 
   align-items: center !important;
   justify-content: flex-end !important;
   width: 165px !important;
   min-width: 165px !important;
-  gap: 0 !important; /* gap 대신 너비로 통제 */
+  gap: 0 !important; 
   padding: 0 !important;
   margin: 0 !important;
 }
@@ -831,20 +829,18 @@ a {
   padding: 0 !important;
 }
 
-/* 2열(신부측 / 미참석) 항목을 우측 벽면에 완전히 밀착시켜 세로선 마감 */
+/* 2열(신부측 / 미참석) 항목 우측 밀착 */
 #rsvpForm .rsvp-option:nth-child(2) {
   justify-content: flex-end !important; 
 }
 
-/* 4️⃣ [찐 모바일 라디오 버튼 크기 축소 및 정원 유지] 
-   모바일 브라우저가 임의로 크기를 키우지 못하도록 -webkit-appearance를 지우고
-   가로세로 12px 정원으로 단단히 잠금 처리합니다. */
+/* 4️⃣ [모바일 라디오 버튼 크기 제어] */
 #rsvpForm .rsvp-option input[type="radio"] {
   -webkit-appearance: none !important;            
   -moz-appearance: none !important;
   appearance: none !important;
   
-  width: 12px !important;                 /* 아기자기하게 줄인 크기 */
+  width: 12px !important;                 
   height: 12px !important;
   min-width: 12px !important;
   min-height: 12px !important;
@@ -854,31 +850,33 @@ a {
   border: 1px solid var(--color-accent) !important; 
   border-radius: 50% !important;
   background-color: var(--color-bg-card) !important;
-  margin: 0 6px 0 0 !important; /* 버튼과 글자 사이 간격 */
+  margin: 0 6px 0 0 !important; 
   outline: none !important;
   cursor: pointer;
 }
 
-/* 라디오 버튼 선택 시 스타일 (가상 요소 없이 테두리 두께로 정중앙 원 구현) */
+/* 라디오 버튼 선택 시 내부 원 스타일 */
 #rsvpForm input[type="radio"]:checked {
-  border: 3.5px solid var(--color-accent-dark) !important; /* 찌그러짐 없는 정원 내부 점 구현 */
+  border: 3.5px solid var(--color-accent-dark) !important; 
   background-color: #ffffff !important;
 }
 
-/* 3️⃣ [참석인원 행 독립 정렬] 
-   인원수 입력 칸과 '명' 자수 위치를 상단 라디오 버튼들과 칼정렬합니다. */
+/* 3️⃣ [참석인원 행 독립 정렬 및 박스 확장] */
 #rsvpCountGroup .rsvp-options {
   display: flex !important;
-  justify-content: space-between !important; 
-  grid-column: 1 / span 2 !important; /* 부모 Grid를 무시하고 Flex로 재정렬 */
+  align-items: center !important;
+  justify-content: flex-start !important; /* 💡 왼쪽 정렬로 변경하여 빈틈없이 채움 */
+  grid-column: 1 / span 2 !important; 
+  width: 165px !important;
+  min-width: 165px !important;
 }
 
-/* 인원수 인풋 박스 */
+/* 💡 인원수 인풋 박스 확장 */
 #rsvpCount {
-  /* 💡 상단 1열 라디오 버튼 시작점에 정확히 일치하도록 너비 세팅 */
-  width: 70px !important;              
+  /* 상단 1열 라디오 시작점(0)에서 시작해 2열 신부측/미참석 글자 앞까지 대략 135px로 길게 늘립니다. */
+  width: 135px !important;              
   height: 32px !important;
-  padding: 0 !important;
+  padding: 0 4px !important;
   border: 1px solid var(--color-border) !important;
   border-radius: var(--radius-sm) !important;
   font-size: 0.875rem;
@@ -890,17 +888,18 @@ a {
   box-sizing: border-box !important;
 }
 
-/* '명' 텍스트 */
+/* '명' 텍스트 위치 매칭 */
 #rsvpCountGroup .rsvp-options span {
   font-family: 'Nanum Myeongjo', serif !important;
   font-size: 0.85rem;
   color: var(--color-text-light);
-  /* 💡 상단 2열의 마감선(80px)에 정확히 들어맞도록 너비를 지정하고 우측 정렬 */
-  width: 80px !important;       
+  /* 💡 남은 30px 영역을 꽉 채우고 우측 정렬하여 '측', '석' 자수 마감선과 정확히 일치시킵니다. */
+  width: 30px !important;       
   text-align: right !important; 
   padding: 0 !important;        
   margin: 0 !important;
   box-sizing: border-box !important;
+  flex-shrink: 0 !important;
 }
 
 /* ==========================================================================
