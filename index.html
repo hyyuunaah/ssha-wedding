@@ -223,7 +223,7 @@
       <div class="location__detail-guide animate-item" data-animate="fade-up" style="margin-top: 35px;">
         <div class="guide-item">
           <h4 class="guide-title">지하철 안내</h4>
-          <p class="guide-text">춘천역(경춘선) 1번출구 셔틀버스 이용가능 (매시 20분 출발)<br><br>남춘천역 1번출구 남춘천역(2295), 시외버스터미널(2058) 정류장에서 400번 승차 후 소양교차로(2639) 하차</p>
+          <p class="guide-text">춘천역(경춘선) 1번출구 셔틀버스 이용가능<br><br>남춘천역 1번출구 남춘천역(2295), 시외버스터미널(2058) 정류장에서 400번 승차 후 소양교차로(2639) 하차</p>
         </div>
 
         <div class="guide-item">
@@ -291,26 +291,34 @@
             </div>
 
             <div class="rsvp-group">
-              <div class="rsvp-group__label">구분</div>
+              <span class="rsvp-group__label">구분</span>
               <div class="rsvp-options">
-                <label class="rsvp-option"><input type="radio" name="attendance_type" value="groom" checked> 신랑측</label>
-                <label class="rsvp-option"><input type="radio" name="attendance_type" value="bride"> 신부측</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신랑측" checked> 신랑측</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신부측"> 신부측</label>
               </div>
             </div>
             
             <div class="rsvp-group">
-              <div class="rsvp-group__label">참석여부</div>
+              <span class="rsvp-group__label">참석 여부</span>
               <div class="rsvp-options">
-                <label class="rsvp-option"><input type="radio" name="attendance_status" value="attend" checked> 참석</label>
-                <label class="rsvp-option"><input type="radio" name="attendance_status" value="absent"> 미참석</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 참석</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> 미참석</label>
               </div>
             </div>
             
-            <div class="rsvp-group" id="rsvpCountGroup">
-              <div class="rsvp-group__label">참석인원</div>
+            <div class="rsvp-group">
+              <span class="rsvp-group__label">식사 여부</span>
               <div class="rsvp-options">
-                <input type="number" id="rsvpCount" min="1" max="10" value="1">
-                <span>명</span>
+                <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사함" checked> 식사 예정</label>
+                <label class="rsvp-option"><input type="radio" name="rsvpMeal" value="식사안함"> 식사 안함</label>
+              </div>
+            </div>
+
+            <div class="rsvp-group" id="rsvpCountGroup">
+              <span class="rsvp-group__label">참석 인원</span>
+              <div class="rsvp-options" style="justify-content: flex-start; align-items: center; gap: 8px;">
+                <input type="number" id="rsvpCount" value="1" min="1" max="99" style="width: 70px; padding: 8px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.875rem; text-align: center; font-family: inherit; color: var(--color-text); background-color: var(--color-bg-card);">
+                <span style="font-size: 0.85rem; color: var(--color-text-light); font-family: 'Nanum Myeongjo', serif;">명</span>
               </div>
             </div>
             
