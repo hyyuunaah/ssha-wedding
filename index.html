@@ -336,11 +336,25 @@
             <button type="submit" class="gb-submit-btn">축하 메시지 등록</button>
           </form>
 
-          <div id="guestbookList" style="margin-top: 25px;">
-            </div>
+          <!-- 축하 메시지 리스트 -->
+          <div id="guestbookList" style="margin-top: 25px;"></div>
+          <!-- 축하메시지 전체보기 버튼 -->
+          <button id="openModalBtn" class="btn-more-messages" style="display: none;">
+            전체보기 <span id="totalMessageCount"></span>
+          </button>
         </div>
-
       </div>
+      
+      <div id="messageModal" class="msg-modal">
+        <div class="msg-modal__content">
+          <div class="msg-modal__header">
+            <h3>축하 메시지 전체보기</h3>
+            <button id="closeModalBtn" class="msg-modal__close">&times;</button>
+          </div>
+          <div id="modalMessageList" class="msg-modal__body"></div>
+        </div>
+      </div>
+      
     </section>
 
     <!-- ─── 카카오톡 공유하기 ───-->
