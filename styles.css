@@ -772,7 +772,7 @@ a {
 }
 
 /* ==========================================================================
-   RSVP 레이아웃 최종 완벽 교정본 (충돌 완벽 진압 및 라디오 초소형화 버전)
+   RSVP 레이아웃 최종 완벽 통합본 (라디오 버튼 크기 및 비율 완벽 교정)
    ========================================================================== */
 .rsvp-card__title {
   font-family: var(--font-serif);
@@ -839,36 +839,43 @@ a {
   justify-content: flex-end !important; 
 }
 
-/* 🔘 [핵심 교정] 894번째 줄의 20px 강제 설정을 무력화시키는 초소형 라디오 설정 */
+/* 🔘 [핵심 교정] 브라우저의 고집을 꺾고 라디오 원 크기를 완벽하게 줄이는 스타일 */
 #rsvpForm .rsvp-options input[type="radio"],
 #rsvpForm .rsvp-option input[type="radio"] {
   -webkit-appearance: none !important;            
   -moz-appearance: none !important;
   appearance: none !important;
   
-  /* 🎯 기존 20px로 고정되던 겉 원 크기를 '11px'로 반 토막 내어 아기자기하게 축소 */
-  width: 11px !important;                
-  height: 11px !important;
-  min-width: 11px !important;
-  min-height: 11px !important;
+  /* 🎯 사진을 줄이듯 전체 스케일을 0.65배로 압축하여 외곽 원 자체를 아기자기하게 만듭니다 */
+  transform: scale(0.65) !important;
+  -webkit-transform: scale(0.65) !important;
+  transform-origin: left center; /* 정렬선이 무너지지 않도록 왼쪽 중심 압축 */
+  
+  /* 브라우저 기본 틀 유지 */
+  width: 18px !important;                
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
   
   border: 1px solid var(--color-accent) !important; 
   border-radius: 50% !important;
   outline: none !important;
-  margin: 0 5px 0 0 !important;          
-  position: relative !important;
   background-color: var(--color-bg-card) !important;
+  position: relative !important;
+  margin: 0 2px 0 0 !important; /* 축소 비율에 따른 글자와의 간격 최적화 */
+  display: inline-block !important;
+  vertical-align: middle !important;
   cursor: pointer;
 }
 
-/* 라디오 체크 시 진한 보라색 배경 전환 */
+/* 체크되었을 때 외곽 원 배경색 전환 */
 #rsvpForm .rsvp-options input[type="radio"]:checked,
 #rsvpForm .rsvp-option input[type="radio"]:checked {
   background-color: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
 }
 
-/* 🎯 [핵심 교정] 축소된 외곽 원(11px) 안에서 아주 얇은 테두리만 남기고 가득 차는 하얀 원 비율 */
+/* 🎯 [핵심 교정] 0.65배로 쪼그라든 외곽 원 내부에서 얇은 테두리만 남기고 가득 차는 하얀 원 비율 */
 #rsvpForm .rsvp-options input[type="radio"]:checked::after,
 #rsvpForm .rsvp-option input[type="radio"]:checked::after {
   content: '' !important;
@@ -877,14 +884,15 @@ a {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   
-  /* 💡 전체 크기인 11px에 맞춰 안쪽을 8px로 짱짱하게 채워 가늘고 세련된 도넛 모양 유도 */
-  width: 8px !important;                            
-  height: 8px !important;
+  /* 💡 외곽이 작아진 상태이므로 내부 알맹이는 12px로 크게 주어야 얇은 연보라 라인만 이쁘게 남습니다 */
+  width: 12px !important;                            
+  height: 12px !important;
   background-color: #ffffff !important;
   border-radius: 50% !important;
+  display: block !important;
 }
 
-/* ─── ✍️ 참석 인원 및 '명' 글자 정렬 유지 ─── */
+/* ─── ✍️ 참석 인원 및 '명' 글자 수직 정렬 유지 ─── */
 #rsvpCountGroup .rsvp-options {
   display: flex !important;
   justify-content: space-between !important; 
