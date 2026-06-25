@@ -772,7 +772,7 @@ a {
 }
 
 /* ==========================================================================
-   RSVP 레이아웃 최종 완벽 통합본 (라디오 버튼 크기 및 비율 완벽 교정)
+   RSVP 레이아웃 최종 완벽 통합본 (수직 가이드라인 오차 0% 칼정렬 버전)
    ========================================================================== */
 .rsvp-card__title {
   font-family: var(--font-serif);
@@ -804,17 +804,19 @@ a {
   text-align: left;
 }
 
-/* [우측 컨테이너] 동일한 고정폭과 우측 정렬 보장 */
+/* [우측 컨테이너] 165px 고정폭 안에서 정밀 격자(Grid)로 강제 정렬 */
 #rsvpForm .rsvp-options {
-  display: flex !important;
-  justify-content: flex-end !important;
+  display: grid !important;
+  /* 💡 1열(첫번째 열)은 딱 85px, 2열(두번째 열)은 딱 80px 공간을 고정 분할 */
+  grid-template-columns: 85px 80px !important; 
   align-items: center !important;
+  justify-content: flex-end !important;
   width: 165px !important;
   min-width: 165px !important;
   gap: 0 !important; 
 }
 
-/* 각 라디오 항목 폭 고정으로 수직 정렬선 강제 일치 */
+/* 각 라디오 항목 레이블 */
 #rsvpForm .rsvp-option {
   display: inline-flex !important;
   align-items: center !important;
@@ -824,48 +826,40 @@ a {
   color: var(--color-text) !important;
   cursor: pointer;
   white-space: nowrap !important;
+  width: 100% !important; /* 분할된 격자 칸을 가득 채우기 */
 }
 
-/* 1열 라디오 항목 (신랑측 / 참석) */
-#rsvpForm .rsvp-option:nth-child(1) {
-  width: 85px !important;
-  min-width: 85px !important;
-}
-
-/* 2열 라디오 항목 (신부측 / 미참석) */
+/* 2열 라디오 항목 (신부측 / 미참석)만 우측 벽으로 완전히 밀착 정렬 */
 #rsvpForm .rsvp-option:nth-child(2) {
-  width: 80px !important;
-  min-width: 80px !important;
   justify-content: flex-end !important; 
 }
 
-/* 🔘 [핵심 교정] 브라우저의 고집을 꺾고 라디오 원 크기를 완벽하게 줄이는 스타일 */
+/* 🔘 [최종 교정] 수직 오차를 만드는 scale을 제거하고 순수 픽셀로 아기자기하게 크기 고정 */
 #rsvpForm .rsvp-options input[type="radio"],
 #rsvpForm .rsvp-option input[type="radio"] {
   -webkit-appearance: none !important;            
   -moz-appearance: none !important;
   appearance: none !important;
   
-  /* 🎯 사진을 줄이듯 전체 스케일을 0.65배로 압축하여 외곽 원 자체를 아기자기하게 만듭니다 */
-  transform: scale(0.65) !important;
-  -webkit-transform: scale(0.65) !important;
-  transform-origin: left center; /* 정렬선이 무너지지 않도록 왼쪽 중심 압축 */
-  
-  /* 브라우저 기본 틀 유지 */
-  width: 18px !important;                
-  height: 18px !important;
-  min-width: 18px !important;
-  min-height: 18px !important;
+  /* 🎯 scale 없이 진짜 순수 원형 지름을 11px로 고정하여 픽셀 오차를 원천 차단합니다 */
+  width: 11px !important;                
+  height: 11px !important;
+  min-width: 11px !important;
+  min-height: 11px !important;
   
   border: 1px solid var(--color-accent) !important; 
   border-radius: 50% !important;
   outline: none !important;
   background-color: var(--color-bg-card) !important;
   position: relative !important;
-  margin: 0 2px 0 0 !important; /* 축소 비율에 따른 글자와의 간격 최적화 */
+  margin: 0 6px 0 0 !important; /* 라디오 원과 우측 텍스트 사이의 고정 간격 */
   display: inline-block !important;
   vertical-align: middle !important;
   cursor: pointer;
+  
+  /* 기존에 뒤틀림을 만들던 transform scale 속성은 완벽히 제거 */
+  transform: none !important;
+  -webkit-transform: none !important;
 }
 
 /* 체크되었을 때 외곽 원 배경색 전환 */
@@ -875,7 +869,7 @@ a {
   border-color: var(--color-accent-dark) !important;
 }
 
-/* 🎯 [핵심 교정] 0.65배로 쪼그라든 외곽 원 내부에서 얇은 테두리만 남기고 가득 차는 하얀 원 비율 */
+/* 🎯 [최종 교정] 순수 11px 크기에 맞춰 얇은 테두리만 남기는 꽉 찬 내부 하얀 원 비율 */
 #rsvpForm .rsvp-options input[type="radio"]:checked::after,
 #rsvpForm .rsvp-option input[type="radio"]:checked::after {
   content: '' !important;
@@ -884,9 +878,9 @@ a {
   left: 50% !important;
   transform: translate(-50%, -50%) !important;
   
-  /* 💡 외곽이 작아진 상태이므로 내부 알맹이는 12px로 크게 주어야 얇은 연보라 라인만 이쁘게 남습니다 */
-  width: 12px !important;                            
-  height: 12px !important;
+  /* 💡 외곽이 11px이므로 내부 알맹이는 7px로 잡아야 도넛 라인이 실선처럼 아주 예쁘게 남습니다 */
+  width: 7px !important;                            
+  height: 7px !important;
   background-color: #ffffff !important;
   border-radius: 50% !important;
   display: block !important;
@@ -896,6 +890,7 @@ a {
 #rsvpCountGroup .rsvp-options {
   display: flex !important;
   justify-content: space-between !important; 
+  grid-column: 1 / span 2 !important; /* 2개의 격자 칸을 합쳐서 정렬선 유연화 */
 }
 
 #rsvpCount {
