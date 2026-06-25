@@ -857,7 +857,7 @@
 
       const data = snapshot.val();
       if (!data) {
-        $gbList.innerHTML = `<p style="text-align:center; color:var(--color-text-muted); font-size:0.9rem; padding: 30px 0; font-family: 'Gowun Dodum', serif;">첫 번째 축하 메시지를 남겨주세요 🌸</p>`;
+        $gbList.innerHTML = `<p style="text-align:center; color:var(--color-text-muted); font-size:0.9rem; padding: 30px 0; font-family: 'Nanum Myeongjo', serif;">첫 번째 축하 메시지를 남겨주세요 🌸</p>`;
         if ($openModalBtn) $openModalBtn.style.display = 'none';
         return;
       }
