@@ -842,6 +842,68 @@
     const rsvpRef = database.ref('rsvp');
     const guestbookRef = database.ref('guestbook');
 
+    // ==========================================================================
+    // 🎯 [새로 정의] 메시지 리스트를 화면에 분할해서 그려주는 핵심 함수 위치
+    // ==========================================================================
+    function renderMessages(snapshot) {
+      const $gbList = document.getElementById('guestbookList');
+      const $modalList = document.getElementById('modalMessageList');
+      const $openModalBtn = document.getElementById('openModalBtn');
+      const $totalCountSpan = document.getElementById('totalMessageCount');
+
+      if (!$gbList) return;
+      $gbList.innerHTML = '';
+      if ($modalList) $modalList.innerHTML = '';
+
+      const data = snapshot.val();
+      if (!data) {
+        $gbList.innerHTML = `<p style="text-align:center; color:var(--color-text-muted); font-size:0.9rem; padding: 30px 0; font-family: 'Gowun Dodum', serif;">첫 번째 축하 메시지를 남겨주세요 🌸</p>`;
+        if ($openModalBtn) $openModalBtn.style.display = 'none';
+        return;
+      }
+
+      const keys = Object.keys(data).reverse();
+      let mainCardCount = 0;
+
+      keys.forEach((key) => {
+        const post = data[key];
+        const date = new Date(post.timestamp).toLocaleDateString('ko-KR', {
+          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+
+        const cardHtml = `
+          <div class="gb-card" style="margin-bottom: 12px;">
+            <div class="gb-card__header">
+              <strong class="gb-card__name">${escapeHtml(post.name)}</strong>
+              <span class="gb-card__date">${date}</span>
+            </div>
+            <p class="gb-card__msg">${escapeHtml(post.message)}</p>
+            <button class="gb-card__delete-btn" onclick="deleteGuestbookPost('${key}', '${post.password}')">삭제</button>
+          </div>
+        `;
+
+        // 메인에는 딱 3개만 노출
+        if (mainCardCount < 3) {
+          $gbList.insertAdjacentHTML('beforeend', cardHtml);
+          mainCardCount++;
+        }
+        // 팝업창에는 전체 노출
+        if ($modalList) {
+          $modalList.insertAdjacentHTML('beforeend', cardHtml);
+        }
+      });
+
+      // 3개 넘으면 버튼 켜기
+      if ($openModalBtn) {
+        if (keys.length > 3) {
+          $openModalBtn.style.display = 'block';
+          if ($totalCountSpan) $totalCountSpan.innerText = `(${keys.length}개)`;
+        } else {
+          $openModalBtn.style.display = 'none';
+        }
+      }
+    }
+
     const $rsvpForm = document.getElementById('rsvpForm');
     const $gbForm = document.getElementById('guestbookForm');
     const $gbList = document.getElementById('guestbookList');
@@ -928,81 +990,16 @@
       });
     }
 
-    // ─── 🎯 여기서부터 기존 코드를 지우고 아래 코드로 교체하세요 ───
     if (guestbookRef && $gbList) {
       guestbookRef.on('value', (snapshot) => {
-        $gbList.innerHTML = '';
-        
-        // 팝업창 리스트 엘리먼트와 버튼 엘리먼트 가져오기
-        const $modalList = document.getElementById('modalMessageList');
-        const $openModalBtn = document.getElementById('openModalBtn');
-        const $totalCountSpan = document.getElementById('totalMessageCount');
-        
-        if ($modalList) $modalList.innerHTML = '';
-
-        const data = snapshot.val();
-        if (!data) {
-          $gbList.innerHTML = `<p style="text-align:center; color:var(--color-text-muted); font-size:0.9rem; padding: 30px 0; font-family: 'Nanum Myeongjo', serif;">첫 번째 축하 메시지를 남겨주세요 🌸</p>`;
-          if ($openModalBtn) $openModalBtn.style.display = 'none';
-          return;
-        }
-
-        const keys = Object.keys(data).reverse();
-        
-        // 🎯 3개 제한용 카운트 변수
-        let mainCardCount = 0;
-
-        keys.forEach((key) => {
-          const post = data[key];
-          const date = new Date(post.timestamp).toLocaleDateString('ko-KR', {
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-          });
-
-          // 카드를 생성하는 공통 문자열 변수 (유저님 카드 구조 그대로 유지)
-          const cardHtml = `
-            <div class="gb-card" style="margin-bottom: 12px;">
-              <div class="gb-card__header">
-                <strong class="gb-card__name">${escapeHtml(post.name)}</strong>
-                <span class="gb-card__date">${date}</span>
-              </div>
-              <p class="gb-card__msg">${escapeHtml(post.message)}</p>
-              <button class="gb-card__delete-btn" onclick="deleteGuestbookPost('${key}', '${post.password}')">삭제</button>
-            </div>
-          `;
-
-          // 💡 [규칙 1] 메인 화면에는 최신 글 딱 3개까지만 출력!
-          if (mainCardCount < 3) {
-            $gbList.insertAdjacentHTML('beforeend', cardHtml);
-            mainCardCount++;
-          }
-
-          // 💡 [규칙 2] 팝업창(모달) 내부 리스트에는 모든 글을 다 차곡차곡 쌓음!
-          if ($modalList) {
-            $modalList.insertAdjacentHTML('beforeend', cardHtml);
-          }
-        });
-
-        // 💡 [규칙 3] 메시지 개수가 3개를 초과하면 '전체보기' 버튼을 노출시킵니다.
-        if ($openModalBtn) {
-          if (keys.length > 3) {
-            $openModalBtn.style.display = 'block';
-            if ($totalCountSpan) $totalCountSpan.innerText = `(${keys.length}개)`;
-          } else {
-            $openModalBtn.style.display = 'none';
-          }
-        }
+        renderMessages(snapshot); // 👈 파이어베이스 데이터가 오면 위 함수로 토스!
       });
     }
 
-    // HTML 특수문자 치환 함수
     function escapeHtml(str) {
       return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
     }
 
-    // 게시글 삭제 함수
     window.deleteGuestbookPost = function(key, correctPassword) {
       const inputPassword = prompt('글 작성 시 입력했던 비밀번호를 입력하세요:');
       if (!inputPassword) return;
@@ -1010,51 +1007,13 @@
       if (inputPassword === correctPassword) {
         if (confirm('정말 축하 메시지를 삭제하시겠습니까?')) {
           database.ref('guestbook/' + key).remove()
-            .then(() => {
-              showToast('메시지가 삭제되었습니다.');
-              // 만약 팝업이 띄워진 상태에서 삭제했을 때 글이 3개 이하가 되면 팝업 닫기 처리
-              const modal = document.getElementById('messageModal');
-              if (modal && modal.classList.contains('is-active')) {
-                // 파이어베이스 리로드 시 자동으로 동기화되므로 열어두어도 무방합니다.
-              }
-            })
+            .then(() => showToast('메시지가 삭제되었습니다.'))
             .catch(() => alert('삭제 처리에 실패했습니다.'));
         }
       } else {
         alert('비밀번호가 일치하지 않습니다 😢');
       }
     };
-
-    // 🎯 [새로 추가] 전체보기 팝업창(모달)을 제어하는 마법의 버튼 리스너
-    const $modal = document.getElementById('messageModal');
-    const $openBtn = document.getElementById('openModalBtn');
-    const $closeBtn = document.getElementById('closeModalBtn');
-
-    // [전체보기] 버튼 클릭 시 -> 팝업 열기 & 뒤쪽 메인스크롤 잠금
-    if ($openBtn && $modal) {
-      $openBtn.addEventListener('click', () => {
-        $modal.classList.add('is-active');
-        document.body.style.overflow = 'hidden';
-      });
-    }
-
-    // [X] 버튼 클릭 시 -> 팝업 닫기 & 메인스크롤 해제
-    if ($closeBtn && $modal) {
-      $closeBtn.addEventListener('click', () => {
-        $modal.classList.remove('is-active');
-        document.body.style.overflow = '';
-      });
-    }
-
-    // 팝업창 바깥의 어두운 영역을 클릭해도 자동으로 닫히게 설정
-    if ($modal) {
-      $modal.addEventListener('click', (e) => {
-        if (e.target === $modal) {
-          $modal.classList.remove('is-active');
-          document.body.style.overflow = '';
-        }
-      });
-    }
   }
 
   if (document.readyState === 'loading') {
