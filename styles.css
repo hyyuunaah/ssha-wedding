@@ -772,7 +772,7 @@ a {
 }
 
 /* ==========================================================================
-   RSVP 레이아웃 세부 교정 (라디오 버튼 및 인원 설정 모바일 최적화 완벽 보정본)
+   RSVP 레이아웃 최종 완벽 교정본 (수직 가이드라인 칼정렬 매칭)
    ========================================================================== */
 .rsvp-card__title {
   font-family: var(--font-serif);
@@ -786,8 +786,8 @@ a {
 .rsvp-group {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 행 제목과 선택 영역을 양 끝으로 균형있게 분할 */
-  padding: 14px 0;                 /* 위아래 터치 영역 소폭 확장 */
+  justify-content: space-between; 
+  padding: 14px 0;                 
   border-bottom: 1px dashed var(--color-border);
 }
 
@@ -799,27 +799,25 @@ a {
   font-size: 0.875rem;
   color: var(--color-text-light);
   font-weight: 700;
-  width: 80px;                    /* 행 제목 너비를 고정하여 우측 컨텐츠의 시작선을 통일 */
-  min-width: 80px;                /* 행 제목의 최소 너비를 잡아 우측 컨텐츠 여백 확보 */
+  width: 75px;                    /* 👈 행 제목 너비를 단단히 고정 */
+  min-width: 75px;
   text-align: left;
 }
 
-/* 라디오 버튼들과 인원 입력창이 정렬될 우측 컨테이너 공통 스타일 */
+/* 🎯 [핵심] 우측 정렬을 위한 2열 격자(Grid) 배치 마법 */
 #rsvpForm .rsvp-options {
-  display: flex !important;
-  justify-content: flex-end !important;   /* 우측 끝으로 정렬하되 여백 분배 */
+  display: grid !important;
+  /* 💡 1열(첫번째 버튼/인풋창) 너비는 80px, 2열(두번째 버튼/'명'글자)은 75px로 고정하고 우측 정렬 */
+  grid-template-columns: 80px 75px !important; 
   align-items: center !important;
-  gap: 8px !important;                    /* 항목 간의 깔끔한 간격 */
+  justify-content: flex-end !important; /* 전체적으로 우측 끝에 밀착 */
   flex: 1;
 }
 
-/* 각 라디오 항목 정돈: 너비를 기존 110px에서 85px로 정돈하여 균형 배치 */
+/* 각 라디오 항목 레이블 */
 #rsvpForm .rsvp-option {
   display: inline-flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
-  width: auto !important;         /* 고정 너비를 제거하여 글자 밀림 방지 */
-  /* min-width: 75px !important; */
   margin: 0 !important;
   padding: 0 !important;
   font-size: 0.85rem !important;
@@ -828,28 +826,27 @@ a {
   white-space: nowrap !important;
 }
 
-/* 모바일 브라우저 라디오 크기 감성 최적화 */
+/* 🔘 라디오 버튼 크기 축소 (iOS/안드로이드 완벽 대응 기본 크기 억제) */
 #rsvpForm .rsvp-option input[type="radio"] {
   -webkit-appearance: none !important;            
   -moz-appearance: none !important;
   appearance: none !important;
   
-  /* 모바일 브라우저 억제 및 강제 크기 축소 */
-  width: 16px !important;                
-  height: 16px !important;
-  transform: scale(0.85) !important;     /* 👈 픽셀이 안 먹힐 때 전체 스케일을 줄여 크기를 아기자기하게 만듭니다 */
-  -webkit-transform: scale(0.85) !important;
+  width: 12px !important;                
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
   
   border: 1px solid var(--color-accent) !important; 
   border-radius: 50% !important;
   outline: none !important;
-  margin: 0 6px 0 0 !important;          /* 라디오 원과 우측 글자 간의 간격 */
+  margin: 0 5px 0 0 !important;          
   position: relative !important;
   background-color: var(--color-bg-card) !important;
   cursor: pointer;
 }
 
-/* 라디오 버튼 선택되었을 때의 감성적인 피치/라벤더 포인트 센터 닷(Dot) 구현 */
+/* 라디오 버튼 체크 시 내부 점 디자인 */
 #rsvpForm .rsvp-option input[type="radio"]:checked {
   background-color: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
@@ -860,21 +857,21 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 6px;                            /* 👈 겉 원 크기에 맞춰 하얀 점 크기 최적화 */
-  height: 6px;
+  width: 4px;                            
+  height: 4px;
   background-color: #ffffff;
   border-radius: 50%;
 }
 
-/* ─── 참석 인원 적는 부분 수직 정렬 매칭 ─── */
+/* ─── ✍️ 참석 인원 적는 칸 수직 라인 100% 매칭 ─── */
 #rsvpCountGroup .rsvp-options {
-  justify-content: flex-end !important; /* 👈 오른쪽 끝 정렬을 유지하여 '명'이 끝 라인에 딱 붙게 만듭니다 */
-  gap: 6px !important;
+  /* 라디오 버튼 그리드와 완벽하게 폭을 일치시킴 */
+  grid-template-columns: 80px 75px !important; 
 }
 
 #rsvpCount {
-  width: 60px !important;              /* 인풋 박스 너비를 슬림하게 조정하여 쏠림 현상 방지 */
-  height: 32px !important;
+  width: 60px !important;              /* 👈 첫 번째 버튼 크기(80px) 안에서 예쁘게 수용되도록 세팅 */
+  height: 30px !important;
   padding: 0 4px !important;
   border: 1px solid var(--color-border) !important;
   border-radius: var(--radius-sm) !important;
@@ -883,13 +880,17 @@ a {
   font-family: inherit;
   color: var(--color-text);
   background-color: var(--color-bg-card) !important;
+  grid-column: 1 !important;           /* 👈 무조건 1열(첫 번째 라디오 버튼 시작점)에 강제 배치 */
 }
 
-/* '명' 텍스트 스타일 정의 */
+/* '명' 텍스트를 두 번째 열의 우측 끝으로 밀어 정렬 */
 #rsvpCountGroup .rsvp-options span {
   font-size: 0.85rem;
   color: var(--color-text);
   white-space: nowrap;
+  grid-column: 2 !important;           /* 👈 무조건 2열('신부측', '미참석' 글자 끝 라인)에 배치 */
+  text-align: right;                   /* 오른쪽 끝 정렬로 '측', '석'과 가로선 맞춤 */
+  padding-right: 2px;                  /* 미세한 우측 여백 교정 */
 }
 
 /* 방명록 입력 창 세부 레이아웃 */
