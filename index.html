@@ -291,26 +291,42 @@
             </div>
 
             <div class="rsvp-group">
-              <span class="rsvp-group__label">구분</span>
+              <div class="rsvp-group__label">구분</div>
               <div class="rsvp-options">
-                <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신랑측" checked> 신랑측</label>
-                <label class="rsvp-option"><input type="radio" name="rsvpSide" value="신부측"> 신부측</label>
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance_type" value="groom" checked>
+                  <span class="radio-circle"></span>
+                  <span class="radio-text">신랑측</span>
+                </label>
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance_type" value="bride">
+                  <span class="radio-circle"></span>
+                  <span class="radio-text">신부측</span>
+                </label>
               </div>
             </div>
             
             <div class="rsvp-group">
-              <span class="rsvp-group__label">참석 여부</span>
+              <div class="rsvp-group__label">참석여부</div>
               <div class="rsvp-options">
-                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="참석" checked> 참석</label>
-                <label class="rsvp-option"><input type="radio" name="rsvpAttend" value="미참석"> 미참석</label>
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance_status" value="attend" checked>
+                  <span class="radio-circle"></span>
+                  <span class="radio-text">참석</span>
+                </label>
+                <label class="rsvp-option">
+                  <input type="radio" name="attendance_status" value="absent">
+                  <span class="radio-circle"></span>
+                  <span class="radio-text">미참석</span>
+                </label>
               </div>
             </div>
             
             <div class="rsvp-group" id="rsvpCountGroup">
-              <span class="rsvp-group__label">참석 인원</span>
-              <div class="rsvp-options" style="justify-content: flex-start; align-items: center; gap: 8px;">
-                <input type="number" id="rsvpCount" value="1" min="1" max="99" style="width: 70px; padding: 8px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-size: 0.875rem; text-align: center; font-family: inherit; color: var(--color-text); background-color: var(--color-bg-card);">
-                <span style="font-size: 0.85rem; color: var(--color-text-light); font-family: 'Nanum Myeongjo', serif;">명</span>
+              <div class="rsvp-group__label">참석인원</div>
+              <div class="rsvp-options">
+                <input type="number" id="rsvpCount" min="1" max="10" value="1">
+                <span class="count-unit">명</span>
               </div>
             </div>
             
