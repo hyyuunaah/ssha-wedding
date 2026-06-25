@@ -1003,7 +1003,7 @@ a {
 
 .gb-card { position: relative !important; }
 .gb-card__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-sm); }
-.gb-card__name { font-size: 0.9375rem; color: var(--color-text); font-weight: bold; }
+.gb-card__name { font-size: 0.9375rem; color: var(--color-accent-dark); font-weight: bold; }
 .gb-card__badge { font-size: 0.75rem; font-weight: normal; background: var(--color-lavender); padding: 2px 8px; border-radius: 12px; margin-left: 6px; color: var(--color-accent-dark); }
 .gb-card__date { font-size: 0.75rem; color: var(--color-text-muted); }
 .gb-card__msg { font-size: 0.875rem; color: var(--color-text-light); white-space: pre-wrap; line-height: 1.5; margin: 0; }
@@ -1198,14 +1198,16 @@ a {
   color: var(--color-text-light);
   background-color: transparent;
   border: 1px solid var(--color-lavender);
-  border-radius: var(--radius-sm, 8px);
+  border-radius: 50px;   /* 알약 모양 버튼 */
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .btn-more-messages:hover {
   background-color: var(--color-bg-card);
-  color: var(--color-accent-dark);
+  background-color: var(--color-bg-alt, #f8f4f0) !important;
+  border-color: var(--color-accent-light, #dcc8e8) !important;
+  color: var(--color-accent-dark, #9a7baa) !important;
 }
 
 /* 팝업 전체 배경 (처음엔 숨김) */
