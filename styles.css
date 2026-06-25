@@ -804,18 +804,17 @@ a {
   text-align: left;
 }
 
-/* 🎯 [우측 컨테이너] 정확히 160px 고정 폭을 주어 우측 마감 정렬선을 하나로 일치시킵니다 */
+/* [우측 전체 영역] 동일한 고정폭과 우측 정렬을 보장합니다 */
 #rsvpForm .rsvp-options {
-  display: grid !important;
-  /* 💡 1열(첫번째 열) 너비 85px, 2열(두번째 열) 너비 75px로 구획 분할 */
-  grid-template-columns: 85px 75px !important; 
-  align-items: center !important;
+  display: flex !important;
   justify-content: flex-end !important;
-  width: 160px !important;
-  min-width: 160px !important;
+  align-items: center !important;
+  width: 165px !important;
+  min-width: 165px !important;
+  gap: 0 !important; /* 내부 간격 오차를 없애기 위해 0 설정 */
 }
 
-/* 각 라디오 항목 레이블 */
+/* 각 라디오 항목 (폭을 고정하여 수직 정렬선을 강제 일치시킵니다) */
 #rsvpForm .rsvp-option {
   display: inline-flex !important;
   align-items: center !important;
@@ -825,6 +824,19 @@ a {
   color: var(--color-text) !important;
   cursor: pointer;
   white-space: nowrap !important;
+}
+
+/* 1열 라디오 항목 (신랑측 / 참석) */
+#rsvpForm .rsvp-option:nth-child(1) {
+  width: 85px !important;
+  min-width: 85px !important;
+}
+
+/* 2열 라디오 항목 (신부측 / 미참석) */
+#rsvpForm .rsvp-option:nth-child(2) {
+  width: 80px !important;
+  min-width: 80px !important;
+  justify-content: flex-end !important; /* 글자 우측 끝 정렬 */
 }
 
 /* 🔘 라디오 버튼 크기 최적화 */
@@ -847,7 +859,7 @@ a {
   cursor: pointer;
 }
 
-/* 라디오 체크 시 피드백 디자인 */
+/* 라디오 체크 내부 점 디자인 */
 #rsvpForm .rsvp-option input[type="radio"]:checked {
   background-color: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
@@ -864,14 +876,15 @@ a {
   border-radius: 50%;
 }
 
-/* ─── ✍️ 참석 인원 적는 칸 수직 가이드라인 칼정렬 ─── */
+/* ─── ✍️ 참석 인원 적는 칸 및 '명' 글자 수직 정렬 최종 교정 ─── */
 #rsvpCountGroup .rsvp-options {
-  grid-template-columns: 85px 75px !important; 
+  display: flex !important;
+  justify-content: space-between !important; /* 양 끝 정렬로 수직 벽면 맞춤 */
 }
 
 #rsvpCount {
-  /* 💡 1열 너비인 85px에서 우측 마진(7px)을 제외한 78px로 딱 맞춰 채우기 */
-  width: 78px !important;              
+  /* 💡 1열 라디오 전체 폭(85px)에서 우측 공백 여백을 고려해 '명' 앞까지 꽉 차게 늘림 */
+  width: 120px !important;              
   height: 30px !important;
   padding: 0 4px !important;
   border: 1px solid var(--color-border) !important;
@@ -881,21 +894,16 @@ a {
   font-family: inherit;
   color: var(--color-text);
   background-color: var(--color-bg-card) !important;
-  
-  grid-column: 1 !important;           /* 무조건 1열(첫번째 라디오 시작위치) 배치 */
-  justify-self: start !important;
+  margin: 0 !important;
 }
 
-/* '명' 텍스트를 두 번째 열의 우측 끝에 정확하게 박아넣기 */
+/* '명' 텍스트를 전체 박스의 맨 우측 끝(즉, '측', '석'의 끝선)에 강제 일착 */
 #rsvpCountGroup .rsvp-options span {
   font-size: 0.85rem;
   color: var(--color-text);
   white-space: nowrap;
-  
-  grid-column: 2 !important;           /* 2열 영역에 강제 바인딩 */
-  text-align: right;                   /* 글자 자체를 오른쪽 정렬 */
-  justify-self: end !important;        /* 2열 격자의 가장 오른쪽 벽면으로 강제 밀착 */
-  padding-right: 1px;                  /* '측', '석' 글자 자형 패딩 보정 */
+  width: 45px !important;       /* 💡 2열 폭에 맞물리도록 넓혀 우측 맞춤 유도 */
+  text-align: right !important; /* 우측 끝으로 글자를 완전히 밀어붙임 */
 }
 
 /* 방명록 입력 창 세부 레이아웃 */
