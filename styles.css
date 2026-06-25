@@ -772,7 +772,7 @@ a {
 }
 
 /* ==========================================================================
-   RSVP 레이아웃 최종 무결점 완벽 종결본 (자바스크립트 완벽 호환 + 절대 정원)
+   RSVP 레이아웃 진짜 최종 무결점본 (스크립트 작동 보장 + 11px 절대 정원)
    ========================================================================== */
 .rsvp-card__title {
   font-family: var(--font-serif);
@@ -805,10 +805,10 @@ a {
   text-align: left;
 }
 
-/* [우측 컨테이너] 165px 고정 정밀 격자판(Grid) */
+/* [우측 컨테이너] 165px 정밀 격자판 */
 #rsvpForm .rsvp-options {
   display: grid !important;
-  grid-template-columns: 85px 80px !important; /* 1열 85px, 2열 80px 분할 */
+  grid-template-columns: 85px 80px !important; 
   align-items: center !important;
   justify-content: flex-end !important;
   width: 165px !important;
@@ -822,12 +822,13 @@ a {
   align-items: center !important;
   margin: 0 !important;
   padding: 0 !important;
-  font-family: inherit !important; /* 폰트 일치 */
+  font-family: inherit !important; /* 💡 감성 폰트 깨짐 방지 */
   font-size: 0.85rem !important;
   color: var(--color-text) !important;
   cursor: pointer;
   white-space: nowrap !important;
   width: 100% !important;
+  position: relative !important;
 }
 
 /* 2열 라디오 항목 (신부측 / 미참석)만 우측 끝벽에 완전히 밀착 */
@@ -835,53 +836,78 @@ a {
   justify-content: flex-end !important; 
 }
 
-/* 🔘 [순정 커스텀] 11px 크기를 단단히 고정하고 브라우저 기본 스타일 삭제 */
-#rsvpForm .rsvp-options input[type="radio"],
+/* 🔘 [핵심] 제멋대로 불어나는 순정 버튼은 스크립트가 읽을 수 있게 크기만 0으로 숨김 */
 #rsvpForm .rsvp-option input[type="radio"] {
-  -webkit-appearance: none !important;            
-  -moz-appearance: none !important;
-  appearance: none !important;
-  
-  width: 11px !important;                
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important; /* 터치 이벤트는 label이 대신 받음 */
+}
+
+/* ✨ [바깥 원] 절대 늘어나거나 찌그러지지 않는 순수 CSS 11px 수제 정원 */
+#rsvpForm .rsvp-option::before {
+  content: '' !important;
+  display: inline-block !important;
+  width: 11px !important;
   height: 11px !important;
   min-width: 11px !important;
   min-height: 11px !important;
   aspect-ratio: 1 / 1 !important;
   flex-shrink: 0 !important;
-  box-sizing: border-box !important;
   
-  border: 1px solid var(--color-accent) !important; 
+  border: 1px solid var(--color-accent) !important;
   border-radius: 50% !important;
   background-color: var(--color-bg-card) !important;
-  margin: 0 6px 0 0 !important; 
-  outline: none !important;
-  position: relative !important;
-  cursor: pointer;
-  display: inline-block !important;
-  vertical-align: middle !important;
+  margin-right: 6px !important;
+  box-sizing: border-box !important;
+  transition: all 0.15s ease;
 }
 
-/* 🎯 [완벽 정원 보장] 체크되었을 때 가상 요소를 쓰지 않고, 방사형 그라데이션으로 흰 원을 픽셀로 찍어버림 */
-#rsvpForm .rsvp-options input[type="radio"]:checked,
-#rsvpForm .rsvp-option input[type="radio"]:checked {
+/* ✨ [안쪽 흰 점] 선택되었을 때만 정중앙에 정원으로 쏙 들어갈 5px 흰색 점 */
+#rsvpForm .rsvp-option::after {
+  content: '' !important;
+  position: absolute !important;
+  
+  /* 💡 1열(신랑측/참석) 기준 바깥 원의 정확한 정중앙 좌표 */
+  left: 3px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  
+  width: 5px !important;
+  height: 5px !important;
+  min-width: 5px !important;
+  min-height: 5px !important;
+  aspect-ratio: 1 / 1 !important;
+  flex-shrink: 0 !important;
+  
+  background-color: #ffffff !important;
+  border-radius: 50% !important;
+  box-sizing: border-box !important;
+  display: none !important; /* 평소엔 숨김 */
+}
+
+/* 💡 2열(신부측/미참석)은 우측 정렬이므로 안쪽 흰색 점의 가로 위치를 별도 보정 */
+#rsvpForm .rsvp-option:nth-child(2)::after {
+  left: auto !important;
+  right: 53px !important; /* 글자 크기에 맞춰 완벽 매칭 */
+}
+
+/* 🎯 [상태 연동] 실제 인풋이 선택(checked)되면 가상 바깥 원의 색상을 보라색으로 변경 */
+#rsvpForm .rsvp-option input[type="radio"]:checked ~ ::before,
+#rsvpForm .rsvp-option:has(input[type="radio"]:checked)::before {
+  background-color: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
-  /* 💡 중앙에서부터 2.5px까지는 흰색, 그 이후는 진보라색으로 채워 찌그러짐을 물리적으로 원천 차단 */
-  background: radial-gradient(
-    circle, 
-    #ffffff 0%, 
-    #ffffff 2.5px, 
-    var(--color-accent-dark) 2.6px, 
-    var(--color-accent-dark) 100%
-  ) !important;
 }
 
-/* 혹시 남아있을지 모를 가상 요소 찌꺼기 완전 삭제 */
-#rsvpForm .rsvp-option::before,
-#rsvpForm .rsvp-option::after,
-#rsvpForm input[type="radio"]::before,
-#rsvpForm input[type="radio"]::after {
-  display: none !important;
-  content: none !important;
+/* 🎯 [상태 연동] 실제 인풋이 선택(checked)되면 내부 흰색 원을 등장시킴 */
+#rsvpForm .rsvp-option input[type="radio"]:checked ~ ::after,
+#rsvpForm .rsvp-option:has(input[type="radio"]:checked)::after {
+  display: block !important;
 }
 
 /* ─── ✍️ 참석 인원 및 '명' 글자 수직 정렬 칼정렬 ─── */
@@ -905,7 +931,7 @@ a {
   margin: 0 !important;
 }
 
-/* '명' 텍스트를 최우측 마감 벽면에 붙여 '측', '석'과 완벽 수직선 일치 */
+/* '명' 텍스트를 최우측 마감 벽면에 붙여 완벽 수직선 일치 */
 #rsvpCountGroup .rsvp-options span {
   font-family: inherit !important;
   font-size: 0.85rem;
