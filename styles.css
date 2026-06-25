@@ -897,7 +897,6 @@ a {
 
 /* '명' 텍스트 위치 매칭 */
 #rsvpCountGroup .rsvp-options span {
-  font-family: 'Nanum Myeongjo', serif !important;
   font-size: 0.85rem;
   color: var(--color-text-light);
   /* 💡 남은 30px 영역을 꽉 채우고 우측 정렬하여 '측', '석' 자수 마감선과 정확히 일치시킵니다. */
