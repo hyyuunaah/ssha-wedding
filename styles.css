@@ -845,11 +845,13 @@ a {
   -moz-appearance: none !important;
   appearance: none !important;
   
-  width: 12px !important;                
-  height: 12px !important;
-  min-width: 12px !important;
-  min-height: 12px !important;
+  /* 🎯 외곽 전체 원 크기를 12px에서 10px로 더 슬림하고 작게 축소 */
+  width: 10px !important;                
+  height: 10px !important;
+  min-width: 10px !important;
+  min-height: 10px !important;
   
+  /* 테두리를 얇고 세련되게 1px로 고정 */
   border: 1px solid var(--color-accent) !important; 
   border-radius: 50% !important;
   outline: none !important;
@@ -859,21 +861,25 @@ a {
   cursor: pointer;
 }
 
-/* 라디오 체크 내부 점 디자인 */
+/* 라디오 체크 시 피드백 디자인 */
 #rsvpForm .rsvp-option input[type="radio"]:checked {
   background-color: var(--color-accent-dark) !important;
   border-color: var(--color-accent-dark) !important;
 }
+
+/* 🎯 [핵심 교정] 선택했을 때의 내부 하얀 원 크기 확대 */
 #rsvpForm .rsvp-option input[type="radio"]:checked::after {
   content: '';
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 4px;                            
-  height: 4px;
-  background-color: #ffffff;
-  border-radius: 50%;
+  
+  /* 💡 전체 원(10px)보다 아주 살짝만 작은 7px로 키워서 내부를 꽉 채웁니다 */
+  width: 7px !important;                            
+  height: 7px !important;
+  background-color: #ffffff !important;
+  border-radius: 50% !important;
 }
 
 /* ─── ✍️ 참석 인원 적는 칸 및 '명' 글자 수직 정렬 최종 교정 ─── */
