@@ -839,45 +839,48 @@ a {
   justify-content: flex-end !important; /* 글자 우측 끝 정렬 */
 }
 
-/* 🔘 라디오 버튼 크기 최적화 */
+/* 🔘 라디오 버튼 외곽 원 자체를 아주 작고 단아하게 강제 조정 */
 #rsvpForm .rsvp-option input[type="radio"] {
   -webkit-appearance: none !important;            
   -moz-appearance: none !important;
   appearance: none !important;
   
-  /* 🎯 외곽 전체 원 크기를 12px에서 10px로 더 슬림하고 작게 축소 */
-  width: 10px !important;                
-  height: 10px !important;
-  min-width: 10px !important;
-  min-height: 10px !important;
+  /* 🎯 [완벽 해결] 브라우저 기본 껍데기 크기를 7px로 아주 작게 압축합니다 */
+  width: 7px !important;                
+  height: 7px !important;
+  min-width: 7px !important;
+  min-height: 7px !important;
   
-  /* 테두리를 얇고 세련되게 1px로 고정 */
-  border: 1px solid var(--color-accent) !important; 
+  /* 🎯 [완벽 해결] 얇은 연보라색 바깥 테두리 선을 '그림자 효과(box-shadow)'로 사악 감싸서 
+     기본 브라우저의 외곽 원 억제 메커니즘을 우회하고 시각적 크기를 아주 작게 고정합니다. */
+  border: none !important; 
+  box-shadow: 0 0 0 1px var(--color-accent) !important;
+  
   border-radius: 50% !important;
   outline: none !important;
-  margin: 0 5px 0 0 !important;          
+  margin: 0 6px 0 0 !important;          
   position: relative !important;
   background-color: var(--color-bg-card) !important;
   cursor: pointer;
 }
 
-/* 라디오 체크 시 피드백 디자인 */
+/* 라디오 체크되었을 때 외곽 원 색상 변경 */
 #rsvpForm .rsvp-option input[type="radio"]:checked {
   background-color: var(--color-accent-dark) !important;
-  border-color: var(--color-accent-dark) !important;
+  box-shadow: 0 0 0 1px var(--color-accent-dark) !important; /* 테두리도 진한 보라색으로 일치 */
 }
 
-/* 🎯 [핵심 교정] 선택했을 때의 내부 하얀 원 크기 확대 */
+/* 🎯 [완벽 해결] 선택했을 때 내부의 하얀 원 비율 최적화 (살짝만 작게 꽉 채움) */
 #rsvpForm .rsvp-option input[type="radio"]:checked::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
   
-  /* 💡 전체 원(10px)보다 아주 살짝만 작은 7px로 키워서 내부를 꽉 채웁니다 */
-  width: 7px !important;                            
-  height: 7px !important;
+  /* 💡 축소된 외곽 바탕(7px) 내부에서 얇은 도넛 선만 남기고 꽉 차도록 5px로 설정 */
+  width: 5px !important;                            
+  height: 5px !important;
   background-color: #ffffff !important;
   border-radius: 50% !important;
 }
