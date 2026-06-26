@@ -886,7 +886,7 @@ a {
 /* 4. 🔥 [핵심] 라디오 버튼이 '체크'되면, 옆에 있는 동그라미 서식을 변경합니다 */
 #rsvpForm .rsvp-option input[type="radio"]:checked + text, /* 일반 텍스트 대응 */
 #rsvpForm .rsvp-option:has(input[type="radio"]:checked)::before {
-  border: 3px solid var(--color-lavender) !important; /* 테두리를 두껍게 해서 중앙 점처럼 보이게 만듦 */
+  border: 3px solid var(--color-accent) !important; /* 테두리를 두껍게 해서 중앙 점처럼 보이게 만듦 */
   background-color: #ffffff !important;
 }
 
