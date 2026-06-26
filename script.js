@@ -875,11 +875,11 @@
             const cardHtml = `
                 <div class="gb-card" style="margin-bottom: 12px;">
                     <div class="gb-card__header">
-                        <strong>${escapeHtml(post.name)}</strong>
+                        <strong class="gb-card__name">${escapeHtml(post.name)}</strong>
                         <span style="font-size: 0.8rem;">${date}</span>
                     </div>
-                    <p>${escapeHtml(post.message)}</p>
-                    <button onclick="deleteGuestbookPost('${key}', '${post.password}')">삭제</button>
+                    <p class="gb-card__msg">${escapeHtml(post.message)}</p>
+                    <button class="gb-card__delete-btn" onclick="deleteGuestbookPost('${key}', '${post.password}')">삭제</button>
                 </div>
             `;
     
