@@ -1001,9 +1001,18 @@ a {
   border-bottom: none !important;
 }
 
-.gb-card { position: relative !important; }
+/* .gb-card { position: relative !important; } */
+.gb-card {
+  position: relative !important;
+  padding-bottom: 20px;       /* 삭제 버튼과 겹치지 않게 하단 여백 추가 */
+  border-bottom: 1px solid #eee; /* 구분선 */
+  margin-bottom: 20px !important;
+}
+.gb-card:last-child {
+  border-bottom: none;       /* 마지막 카드는 선 제거 */
+}
 .gb-card__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-sm); }
-.gb-card__name { font-size: 0.9375rem; color: var(--color-accent-dark) !important; font-weight: bold; }
+.gb-card__name { font-size: 0.9375rem; color: var(--color-accent) !important; font-weight: bold; }
 .gb-card__badge { font-size: 0.75rem; font-weight: normal; background: var(--color-lavender); padding: 2px 8px; border-radius: 12px; margin-left: 6px; color: var(--color-accent-dark); }
 .gb-card__date { font-size: 0.75rem; color: var(--color-text-muted); }
 .gb-card__msg { font-size: 0.875rem; color: var(--color-text-light); white-space: pre-wrap; line-height: 1.5; margin: 0; }
